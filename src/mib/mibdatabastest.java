@@ -9,10 +9,7 @@ import oru.inf.InfException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- *
- * @author joakimfockstedt
- */
+
 public class mibdatabastest {
     
     private static InfDB idb;
