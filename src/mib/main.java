@@ -12,9 +12,9 @@ public class main {
         //Kod för att testa validering, använder scanner som input.
         Validering validering = new Validering();
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Skriv din epost");
+        System.out.println("Skriv din plats");
         String input = scanner.nextLine();
-        validering.valideraAlienEpost(input);
+        validering.valideraPlats(input);
     }
     
     

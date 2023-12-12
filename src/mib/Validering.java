@@ -67,4 +67,24 @@ public class Validering {
         System.out.println(valid);
         return valid;
     }
+    
+    //Validerar ett område
+    public boolean valideraOmråde(String område){
+        boolean valid = false;
+        if(område.matches("^[A-Z]{1}[a-z]*")){
+            valid = true;
+        }
+        System.out.println(valid);
+        return valid;
+    }
+    
+    //validerar en plats
+    public boolean valideraPlats(String plats){
+        boolean valid = false;
+        if(plats.matches("[A-Z]{1}[a-z]*")){
+            valid = true;
+        }
+        System.out.println(valid);
+        return valid;
+    }
 }
