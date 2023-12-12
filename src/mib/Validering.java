@@ -87,4 +87,34 @@ public class Validering {
         System.out.println(valid);
         return valid;
     }
+    
+    //validerar utrustning
+    public boolean valideraUtrustning(String utrustning){
+        boolean valid = false;
+        if(utrustning.matches("^[A-Z]{1}[a-z]*+(\\s[A-Z]{1}[a-z]*)?")){
+            valid = true;
+        }
+        System.out.println(valid);
+        return valid;
+    }
+    
+    //validerar alienNamn
+    public boolean valideraAlienNamn(String namn){
+        boolean valid = false;
+        if(namn.matches("^[A-Z]{1}[a-z]+(\\s[A-Z]{1}[a-z]*)?")){
+            valid = true;
+        }
+        System.out.println(valid);
+        return valid;
+    }
+    
+    //validerar AlienTelefon
+    public boolean valideraAlienTelefonnummer(String nummer){
+        boolean valid = false;
+        if(nummer.matches("^555-\\d[0-9]{1,4}")){
+            valid = true;
+        }
+        System.out.println(valid);
+        return valid;
+    }
 }
