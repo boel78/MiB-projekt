@@ -14,7 +14,7 @@ public class main {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Skriv din input");
         String input = scanner.nextLine();
-        validering.valideraAlienTelefonnummer(input);
+        validering.valideraAgentAnställningsDatum(input);
     }
     
     

@@ -117,4 +117,24 @@ public class Validering {
         System.out.println(valid);
         return valid;
     }
+    
+    //validerar ett agentNamn
+    public boolean valideraAgentNamn(String namn){
+        boolean valid = false;
+        if(namn.matches("^Agent\\s[A-Z]{1}")){
+            valid = true;
+        }
+        System.out.println(valid);
+        return valid;
+    }
+    
+    //validera agentAnställningsDatum
+    public boolean valideraAgentAnställningsDatum(String datum){
+        boolean valid = false;
+        if(datum.matches("\\d{4}-(0?[1-9]|1[012])-(0?[1-9]|1?[0-9]|2?[0-9]|3[01])")){
+            valid = true;
+        }
+        System.out.println(valid);
+        return valid;
+    }
 }
