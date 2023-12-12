@@ -137,4 +137,15 @@ public class Validering {
         System.out.println(valid);
         return valid;
     }
+    
+    //validera agentTelefon
+    public boolean valideraAgentTelefonnummer(String nummer){
+    boolean valid = false;
+        if(nummer.matches("^555-\\d[0-9]{1,5}")){
+            valid = true;
+        }
+        System.out.println(valid);
+        return valid;
+    }
+    
 }
