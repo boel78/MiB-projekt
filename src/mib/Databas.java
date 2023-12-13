@@ -5,6 +5,7 @@ import oru.inf.InfException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Databas {
     private InfDB idb;
@@ -87,4 +88,47 @@ public class Databas {
         }
         return admin;
     }
+    
+        // hämta all info om en alien utifrån ID.
+    public HashMap<String,String> hämtaAlienInfo(int ID) {
+        String query = "SELECT * FROM alien WHERE alien_id=" + ID;
+        HashMap<String,String> alien = new HashMap<>();
+        try {
+        alien = idb.fetchRow(query);
+        } catch (InfException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return alien;
+    }
+        // ta bort alien utifrån ID.
+    public HashMap<String,String> taBortAlien(int ID) {
+        String query = "DELETE FROM alien WHERE alien_id=" + ID;
+        HashMap<String,String> alien = new HashMap<>();
+        try {
+        alien = idb.fetchRow(query);
+        } catch (InfException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return alien;
+    }
+    
+        // hämta en aliens id utifrån namnet.
+    public int hämtaAlienIdFrånNamn(String namn) {
+        String query = "SELECT alien_id FROM Alien WHERE namn= '" + namn + "'";
+        int id = 0;
+        try {
+         String strängId = idb.fetchSingle(query);
+        
+        id = Integer.parseInt(strängId); }
+        
+        catch(InfException ex) {
+            System.out.println(ex.getMessage());
+        }
+        
+        System.out.println(id);
+        return id;
+    }
+    
+      
+    
 }

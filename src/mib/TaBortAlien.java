@@ -4,17 +4,21 @@
  */
 package mib;
 
+import java.util.HashMap;
+
 /**
  *
  * @author lukasdenfete
  */
 public class TaBortAlien extends javax.swing.JFrame {
+    private Databas db;
 
     /**
      * Creates new form TaBortAlien
      */
     public TaBortAlien() {
         initComponents();
+        db = new Databas();
     }
 
     /**
@@ -26,21 +30,60 @@ public class TaBortAlien extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btnTaBort = new javax.swing.JButton();
+        txtNamnAttTaBort = new javax.swing.JTextField();
+        lblRubrik = new javax.swing.JLabel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        btnTaBort.setText("Ta bort");
+        btnTaBort.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnTaBortMouseClicked(evt);
+            }
+        });
+
+        txtNamnAttTaBort.setColumns(8);
+
+        lblRubrik.setText("Ange namn på alien att ta bort");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(101, 101, 101)
+                        .addComponent(lblRubrik))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(145, 145, 145)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtNamnAttTaBort, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(17, 17, 17)
+                                .addComponent(btnTaBort)))))
+                .addContainerGap(120, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(39, 39, 39)
+                .addComponent(lblRubrik)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                .addComponent(txtNamnAttTaBort, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(43, 43, 43)
+                .addComponent(btnTaBort)
+                .addGap(63, 63, 63))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnTaBortMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTaBortMouseClicked
+        // TODO add your handling code here:
+        db.hämtaAlienIdFrånNamn(txtNamnAttTaBort.getText());
+    }//GEN-LAST:event_btnTaBortMouseClicked
 
     /**
      * @param args the command line arguments
@@ -78,5 +121,8 @@ public class TaBortAlien extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnTaBort;
+    private javax.swing.JLabel lblRubrik;
+    private javax.swing.JTextField txtNamnAttTaBort;
     // End of variables declaration//GEN-END:variables
 }
