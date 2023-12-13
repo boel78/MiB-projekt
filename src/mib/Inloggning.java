@@ -33,7 +33,6 @@ public class Inloggning extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         pwField.setColumns(20);
-        pwField.setText("jPasswordField1");
 
         btnLogin.setText("jButton1");
         btnLogin.addActionListener(new java.awt.event.ActionListener() {
