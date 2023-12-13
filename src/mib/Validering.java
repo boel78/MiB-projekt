@@ -20,15 +20,12 @@ public class Validering {
     public boolean valideraAlienEpost(String epost){
         boolean valid = false;
         String emailRegex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$";
-        boolean existerar = false;
-        for(String email : db.hämtaAllaAlienEpost()){
-            if(email.equals(epost)){
-                existerar = true;
-                System.out.println("Epost finns redan");
-            }
-        }
+        boolean existerar = valideraAlienEpostFinns(epost);
         if(epost.matches(emailRegex) && !existerar){
             valid = true;
+        }
+        else if (existerar){
+            System.out.println("Eposten finns redan");
         }
         else{
             System.out.println("typo");
@@ -146,6 +143,18 @@ public class Validering {
         }
         System.out.println(valid);
         return valid;
+    }
+    
+    //Validera om alien email finns
+    public boolean valideraAlienEpostFinns(String epost){
+        boolean existerar = false;
+        for(String email : db.hämtaAllaAlienEpost()){
+            if(email.equals(epost)){
+                existerar = true;
+                System.out.println("Epost finns redan");
+            }
+        }
+        return existerar;
     }
     
 }
