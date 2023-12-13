@@ -4,7 +4,7 @@ import java.util.Scanner;
 import oru.inf.InfException;
 
 
-public class main {
+/*public class main {
     
     public static void main(String[] args) throws InfException {
         
@@ -19,3 +19,4 @@ public class main {
     
     
 }
+*/
