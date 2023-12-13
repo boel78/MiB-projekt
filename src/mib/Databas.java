@@ -54,5 +54,37 @@ public class Databas {
         return alienEmail;
     }
     
+    //Hämtar AlienLösenord
+    public String hämtaAlienLösenordPåEpost(String email, String typ){
+        System.out.println(typ);
+        if(typ.equals("Admin")){
+            typ = "Agent";
+        }
+        String query = "SELECT Losenord FROM " + typ + " where Epost= '" + email + "'";
+        
+        String alienLösen = "";
+        try {
+            alienLösen = idb.fetchSingle(query);
+        }
+        catch(InfException ex){
+            System.out.println(ex.getMessage());
+        }
+        return alienLösen;
+    }
     
+    //Är Admin
+    public boolean hämtaAdminStatus(String email){
+        boolean admin = false;
+        String query = "SELECT Administrator FROM Agent where Epost= '" + email + "'";
+        
+        try{
+            String status = idb.fetchSingle(query);
+            if(status.equals("J")){
+                admin = true;
+            }
+        } catch(InfException ex){
+                System.out.println(ex.getMessage());
+        }
+        return admin;
+    }
 }
