@@ -140,12 +140,34 @@ public class Validering {
     
     //validera agentTelefon
     public boolean valideraAgentTelefonnummer(String nummer){
-    boolean valid = false;
+        boolean valid = false;
         if(nummer.matches("^555-\\d[0-9]{1,5}")){
             valid = true;
         }
         System.out.println(valid);
         return valid;
+    }
+    
+    //validera agentEpostFinns
+    public boolean valideraAgentEpostFinns(String epost){
+        boolean finns = false;
+        for(String email : db.hämtaAllaAgentEpost()){
+            if(epost.equals(email)){
+                finns = true;
+            }
+        }
+        return finns;
+    }
+    
+    //validera agentNamnFinns
+    public boolean valideraAgentNamnFinns(String namn){
+        boolean finns = false;
+        for(String agentNamn : db.hämtaAgentNamn()){
+            if(agentNamn.equals(namn)){
+                finns = true;
+            }
+        }
+        return finns;
     }
     
 }

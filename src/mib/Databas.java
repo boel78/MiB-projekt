@@ -87,4 +87,54 @@ public class Databas {
         }
         return admin;
     }
+    
+    //Hämtar antal agenter
+    public int antalAgenterIDatabas(){
+        int mängd = 0;
+        ArrayList<String> agenter = hämtaAllaAgentEpost();
+        for(String epost : agenter){
+            mängd++;
+        }
+        return mängd;
+    }
+    
+    //Hämtar alla agentNamn
+    public ArrayList<String> hämtaAgentNamn(){
+        ArrayList<String> agentNamn = new ArrayList<>();
+        try{ 
+            agentNamn = idb.fetchColumn("SELECT Namn FROM Agent");
+        }
+        catch(InfException ex){
+            System.out.println(ex.getMessage());
+        }
+        return agentNamn;
+    }
+    
+    //Skapa en ny Agent
+    public void nyRegistreraAgent(int ID, String namn, String telefon, String anställningsdatum, String Admin, String epost, String lösenord, String område){
+        int omrID = hämtaOmrådeId(område);
+        String query = "INSERT INTO Agent VALUES(" + ID + ",'" + namn + "','" + telefon + "','" + anställningsdatum + "','" + Admin + "','" + epost + "','" + lösenord + "'," + omrID+ ")";
+        System.out.println(query);
+        try{
+            idb.insert(query);
+            System.out.println("DET funka");
+        }
+        catch(InfException ex){
+            System.out.println(ex.getMessage());
+        }
+    }
+    
+    //Hämta områdesID från områdenamn
+    public int hämtaOmrådeId(String namn){
+        int id = 0;
+        String query = "SELECT Omrades_ID FROM Omrade WHERE Benamning= '" + namn + "'";
+        try{
+            id = Integer.parseInt(idb.fetchSingle(query));
+            System.out.println(namn + " har id " + id);
+        }
+        catch(InfException ex){
+            System.out.println(ex.getMessage());
+        }
+        return id;
+    }
 }
