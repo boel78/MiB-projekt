@@ -5,6 +5,7 @@ import oru.inf.InfException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Databas {
     private InfDB idb;
@@ -282,5 +283,44 @@ public class Databas {
             System.out.println(ex.getMessage());
         }
         return id;
+    }
+    
+    //Hämta Innehar utrustning utifrån ID
+    public ArrayList<HashMap<String, String>> getInneharUtrustningFrånID(String ID){
+        ArrayList<HashMap<String, String>> inneharUtrustning = new ArrayList<>();
+        String query = "SELECT * FROM Innehar_utrustning where Agent_ID = " + ID;
+        try{
+            inneharUtrustning = idb.fetchRows(query);
+        }
+        catch(InfException ex){
+            System.out.println(ex.getMessage());
+        }
+        return inneharUtrustning;   
+    }
+    
+    //Hämta Agent ID från namn
+    public String getAgentIDFrånNamn(String namn){
+        String id = "";
+        String query = "SELECT Agent_ID from Agent where Namn = '" + namn +"'";
+        try{
+            id = idb.fetchSingle(query);
+        }
+        catch(InfException ex){
+            System.out.println(ex.getMessage());
+        }
+        return id;
+    }
+    
+    //Hämta utrustnings Benämning från ID
+    public String getUtrustningsBenämningFrånID(String ID){
+        String benämning = "";
+        String query= "SELECT Benamning FROM Utrustning where Utrustnings_ID = " + ID;
+        try{
+           benämning = idb.fetchSingle(query);
+        }
+        catch(InfException ex){
+            System.out.println(ex.getMessage());
+        }
+        return benämning;
     }
 }
