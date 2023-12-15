@@ -129,6 +129,13 @@ public class Databas {
         return id;
     }
     
+    //hämta ras på alien utifrån id.
+    public void taBortRas(int id) throws InfException {
+       
+        idb.delete("DELETE FROM Boglodite, Squid, Worm WHERE alien_id=" + id);
+                
+            }
+    
       
     
 }
