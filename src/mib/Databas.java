@@ -100,16 +100,14 @@ public class Databas {
         }
         return alien;
     }
-        // ta bort alien utifrån ID.
-    public HashMap<String,String> taBortAlien(int ID) {
+    // ta bort alien utifrån ID.
+    public void taBortAlien(int ID) throws InfException {
         String query = "DELETE FROM alien WHERE alien_id=" + ID;
-        HashMap<String,String> alien = new HashMap<>();
         try {
-        alien = idb.fetchRow(query);
+            idb.delete(query);
         } catch (InfException ex) {
             System.out.println(ex.getMessage());
         }
-        return alien;
     }
     
         // hämta en aliens id utifrån namnet.
@@ -129,13 +127,11 @@ public class Databas {
         return id;
     }
     
-    //hämta ras på alien utifrån id.
+    //ta bort ras på alien utifrån id.
     public void taBortRas(int id) throws InfException {
-       
-        idb.delete("DELETE FROM Boglodite, Squid, Worm WHERE alien_id=" + id);
-                
+
+        idb.delete("DELETE FROM Boglodite WHERE Alien_ID=" + id);
+        idb.delete("DELETE FROM Squid WHERE Alien_ID=" + id);
+        idb.delete("DELETE FROM Worm WHERE Alien_ID=" + id);        
             }
-    
-      
-    
-}
+    }
