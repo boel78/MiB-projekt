@@ -7,6 +7,7 @@ package mib;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import mib.Validering;
 import oru.inf.InfException;
 
 /**
@@ -82,18 +83,24 @@ public class TaBortAlien extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    // Ta bort alien
     private void btnTaBortMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTaBortMouseClicked
-                   // Ta bort alien
-        try {
-            int id = db.hämtaAlienIdFrånNamn(txtNamnAttTaBort.getText());
+         try {
+        String namnAttTaBort = txtNamnAttTaBort.getText();
+        Integer id = db.hämtaAlienIdFrånNamn(namnAttTaBort);
+        Validering validering = new Validering();
+
+        if (validering.valideraAlienId(id)) {
             db.taBortRas(id);
             db.taBortAlien(id);
-        } catch (InfException ex) {
-            Logger.getLogger(TaBortAlien.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(namnAttTaBort + " har tagits bort ur systemet.");
+        } else {
+            System.out.println(namnAttTaBort + " finns inte i systemet eller ogiltigt Alien-ID.");
         }
-        
-        
+    } catch (InfException ex) {
+        Logger.getLogger(TaBortAlien.class.getName()).log(Level.SEVERE, null, ex);
+    }   
     }//GEN-LAST:event_btnTaBortMouseClicked
 
     /**

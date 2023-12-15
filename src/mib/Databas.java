@@ -111,21 +111,21 @@ public class Databas {
     }
     
         // hämta en aliens id utifrån namnet.
-    public int hämtaAlienIdFrånNamn(String namn) {
-        String query = "SELECT alien_id FROM Alien WHERE namn= '" + namn + "'";
-        int id = 0;
-        try {
-         String strängId = idb.fetchSingle(query);
-        
-        id = Integer.parseInt(strängId); }
-        
-        catch(InfException ex) {
-            System.out.println(ex.getMessage());
+public int hämtaAlienIdFrånNamn(String namn) {
+    String query = "SELECT alien_id FROM Alien WHERE namn= '" + namn + "'";
+    int id = 0;
+    try {
+        String strängId = idb.fetchSingle(query);
+
+        if (strängId != null && !strängId.isEmpty()) {
+            id = Integer.parseInt(strängId);
         }
-        
-        System.out.println(id);
-        return id;
+    } catch (InfException ex) {
+        System.out.println(ex.getMessage());
     }
+    return id;
+}
+        
     
     //ta bort ras på alien utifrån id.
     public void taBortRas(int id) throws InfException {
