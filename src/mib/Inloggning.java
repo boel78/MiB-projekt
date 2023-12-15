@@ -107,7 +107,7 @@ public class Inloggning extends javax.swing.JFrame {
         String user = txtField.getText();
         String pass = pwField.getText();
         String typ = ÄrInloggTyp(user);
-            if(pass.equals(idb.hämtaAlienLösenordPåEpost(user, typ))){
+            if(pass.equals(idb.getAlienLösenordPåEpost(user, typ))){
                  valid = true;
             } 
         System.out.println(valid);
@@ -118,7 +118,7 @@ public class Inloggning extends javax.swing.JFrame {
         String typ = "Alien";
         String[] emailTyper = email.split("@");
             if(emailTyper[1].equals("mib.net")){
-                boolean ärAdmin = idb.hämtaAdminStatus(email);
+                boolean ärAdmin = idb.getAdminStatus(email);
                 typ = "Agent";
                 if(ärAdmin){
                     typ = "Admin";

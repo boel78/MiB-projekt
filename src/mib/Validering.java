@@ -21,7 +21,7 @@ public class Validering {
         boolean valid = false;
         String emailRegex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$";
         boolean existerar = false;
-        for(String email : db.hämtaAllaAlienEpost()){
+        for(String email : db.getAllaAlienEpost()){
             if(email.equals(epost)){
                 existerar = true;
                 System.out.println("Epost finns redan");
@@ -42,7 +42,7 @@ public class Validering {
         boolean valid = false;
         String emailRegex = "^[a][a-z]{1}+\\@mib.net";
         boolean existerar = false;
-        for(String email : db.hämtaAllaAgentEpost()){
+        for(String email : db.getAllaAgentEpost()){
             if(email.equals(epost)){
                 System.out.println("Email finns redan.");
                 existerar = true;
@@ -146,6 +146,62 @@ public class Validering {
         }
         System.out.println(valid);
         return valid;
+    }
+    
+    //validera om utrustningbenämning finns
+    public boolean valideraUtrustningBenämningExisterar(String benämning){
+        boolean hittad = false;
+            for(String namn : db.getUtrustningBenämning()){
+            if(benämning.equals(namn)){
+                hittad = true;
+            }
+            }
+        return hittad;
+    }
+    
+    //Validera om Vapen finns utifrån ID
+    public boolean valideraVapenExisterar(String ID){
+        boolean hittad = false;
+            for(String id : db.getVapenID()){
+                if(ID.equals(id)){
+                    hittad = true;
+                }
+            }
+        return hittad;
+    }
+    
+    //Validera om InneharUtrustning har IDt
+    public boolean valideraOmUtrustningInnehas(String ID){
+        boolean finns = false;
+        for(String id : db.getUtrustningSomInnehas()){
+            if(ID.equals(id)){
+                finns = true;
+            }
+        } 
+        return finns;
+    }
+    
+    //Validera om Kommunikation har IDt
+    public boolean valideraKommunikationUtrustningsID(String ID){
+        boolean finns = false;
+        for(String id : db.getKommunikationID()){
+            if(ID.equals(id)){
+                finns = true;
+            }
+        } 
+         System.out.println(finns);       
+        return finns;
+    }
+    
+    //Validera om Teknik har IDt
+    public boolean valideraTeknikUtrustningsID(String ID){
+        boolean finns = false;
+        for(String id : db.getTeknikID()){
+            if(ID.equals(id)){
+                finns = true;
+            }
+        } 
+        return finns;
     }
     
 }

@@ -22,7 +22,7 @@ public class Databas {
     }
     
     //Test för att se så databas funkar
-    public String hämtaAgentTest(){
+    public String getAgentTest(){
        String namn = "";
        try {
        namn =  idb.fetchSingle("SELECT Namn FROM agent WHERE agent_id=1");
@@ -33,7 +33,7 @@ public class Databas {
     }
     
     //Hämtar alla agentEmail
-    public ArrayList<String> hämtaAllaAgentEpost(){
+    public ArrayList<String> getAllaAgentEpost(){
         ArrayList<String> agentEpost = new ArrayList<>();
         try { 
             agentEpost = idb.fetchColumn("SELECT Epost FROM AGENT");
@@ -44,7 +44,7 @@ public class Databas {
     }
     
     //Hämtar alla AlienEmail
-    public ArrayList<String> hämtaAllaAlienEpost(){
+    public ArrayList<String> getAllaAlienEpost(){
         ArrayList<String> alienEmail = new ArrayList<>();
         try{
             alienEmail = idb.fetchColumn("SELECT Epost FROM Alien");
@@ -55,7 +55,7 @@ public class Databas {
     }
     
     //Hämtar AlienLösenord
-    public String hämtaAlienLösenordPåEpost(String email, String typ){
+    public String getAlienLösenordPåEpost(String email, String typ){
         System.out.println(typ);
         if(typ.equals("Admin")){
             typ = "Agent";
@@ -73,7 +73,7 @@ public class Databas {
     }
     
     //Är Admin
-    public boolean hämtaAdminStatus(String email){
+    public boolean getAdminStatus(String email){
         boolean admin = false;
         String query = "SELECT Administrator FROM Agent where Epost= '" + email + "'";
         
@@ -86,5 +86,148 @@ public class Databas {
                 System.out.println(ex.getMessage());
         }
         return admin;
+    }
+    
+    //Hämtar alla utrustningsbenämningar
+    public ArrayList<String> getUtrustningBenämning(){
+        ArrayList<String> utrustning = new ArrayList<>();
+        try{
+            utrustning = idb.fetchColumn("SELECT Benamning FROM Utrustning");
+        }
+        catch(InfException ex){
+            System.out.println(ex.getMessage());
+        }
+        return utrustning;
+    }
+    
+    //Hämta utrustnings ID utifrån benämning
+    public String getUtrustningID(String benämning){
+        String ID = "";
+        String query = "SELECT Utrustnings_ID FROM Utrustning WHERE Benamning='" + benämning + "'";
+        try{
+            ID = idb.fetchSingle(query);
+        }
+        catch(InfException ex){
+            System.out.println(ex.getMessage());
+        }
+        return ID;
+    }
+    
+    //Ta bort utrustning
+    public void taBortUtrustning(String ID){
+        String query = "DELETE FROM Utrustning where Utrustnings_ID =" + ID;
+        try{
+            idb.delete(query);
+            System.out.println("Borttaget");
+        }
+        catch(InfException ex){
+            System.out.println(ex.getMessage());
+        }
+    }
+    
+    //Ta bort vapen
+    public void taBortVapen(String ID){
+        String query = "DELETE FROM Vapen where Utrustnings_ID = " + ID;
+        try{
+            idb.delete(query);
+            System.out.println("Borttaget");
+        }
+        catch(InfException ex){
+            System.out.println(ex.getMessage());
+        }
+    }
+    
+    //Hämta vapen från ID
+    public String getVapenBenämning(String ID){
+        String namn = "";
+        String query = "SELECT Benamning FROM Vapen where Utrustnings_ID = " + ID;
+        try{
+            namn = idb.fetchSingle(query);
+        }
+        catch(InfException ex){
+            System.out.println(ex.getMessage());
+        }
+        return namn;
+    }
+    
+    //Hämta Alla Vapen från ID
+    public ArrayList<String> getVapenID(){
+        ArrayList<String> vapen = new ArrayList<>();
+        try{
+            vapen = idb.fetchColumn("SELECT Utrustnings_ID FROM Vapen");
+        }
+        catch(InfException ex){
+            System.out.println(ex.getMessage());
+        }
+        return vapen;
+    }
+    
+    //Ta bort rad innehar utrustning från utrustningsID
+    public void taBortInneharUtrustning(String utrustningsID){
+        String query= "DELETE FROM Innehar_Utrustning where Utrustnings_ID = " + utrustningsID;
+        try{
+            idb.delete(query);
+        }
+        catch(InfException ex){
+            System.out.println(ex.getMessage());
+        }
+    }
+    
+    //Hämta UtrustningsID från innehar_Utrustning
+    public ArrayList<String> getUtrustningSomInnehas(){
+        ArrayList<String> utrustningsID = new ArrayList<>();
+        try{
+            utrustningsID = idb.fetchColumn("SELECT Utrustnings_ID FROM Innehar_Utrustning");
+        }
+        catch(InfException ex){
+            System.out.println(ex.getMessage());
+        }
+        return utrustningsID;
+    }
+    
+    //Hämta UtrustningsID från Teknik
+    public ArrayList<String> getTeknikID(){
+        ArrayList<String> teknik = new ArrayList<>();
+        try{
+            teknik = idb.fetchColumn("SELECT Utrustnings_ID FROM Teknik");
+        }
+        catch(InfException ex){
+            System.out.println(ex.getMessage());
+        }
+        return teknik;
+    }
+    
+    //Hämta UtrustningsID från Kommunikation
+    public ArrayList<String> getKommunikationID(){
+        ArrayList<String> kommunikation = new ArrayList<>();
+        try{
+            kommunikation = idb.fetchColumn("SELECT Utrustnings_ID FROM Kommunikation");
+        }
+        catch(InfException ex){
+            System.out.println(ex.getMessage());
+        }
+        return kommunikation;
+    }
+     
+    //Ta bort Teknik utifrån ID
+    public void taBortTeknik(String utrustningsID){
+        String query= "DELETE FROM Teknik where Utrustnings_ID = " + utrustningsID;
+        try{
+            idb.delete(query);
+        }
+        catch(InfException ex){
+            System.out.println(ex.getMessage());
+        }
+    }
+    
+    //Ta bort Kommunikation utifrån ID
+    public void taBortKommunikation(String utrustningsID){
+        String query= "DELETE FROM Kommunikation where Utrustnings_ID =" + utrustningsID;
+        try{
+            idb.delete(query);
+        }
+        catch(InfException ex){
+            System.out.println(ex.getMessage());
+        }
     }
 }
