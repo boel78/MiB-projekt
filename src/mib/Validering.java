@@ -207,7 +207,7 @@ public class Validering {
       //validera agentEpostFinns
       public boolean valideraAgentEpostFinns(String epost){
           boolean finns = false;
-          for(String email : db.hämtaAllaAgentEpost()){
+          for(String email : db.getAllaAgentEpost()){
               if(epost.equals(email)){
                   finns = true;
               }
@@ -218,7 +218,7 @@ public class Validering {
       //validera agentNamnFinns
       public boolean valideraAgentNamnFinns(String namn){
           boolean finns = false;
-          for(String agentNamn : db.hämtaAgentNamn()){
+          for(String agentNamn : db.getAgentNamn()){
               if(agentNamn.equals(namn)){
                   finns = true;
               }

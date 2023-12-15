@@ -103,7 +103,7 @@ public class Databas {
     //Hämtar antal agenter
     public int antalAgenterIDatabas(){
         int mängd = 0;
-        ArrayList<String> agenter = hämtaAllaAgentEpost();
+        ArrayList<String> agenter = getAllaAgentEpost();
         for(String epost : agenter){
             mängd++;
         }
@@ -235,11 +235,17 @@ public class Databas {
           String query= "DELETE FROM Kommunikation where Utrustnings_ID =" + utrustningsID;
           try{
               idb.delete(query);
+              System.out.println("Tog bort kommunikation");
+          }
+          catch(InfException ex){
+              System.out.println(ex.getMessage());
+          }
+      }
 
 
 
     //Hämtar alla agentNamn
-    public ArrayList<String> hämtaAgentNamn(){
+    public ArrayList<String> getAgentNamn(){
         ArrayList<String> agentNamn = new ArrayList<>();
         try{
             agentNamn = idb.fetchColumn("SELECT Namn FROM Agent");
@@ -252,7 +258,7 @@ public class Databas {
 
     //Skapa en ny Agent
     public void nyRegistreraAgent(int ID, String namn, String telefon, String anställningsdatum, String Admin, String epost, String lösenord, String område){
-        int omrID = hämtaOmrådeId(område);
+        int omrID = getOmrådeId(område);
         String query = "INSERT INTO Agent VALUES(" + ID + ",'" + namn + "','" + telefon + "','" + anställningsdatum + "','" + Admin + "','" + epost + "','" + lösenord + "'," + omrID+ ")";
         System.out.println(query);
         try{
@@ -265,7 +271,7 @@ public class Databas {
     }
 
     //Hämta områdesID från områdenamn
-    public int hämtaOmrådeId(String namn){
+    public int getOmrådeId(String namn){
         int id = 0;
         String query = "SELECT Omrades_ID FROM Omrade WHERE Benamning= '" + namn + "'";
         try{
@@ -276,44 +282,5 @@ public class Databas {
             System.out.println(ex.getMessage());
         }
         return id;
-    }
-
-    //Hämta utrustnings ID utifrån benämning
-    public String getUtrustningID(String benämning){
-        String ID = "";
-        String query = "SELECT Utrustnings_ID FROM Utrustning WHERE Benamning='" + benämning + "'";
-        try{
-            ID = idb.fetchSingle(query);
-        }
-        catch(InfException ex){
-            System.out.println(ex.getMessage());
-        }
-        return ID;
-    }
-
-    //Ta bort utrustning
-    public void taBortUtrustning(String ID){
-        String query = "DELETE FROM Utrustning where Utrustnings_ID =" + ID;
-        try{
-            idb.delete(query);
-            System.out.println("Borttaget");
-        }
-        catch(InfException){
-            System.out.println(ex.getMessage());
-        }
-    }
-
-    //Skapa en ny Agent
-    public void nyRegistreraAgent(int ID, String namn, String telefon, String anställningsdatum, String Admin, String epost, String lösenord, String område){
-        int omrID = hämtaOmrådeId(område);
-        String query = "INSERT INTO Agent VALUES(" + ID + ",'" + namn + "','" + telefon + "','" + anställningsdatum + "','" + Admin + "','" + epost + "','" + lösenord + "'," + omrID+ ")";
-        System.out.println(query);
-        try{
-            idb.insert(query);
-            System.out.println("DET funka");
-        }
-        catch(InfException ex){
-            System.out.println(ex.getMessage());
-        }
     }
 }
