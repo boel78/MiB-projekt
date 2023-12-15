@@ -2,11 +2,11 @@ package mib;
 
 public class Validering {
     private Databas db;
-    
+
     public Validering(){
         db = new Databas();
     }
-    
+
     //Validerar ett namn
     public boolean valideraNamn(String namn){
         boolean valid = false;
@@ -15,7 +15,7 @@ public class Validering {
         }
        return valid;
     }
-    
+
     //Validerar en Alienemail
     public boolean valideraAlienEpost(String epost){
         boolean valid = false;
@@ -36,7 +36,7 @@ public class Validering {
         System.out.println(valid);
         return valid;
     }
-    
+
     //Validerar en AgentEmail
     public boolean valideraAgentEpost(String epost){
         boolean valid = false;
@@ -57,7 +57,7 @@ public class Validering {
         System.out.println(valid);
         return valid;
     }
-    
+
     //Validerar ett lösenord
     public boolean valideraLösenord(String lösen){
         boolean valid = false;
@@ -67,7 +67,7 @@ public class Validering {
         System.out.println(valid);
         return valid;
     }
-    
+
     //Validerar ett område
     public boolean valideraOmråde(String område){
         boolean valid = false;
@@ -77,7 +77,7 @@ public class Validering {
         System.out.println(valid);
         return valid;
     }
-    
+
     //validerar en plats
     public boolean valideraPlats(String plats){
         boolean valid = false;
@@ -87,7 +87,7 @@ public class Validering {
         System.out.println(valid);
         return valid;
     }
-    
+
     //validerar utrustning
     public boolean valideraUtrustning(String utrustning){
         boolean valid = false;
@@ -97,7 +97,7 @@ public class Validering {
         System.out.println(valid);
         return valid;
     }
-    
+
     //validerar alienNamn
     public boolean valideraAlienNamn(String namn){
         boolean valid = false;
@@ -107,7 +107,7 @@ public class Validering {
         System.out.println(valid);
         return valid;
     }
-    
+
     //validerar AlienTelefon
     public boolean valideraAlienTelefonnummer(String nummer){
         boolean valid = false;
@@ -117,7 +117,7 @@ public class Validering {
         System.out.println(valid);
         return valid;
     }
-    
+
     //validerar ett agentNamn
     public boolean valideraAgentNamn(String namn){
         boolean valid = false;
@@ -127,7 +127,7 @@ public class Validering {
         System.out.println(valid);
         return valid;
     }
-    
+
     //validera agentAnställningsDatum
     public boolean valideraAgentAnställningsDatum(String datum){
         boolean valid = false;
@@ -137,17 +137,17 @@ public class Validering {
         System.out.println(valid);
         return valid;
     }
-    
+
     //validera agentTelefon
     public boolean valideraAgentTelefonnummer(String nummer){
-    boolean valid = false;
+        boolean valid = false;
         if(nummer.matches("^555-\\d[0-9]{1,5}")){
             valid = true;
         }
         System.out.println(valid);
         return valid;
     }
-    
+
     //validera om utrustningbenämning finns
     public boolean valideraUtrustningBenämningExisterar(String benämning){
         boolean hittad = false;
@@ -158,7 +158,7 @@ public class Validering {
             }
         return hittad;
     }
-    
+
     //Validera om Vapen finns utifrån ID
     public boolean valideraVapenExisterar(String ID){
         boolean hittad = false;
@@ -169,7 +169,7 @@ public class Validering {
             }
         return hittad;
     }
-    
+
     //Validera om InneharUtrustning har IDt
     public boolean valideraOmUtrustningInnehas(String ID){
         boolean finns = false;
@@ -177,10 +177,10 @@ public class Validering {
             if(ID.equals(id)){
                 finns = true;
             }
-        } 
+        }
         return finns;
     }
-    
+
     //Validera om Kommunikation har IDt
     public boolean valideraKommunikationUtrustningsID(String ID){
         boolean finns = false;
@@ -188,11 +188,11 @@ public class Validering {
             if(ID.equals(id)){
                 finns = true;
             }
-        } 
-         System.out.println(finns);       
+        }
+         System.out.println(finns);
         return finns;
     }
-    
+
     //Validera om Teknik har IDt
     public boolean valideraTeknikUtrustningsID(String ID){
         boolean finns = false;
@@ -200,8 +200,30 @@ public class Validering {
             if(ID.equals(id)){
                 finns = true;
             }
-        } 
+        }
+        return finns;
+      }
+
+      //validera agentEpostFinns
+      public boolean valideraAgentEpostFinns(String epost){
+          boolean finns = false;
+          for(String email : db.hämtaAllaAgentEpost()){
+              if(epost.equals(email)){
+                  finns = true;
+              }
+          }
+          return finns;
+      }
+
+      //validera agentNamnFinns
+      public boolean valideraAgentNamnFinns(String namn){
+          boolean finns = false;
+          for(String agentNamn : db.hämtaAgentNamn()){
+              if(agentNamn.equals(namn)){
+                  finns = true;
+              }
+          }
         return finns;
     }
-    
+
 }
