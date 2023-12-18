@@ -161,14 +161,14 @@ public class Validering {
     
     //Validera om AlienID finns.
     public boolean valideraAlienId(int id){
-        boolean valid=false;
-        try {
+        boolean finns=false;
             HashMap<String, String> alienInfo = db.hämtaAlienInfo(id);
-            valid = !alienInfo.isEmpty();
-        } catch(Exception e) {
-            valid=false;
+        for(String strängId : alienInfo.keySet()){
+            int alienId = Integer.parseInt(strängId);
+        if(alienId == id){
+            finns = true;
+        }
+        }
+            return finns;
     }
-        return valid;
-    }
-    
 }

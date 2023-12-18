@@ -1,10 +1,11 @@
-
 package mib;
 
 import javax.swing.JComboBox;
 import mib.Databas;
 import mib.Validering;
+import oru.inf.InfDB;
 import oru.inf.InfException;
+
 
 /**
  *
@@ -232,9 +233,9 @@ public class NyregistreraAlien extends javax.swing.JFrame {
             telefonnummer = txtTelefon.getText();
             System.out.println("Telefonnummer: " + telefonnummer);
         }
-        if(validering.valideraLösenord(pswLösenord.getText())){
-            lösenord = pswLösenord.getText();
-        }   
+        if(validering.valideraLösenord(new String(pswLösenord.getPassword()))){
+            lösenord = new String (pswLösenord.getPassword());
+        }
         alienId = Integer.parseInt(txtID.getText());
         datum = txtDatum.getText();
         ansvarigAgent = Integer.parseInt(txtAnsvarigAgent.getText());

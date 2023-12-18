@@ -136,6 +136,7 @@ public int hämtaAlienIdFrånNamn(String namn) {
         idb.delete("DELETE FROM Squid WHERE Alien_ID=" + id);
         idb.delete("DELETE FROM Worm WHERE Alien_ID=" + id);        
 }
+
     public void registreraNyAlien(int id, String datum, String epost, String lösenord, String namn, String telefon, int plats, int ansvarigAgent){
         try {
         if(validering.valideraAlienEpostFinns(epost)){
