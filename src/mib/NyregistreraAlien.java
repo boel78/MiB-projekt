@@ -233,8 +233,8 @@ public class NyregistreraAlien extends javax.swing.JFrame {
             telefonnummer = txtTelefon.getText();
             System.out.println("Telefonnummer: " + telefonnummer);
         }
-        if(validering.valideraLösenord(new String(pswLösenord.getPassword()))){
-            lösenord = new String (pswLösenord.getPassword());
+        if(validering.valideraLösenord(pswLösenord.getText())){
+            lösenord = pswLösenord.getText();
         }
         alienId = Integer.parseInt(txtID.getText());
         datum = txtDatum.getText();
