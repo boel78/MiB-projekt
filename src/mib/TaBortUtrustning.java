@@ -273,6 +273,16 @@ public class TaBortUtrustning extends javax.swing.JFrame {
     //Hämta knappen
     private void btnHämtaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHämtaActionPerformed
         setDataITabell();
+                if(txtAdmin.getText().equals("Nej")){
+                    lblTaBort.setVisible(false);
+                    comboBox.setVisible(false);
+                    btnTaBort.setVisible(false);
+        }
+                else{
+                    lblTaBort.setVisible(true);
+                    comboBox.setVisible(true);
+                    btnTaBort.setVisible(true);
+                }
     }//GEN-LAST:event_btnHämtaActionPerformed
 
 
