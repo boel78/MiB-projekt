@@ -1,5 +1,7 @@
 package mib;
 
+import java.util.HashMap;
+
 public class Validering {
     private Databas db;
 
@@ -224,6 +226,19 @@ public class Validering {
               }
           }
         return finns;
+    }
+      
+       //Validera om AlienID finns.
+    public boolean valideraAlienId(int id){
+        boolean finns=false;
+            HashMap<String, String> alienInfo = db.hämtaAlienInfo(id);
+        for(String strängId : alienInfo.keySet()){
+            int alienId = Integer.parseInt(alienInfo.get(strängId));
+        if(alienId == id){
+            finns = true;
+        }
+        }
+            return finns;
     }
 
 }
