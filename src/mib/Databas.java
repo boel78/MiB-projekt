@@ -9,6 +9,7 @@ import java.util.HashMap;
 
 public class Databas {
     private InfDB idb;
+    private Validering validering;
     
     
     //Skapa db
@@ -20,6 +21,7 @@ public class Databas {
         catch (InfException ex) {
             Logger.getLogger(Databas.class.getName()).log(Level.SEVERE, null, ex);
         }
+        validering = new Validering();
     }
     
     //Test för att se så databas funkar
@@ -133,5 +135,23 @@ public int hämtaAlienIdFrånNamn(String namn) {
         idb.delete("DELETE FROM Boglodite WHERE Alien_ID=" + id);
         idb.delete("DELETE FROM Squid WHERE Alien_ID=" + id);
         idb.delete("DELETE FROM Worm WHERE Alien_ID=" + id);        
-            }
+}
+    public void registreraNyAlien(int id, String datum, String epost, String lösenord, String namn, String telefon, int plats, int ansvarigAgent){
+        try {
+        if(validering.valideraAlienEpostFinns(epost)){
+            String query = "INSERT INTO Alien (Alien_ID, Registreringsdatum, Epost, Losenord, Namn, Telefon, Plats, Ansvarig_Agent)" +
+            "VALUES (" + id + ", '" + datum + "', '" + epost + "', '" + lösenord + "', '" + namn + "', '" + telefon + "', '" + plats + "', '" + ansvarigAgent + "')";
+        idb.insert(query); 
+            System.out.println("Ny alien har registrerats.");
+        
+        } else {
+            System.out.println("Eposten finns redan i systemet.");
+        }
+        } catch(InfException e){
+            System.out.println("Fel vid registrering av ny alien.");
+        }
+            
     }
+}
+    
+    
