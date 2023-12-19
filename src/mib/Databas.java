@@ -341,25 +341,25 @@ public class Databas {
         try {
             idb.delete(query);
         } catch (InfException ex) {
-            System.out.println(ex.getMessage());
+          System.out.println(ex.getMessage());
         }
     }
     
         // hämta en aliens id utifrån namnet.
-public int hämtaAlienIdFrånNamn(String namn) {
-    String query = "SELECT alien_id FROM Alien WHERE namn= '" + namn + "'";
-    int id = 0;
-    try {
+    public int hämtaAlienIdFrånNamn(String namn) {
+        String query = "SELECT alien_id FROM Alien WHERE namn= '" + namn + "'";
+        int id = 0;
+        try {
         String strängId = idb.fetchSingle(query);
 
         if (strängId != null && !strängId.isEmpty()) {
             id = Integer.parseInt(strängId);
         }
-    } catch (InfException ex) {
+        } catch (InfException ex) {
         System.out.println(ex.getMessage());
+        }
+        return id;
     }
-    return id;
-}
         
     
     //ta bort ras på alien utifrån id.
@@ -372,22 +372,27 @@ public int hämtaAlienIdFrånNamn(String namn) {
         catch(InfException ex){
             System.out.println(ex.getMessage());
         }
-}
-
+    }
+    //Lägg till ny alien.
     public void registreraNyAlien(int id, String datum, String epost, String lösenord, String namn, String telefon, int plats, int ansvarigAgent){
         try {
-        //if(validering.valideraAlienEpostFinns(epost)){
             String query = "INSERT INTO Alien (Alien_ID, Registreringsdatum, Epost, Losenord, Namn, Telefon, Plats, Ansvarig_Agent)" +
             "VALUES (" + id + ", '" + datum + "', '" + epost + "', '" + lösenord + "', '" + namn + "', '" + telefon + "', '" + plats + "', '" + ansvarigAgent + "')";
         idb.insert(query); 
             System.out.println("Ny alien har registrerats.");
-        
-       // } else {
-            //System.out.println("Eposten finns redan i systemet.");
-        //}
-        } catch(InfException e){
-            System.out.println(e.getMessage());
+
+        } catch(InfException ex){
+            System.out.println(ex.getMessage());
         }
             
     }
-}
+    //Hämta antal aliens.
+    public int antalAliensIDatabas(){
+        int antal = 0;
+        ArrayList<String> aliens = getAllaAlienEpost();
+        for(String epost : aliens){
+            antal++;
+        }
+        return antal;
+        }
+    }
