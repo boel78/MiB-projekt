@@ -19,51 +19,38 @@ public class Validering {
     }
 
     //Validerar en Alienemail
-    public boolean valideraAlienEpost(String epost){
+    public boolean valideraAlienEpostTypo(String epost){
         boolean valid = false;
         String emailRegex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$";
-        boolean existerar = false;
-        for(String email : db.getAllaAlienEpost()){
-            if(email.equals(epost)){
-                existerar = true;
-                System.out.println("Epost finns redan");
-            }
-        }
-        if(epost.matches(emailRegex) && !existerar){
+        
+        if(epost.matches(emailRegex)){
             valid = true;
         }
         else{
             System.out.println("typo");
         }
-        System.out.println(valid);
+        System.out.println("Alien epost: " + valid);
         return valid;
     }
-
-    //Validerar en AgentEmail
-    public boolean valideraAgentEpost(String epost){
-        boolean valid = false;
-        String emailRegex = "^[a][a-z]{1}+\\@mib.net";
-        boolean existerar = false;
-        for(String email : db.getAllaAgentEpost()){
-            if(email.equals(epost)){
-                System.out.println("Email finns redan.");
-                existerar = true;
+    
+    //Validera om Alienepost finns
+    public boolean valideraAlienEpostExisterar(String epost){
+        boolean finns = false;
+        if(valideraAlienEpostTypo(epost)){
+            for(String email : db.getAllaAlienEpost()){
+                if(email.equals(epost)){
+                  finns = true;
+                    System.out.println("Epost finns redan");
+                }
             }
         }
-        if(epost.matches(emailRegex) && !existerar){
-            valid = true;
-        }
-        else{
-            System.out.println("Typo");
-        }
-        System.out.println(valid);
-        return valid;
+        return finns;
     }
 
     //Validerar ett lösenord
     public boolean valideraLösenord(String lösen){
         boolean valid = false;
-        if(lösen.matches("^[a-zA-Z0-9][a-zA-Z0-9]*")){
+        if(lösen.matches("^[a-zA-Z0-9][a-zA-Z0-9]*") && lösen.length() <= 6){
             valid = true;
         }
         System.out.println(valid);
