@@ -55,7 +55,7 @@ public class Databas {
         return alienEmail;
     }
 
-    //Hämtar AlienLösenord
+    //Hämtar AlienLösenord från epost
     public String getAlienLösenordPåEpost(String email, String typ){
         System.out.println(typ);
         if(typ.equals("Admin")){
@@ -323,4 +323,54 @@ public class Databas {
         }
         return benämning;
     }
+    
+    //Hämta agentLösen från epost
+    public String getAgentLösenordFrånEpost(String epost){
+        String lösenord = "";
+        String query = "SELECT Losenord FROM Agent where Epost = '" + epost + "'";
+        try{
+            lösenord = idb.fetchSingle(query);
+        }
+        catch(InfException ex){
+            System.out.println(ex.getMessage());
+        }
+        return lösenord;
+    }
+    
+    //Byt agentLösen utifrån epost
+    public void setAgentLösenordFrånEpost(String epost, String losenord){
+        String query = "UPDATE Agent SET Losenord= '"+ losenord + "' where Epost = '" + epost + "'";
+        try{
+            idb.update(query);
+        }
+        catch(InfException ex){
+            System.out.println(ex.getMessage());
+        }
+    }
+    
+    //Hämta alienlösen från epost
+    public String getAlienLösenordFrånEpost(String epost){
+        String lösenord = "";
+        String query = "SELECT Losenord FROM Alien where Epost = '" + epost +"'";
+        try {
+            lösenord = idb.fetchSingle(query);
+        }
+        catch(InfException ex){
+            System.out.println(ex.getMessage());
+        }
+        return lösenord;
+    }
+    
+    //Byt Alien lösen utifrån epost
+    public void setAlienLösenordFrånEpost(String epost, String losenord){
+        String query = "UPDATE Alien SET Losenord= '"+ losenord + "' where Epost = '" + epost + "'";
+        try{
+            idb.update(query);
+        }
+        catch(InfException ex){
+            System.out.println(ex.getMessage());
+        }
+    }
+    
+    
 }
