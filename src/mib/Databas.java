@@ -324,8 +324,6 @@ public class Databas {
         return benämning;
     }
     
-    
-    
     public String getEpostFranNamn(String namn){
         String epost = "";
         String query = "Select Epost from agent where namn = '" + namn + "';";
@@ -335,7 +333,27 @@ public class Databas {
         catch(InfException ex) {
             System.out.println(ex.getMessage());
         }
-        
         return epost;
     }
+    
+    public void setAdminStatus(boolean status, String namn){
+        
+        String s = ""; 
+        if(status == true){
+            s="N";
+        }
+        else{
+            s="J";
+        }
+        
+        String query = "update agent set Administrator = '" + s + "' where namn = '" + namn + "';";
+        try{
+            idb.update(query);
+            System.out.println(s);
+        }
+        catch(InfException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+    
 }

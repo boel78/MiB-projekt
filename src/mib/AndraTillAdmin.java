@@ -95,10 +95,20 @@ public class AndraTillAdmin extends javax.swing.JFrame {
 
     private void messageAdminAndrad(){
         //
+        String epost = idb.getEpostFranNamn(valdAgent);
+        Boolean status = idb.getAdminStatus(epost);
+        
         String message = "";
-        
-        
-        System.out.print("");
+        if(status == true){
+            //Admin
+            message = "Rättigheterna för " + valdAgent + " har ändrats till: Admin.";
+        }
+        else{
+            //Agent
+            message = "Rättigheter för " + valdAgent + " har ändrats till: Ej Admin";
+        }
+        System.out.println(message);
+        System.out.println(status);
     }
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -106,6 +116,8 @@ public class AndraTillAdmin extends javax.swing.JFrame {
         //Databas metod
         String epost = idb.getEpostFranNamn(valdAgent);
         Boolean status = idb.getAdminStatus(epost);
+        
+        idb.setAdminStatus(status, valdAgent);
         
         
         
