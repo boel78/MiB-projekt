@@ -311,6 +311,19 @@ public class Databas {
         return id;
     }
     
+    //Hämta Agent namn från ID
+    public String getAgentNamnFrånID(int id){
+        String namn = "";
+        String query = "SELECT Namn from Agent where Agent_ID = " + id;
+        try{
+            namn = idb.fetchSingle(query);
+        }
+        catch(InfException ex){
+            System.out.println(ex.getMessage());
+        }
+        return namn;
+    }
+    
     //Hämta utrustnings Benämning från ID
     public String getUtrustningsBenämningFrånID(String ID){
         String benämning = "";

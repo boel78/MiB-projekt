@@ -5,6 +5,7 @@
 package mib;
 
 import java.util.ArrayList;
+import javax.swing.DefaultListModel;
 
 /**
  *
@@ -14,12 +15,15 @@ public class VisaTop3Agenter extends javax.swing.JFrame {
 
     private Databas db;
     private String områdeID;
+    private DefaultListModel mod;
     /**
      * Creates new form VisaTop3Agenter
      */
     public VisaTop3Agenter() {
         initComponents();
         db = new Databas();
+        mod = new DefaultListModel();
+        listAgenter.setModel(mod);
         
     }
 
@@ -35,7 +39,7 @@ public class VisaTop3Agenter extends javax.swing.JFrame {
         lblOmråde = new javax.swing.JLabel();
         btnHämta = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
+        listAgenter = new javax.swing.JList<>();
         comboBox = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -49,7 +53,7 @@ public class VisaTop3Agenter extends javax.swing.JFrame {
             }
         });
 
-        jScrollPane1.setViewportView(jList1);
+        jScrollPane1.setViewportView(listAgenter);
 
         comboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Svealand", "Götaland", "Norrland" }));
 
@@ -92,11 +96,16 @@ public class VisaTop3Agenter extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnHämtaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHämtaActionPerformed
+        if(!mod.isEmpty()){
+            mod.clear();
+        }
         String område = comboBox.getSelectedItem().toString();
         områdeID = db.getOmrådeId(område).toString();
         String agentID = "";
-        räknaUtTopTre();
-        
+        ArrayList<Integer> listan = räknaUtTopTre();
+        for(Integer id : listan){
+           mod.addElement(db.getAgentNamnFrånID(id));
+        }
         
     }//GEN-LAST:event_btnHämtaActionPerformed
     
@@ -152,7 +161,7 @@ public class VisaTop3Agenter extends javax.swing.JFrame {
         int treAgent = 0;
         int treAntal = 0;
         for(int[] agent : agenter){
-            if(agent[1] > maxAntal){
+            if(agent[1] >= maxAntal){
                 maxAgent = agent[0];
                 topTre.add(0, maxAgent);
                 maxAntal = agent[1];
@@ -168,9 +177,6 @@ public class VisaTop3Agenter extends javax.swing.JFrame {
                 treAntal = agent[1];
             }
         }
-        System.out.println(topTre);
-        System.out.println("MaxAgent: " + maxAgent);
-        System.out.println("MaxAntal: " + maxAntal);
         return topTre;
     }
     /**
@@ -211,8 +217,8 @@ public class VisaTop3Agenter extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnHämta;
     private javax.swing.JComboBox<String> comboBox;
-    private javax.swing.JList<String> jList1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblOmråde;
+    private javax.swing.JList<String> listAgenter;
     // End of variables declaration//GEN-END:variables
 }
