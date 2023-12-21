@@ -115,7 +115,8 @@ public class BytaLösenord extends javax.swing.JFrame {
     private void btnBytLösenordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBytLösenordActionPerformed
         String epost = txtEpost.getText();
         valideraNyalösenordet();
-        String nuvarandeLösenord = pwNuvarandeLösenord.getText();       
+        String nuvarandeLösenord = pwNuvarandeLösenord.getText(); 
+        //Agent lösenord
         if(validering.getÄrEpostAgent(epost)){
             if(validering.valideraAgentLösenord(nuvarandeLösenord, epost)){
                     db.setAgentLösenordFrånEpost(epost, nyttLösenord);
