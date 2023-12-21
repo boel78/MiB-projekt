@@ -96,11 +96,11 @@ public class AndraTillAdmin extends javax.swing.JFrame {
     
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        //System.out.println(valdAgent);
-        
         //Databas metod
-        getEpostFranNamn(valdAgent);
+        String epost = idb.getEpostFranNamn(valdAgent);
         
+        
+        //System.out.println(valdAgent);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     
