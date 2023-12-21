@@ -323,4 +323,19 @@ public class Databas {
         }
         return benämning;
     }
+    
+    
+    
+    public String getEpostFranNamn(String namn){
+        String epost = "";
+        String query = "Select Epost from agent where namn = '" + namn + "';";
+        try{
+            epost = idb.fetchSingle(query);
+            }
+        catch(InfException ex) {
+            System.out.println(ex.getMessage());
+        }
+        
+        return epost;
+    }
 }
