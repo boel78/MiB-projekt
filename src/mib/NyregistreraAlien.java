@@ -227,6 +227,7 @@ public class NyregistreraAlien extends javax.swing.JFrame {
                                   
     }//GEN-LAST:event_btnLäggTillActionPerformed
 
+    //Anger plats
     private void comboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxActionPerformed
         JComboBox comboBox = (JComboBox) evt.getSource();
 

@@ -1,5 +1,6 @@
 package mib;
 
+
 import oru.inf.InfDB;
 import oru.inf.InfException;
 import java.util.logging.Level;
@@ -395,4 +396,25 @@ public class Databas {
         }
         return antal;
         }
+    
+
+    public void ändraAlienInfo(int id,int nyttID, String datum, String lösenord, String namn, String telefon, int plats, int ansvarigAgent){
+        try {
+        String query = "UPDATE Alien SET "
+                + "Registreringsdatum = '" + datum + "', "
+                + "Losenord = '" + lösenord + "', "
+                + "Namn = '" + namn + "', "
+                + "Telefon = '" + telefon + "', "
+                + "Plats = " + plats + ", "
+                + "Ansvarig_Agent = " + ansvarigAgent + ", "
+                + "Alien_ID = " + nyttID
+                + " WHERE Alien_ID = " + id;
+        idb.update(query);
+        System.out.println("Informationen har uppdaterats.");
+        } catch(InfException ex){
+            System.out.println(ex.getMessage());
+        }
     }
+    
+
+}
