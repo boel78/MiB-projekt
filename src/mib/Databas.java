@@ -398,7 +398,7 @@ public class Databas {
         }
     
 
-    public void ändraAlienInfo(int id,int nyttID, String datum, String lösenord, String namn, String telefon, int plats, int ansvarigAgent){
+    public void ändraAlienInfo(int id, String datum, String lösenord, String namn, String telefon, int plats, int ansvarigAgent){
         try {
         String query = "UPDATE Alien SET "
                 + "Registreringsdatum = '" + datum + "', "
@@ -406,8 +406,7 @@ public class Databas {
                 + "Namn = '" + namn + "', "
                 + "Telefon = '" + telefon + "', "
                 + "Plats = " + plats + ", "
-                + "Ansvarig_Agent = " + ansvarigAgent + ", "
-                + "Alien_ID = " + nyttID
+                + "Ansvarig_Agent = " + ansvarigAgent
                 + " WHERE Alien_ID = " + id;
         idb.update(query);
         System.out.println("Informationen har uppdaterats.");
@@ -415,6 +414,5 @@ public class Databas {
             System.out.println(ex.getMessage());
         }
     }
-    
 
 }

@@ -48,8 +48,6 @@ public class ÄndraAlienInfo extends javax.swing.JFrame {
         lblDatum = new javax.swing.JLabel();
         txtDatum = new javax.swing.JTextField();
         lblDatum2 = new javax.swing.JLabel();
-        lblID = new javax.swing.JLabel();
-        txtID = new javax.swing.JTextField();
         btnOk = new javax.swing.JButton();
         lblNyttNamn = new javax.swing.JLabel();
         txtNyttNamn = new javax.swing.JTextField();
@@ -88,10 +86,6 @@ public class ÄndraAlienInfo extends javax.swing.JFrame {
         txtDatum.setColumns(5);
 
         lblDatum2.setText("(ÅÅÅÅ-MM-DD)");
-
-        lblID.setText("Nytt ID:");
-
-        txtID.setColumns(5);
 
         btnOk.setText("Ok");
         btnOk.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -139,10 +133,7 @@ public class ÄndraAlienInfo extends javax.swing.JFrame {
                                 .addComponent(lblDatum2)
                                 .addGap(3, 3, 3))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lblID)
-                                    .addComponent(txtDatum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txtDatum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(10, 10, 10))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -202,17 +193,10 @@ public class ÄndraAlienInfo extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(txtDatum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(24, 24, 24)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblLösen, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblID, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addComponent(lblLösen)
+                .addGap(18, 18, 18)
+                .addComponent(pswLösen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(pswLösen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addComponent(lblAgent)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -247,39 +231,48 @@ public class ÄndraAlienInfo extends javax.swing.JFrame {
     private void btnOkMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnOkMouseClicked
             
         String namnAttÄndra = txtNamn.getText();
-        int idAttÄndra = db.hämtaAlienIdFrånNamn(namnAttÄndra);
+        int id = db.hämtaAlienIdFrånNamn(namnAttÄndra);
 
         //Validerar
-        if(validering.valideraNamn(namnAttÄndra)
-            && validering.valideraAlienTelefonnummer(txtTelefon.getText())
-            && validering.valideraLösenord(pswLösen.getText())
-            && validering.valideraAgentAnställningsDatum(txtDatum.getText())
-            && ansvarigAgent <= db.antalAgenterIDatabas()
-            && validering.valideraAlienId(idAttÄndra)) {
+        if(!validering.valideraNamn(namnAttÄndra)){
+            System.out.println("Felaktigt namn.");
+        }
+        else if(!validering.valideraAlienTelefonnummer(txtTelefon.getText())) {
+            System.out.println("Felaktigt telefonnummer.");
+        }
+        else if(!validering.valideraLösenord(pswLösen.getText())) {
+            System.out.println("Felaktigt lösenord.");
+        }
+        else if(!validering.valideraAgentAnställningsDatum(txtDatum.getText())){
+            System.out.println("Felaktigt datum.");
+        }
+        else if(ansvarigAgent > db.antalAgenterIDatabas()) {
+            System.out.println("Agenten finns inte.");
             
             
             //Sätter värden på fälten
-            namn = txtNyttNamn.getText();
+        } else {   namn = txtNyttNamn.getText();
             telefonnummer = txtTelefon.getText();
             lösenord = pswLösen.getText();
             datum = txtDatum.getText();
+            
+            try {
             ansvarigAgent = Integer.parseInt(txtAgent.getText());
-            alienId = Integer.parseInt(txtID.getText());
-
+          } catch(NumberFormatException ex) {
+              System.out.println(ex.getMessage());
+          }
             //Skriver ut informationen som lagts till i fälten
             System.out.println("Telefonnummer: " + telefonnummer);
             System.out.println("Namn: " + namn);
             System.out.println("Datum: " + datum);
             System.out.println("Ansvarig agent: " + ansvarigAgent);
-            System.out.println("Alien ID: " + alienId);
             System.out.println("Plats: " + plats);
         
         //Lägger till värden i tabellen via databasklassen
-        db.ändraAlienInfo(idAttÄndra, alienId, datum, lösenord, namn, telefonnummer, plats, ansvarigAgent);
-            } else {
-                System.out.println("Alien med namnet " + namnAttÄndra + " kunde inte hittas.");
-            
+        db.ändraAlienInfo(id, datum, lösenord, namn, telefonnummer, plats, ansvarigAgent);
         }
+            
+        
     }//GEN-LAST:event_btnOkMouseClicked
 
     /**
@@ -323,7 +316,6 @@ public class ÄndraAlienInfo extends javax.swing.JFrame {
     private javax.swing.JLabel lblAgent;
     private javax.swing.JLabel lblDatum;
     private javax.swing.JLabel lblDatum2;
-    private javax.swing.JLabel lblID;
     private javax.swing.JLabel lblLösen;
     private javax.swing.JLabel lblNamn;
     private javax.swing.JLabel lblNyttNamn;
@@ -333,7 +325,6 @@ public class ÄndraAlienInfo extends javax.swing.JFrame {
     private javax.swing.JPasswordField pswLösen;
     private javax.swing.JTextField txtAgent;
     private javax.swing.JTextField txtDatum;
-    private javax.swing.JTextField txtID;
     private javax.swing.JTextField txtNamn;
     private javax.swing.JTextField txtNyttNamn;
     private javax.swing.JTextField txtTelefon;
