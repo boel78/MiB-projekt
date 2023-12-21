@@ -93,14 +93,23 @@ public class AndraTillAdmin extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    
+    private void messageAdminAndrad(){
+        //
+        String message = "";
+        
+        
+        System.out.print("");
+    }
+
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         //Databas metod
         String epost = idb.getEpostFranNamn(valdAgent);
+        Boolean status = idb.getAdminStatus(epost);
         
         
-        //System.out.println(valdAgent);
+        
+        messageAdminAndrad();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     
