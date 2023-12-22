@@ -140,6 +140,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="H&#xe4;mta"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnH&#xe4;mtaActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JComboBox" name="comboBoxRas">
       <Properties>

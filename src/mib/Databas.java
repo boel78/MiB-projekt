@@ -372,5 +372,16 @@ public class Databas {
         }
     }
     
-    
+    //Hämta idn från Boglodite
+    public ArrayList<String> getIdnFrånRas(String ras){
+        ArrayList<String> IDn = new ArrayList<>();
+        String query = "SELECT Alien_ID FROM " + ras;
+        try{
+            IDn = idb.fetchColumn(query);
+        }
+        catch(InfException ex){
+            System.out.println(ex.getMessage());
+        }
+        return IDn;
+    }
 }

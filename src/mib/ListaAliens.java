@@ -5,6 +5,8 @@
 package mib;
 
 import java.awt.Color;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -17,6 +19,8 @@ public class ListaAliens extends javax.swing.JFrame {
     private boolean visaDatum;
     private String plats;
     private String ras;
+    private Databas db;
+    private DefaultTableModel model;
     /**
      * Creates new form ListaAliens
      */
@@ -29,6 +33,9 @@ public class ListaAliens extends javax.swing.JFrame {
         txtAndraDatum.setVisible(false);
         lblFrån.setVisible(false);
         lblTill.setVisible(false);
+        db = new Databas();
+        model = (DefaultTableModel) tblInfo.getModel();
+        model.setRowCount(0);
     }
 
     /**
@@ -69,6 +76,11 @@ public class ListaAliens extends javax.swing.JFrame {
         txtAndraDatum.setColumns(10);
 
         btnHämta.setText("Hämta");
+        btnHämta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHämtaActionPerformed(evt);
+            }
+        });
 
         comboBoxRas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Worm", "Boglodite", "Squid", "---" }));
         comboBoxRas.setSelectedIndex(3);
@@ -220,6 +232,15 @@ public class ListaAliens extends javax.swing.JFrame {
             lblTill.setVisible(false);
         }
     }//GEN-LAST:event_btnDatumActionPerformed
+
+    //Hämta knappen
+    private void btnHämtaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHämtaActionPerformed
+       ArrayList<String> id = db.getIdnFrånRas(ras);
+       for(String ID : id){
+           String namn = "";
+           model.addRow(new Object[]{ID, 0, 0});
+       }
+    }//GEN-LAST:event_btnHämtaActionPerformed
 
     /**
      * @param args the command line arguments
