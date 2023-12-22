@@ -372,7 +372,7 @@ public class Databas {
         }
     }
     
-    //Hämta idn från Boglodite
+    //Hämta idn från Ras
     public ArrayList<String> getIdnFrånRas(String ras){
         ArrayList<String> IDn = new ArrayList<>();
         String query = "SELECT Alien_ID FROM " + ras;
@@ -384,4 +384,36 @@ public class Databas {
         }
         return IDn;
     }
+    
+    //Hämta Alien namn från ID
+    public String getAlienNamnFrånID(String ID){
+        String query = "SELECT Namn FROM Alien where Alien_ID = " + ID;
+        String namn = "";
+        try{
+            namn = idb.fetchSingle(query);
+        }
+        catch(InfException ex){
+            System.out.println(ex.getMessage());
+        }
+        return namn;
+    }
+    
+    //Hämta Alien epost från ID
+    public String getAlienEpostFrånID(String ID){
+        String query = "SELECT Epost FROM Alien where Alien_ID = " + ID;
+        String epost = "";
+        try{
+            epost = idb.fetchSingle(query);
+        }
+        catch(InfException ex){
+            System.out.println(ex.getMessage());
+        }
+        return epost;
+    }
+    
+    //Hämta plats id från namn
+    
+    
+    
+    //Hämta Alien id på dom som finns i en plats
 }

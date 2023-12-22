@@ -205,6 +205,9 @@ public class ListaAliens extends javax.swing.JFrame {
         if(plats.equals("---")){
             visaPlats = false;
         }
+        else{
+            visaPlats = true;
+        }
     }//GEN-LAST:event_comboBoxPlatsActionPerformed
 
     //Ras comboBox
@@ -212,6 +215,9 @@ public class ListaAliens extends javax.swing.JFrame {
         ras = comboBoxRas.getSelectedItem().toString();
         if(ras.equals("---")){
             visaRas = false;
+        }
+        else{
+            visaPlats = true;
         }
     }//GEN-LAST:event_comboBoxRasActionPerformed
 
@@ -235,10 +241,24 @@ public class ListaAliens extends javax.swing.JFrame {
 
     //Hämta knappen
     private void btnHämtaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHämtaActionPerformed
-       ArrayList<String> id = db.getIdnFrånRas(ras);
-       for(String ID : id){
-           String namn = "";
-           model.addRow(new Object[]{ID, 0, 0});
+       if(visaRas){
+        ArrayList<String> AlienIDRas = db.getIdnFrånRas(ras);
+            for(String ID : AlienIDRas){
+                String namn = db.getAlienNamnFrånID(ID);
+                String epost = db.getAlienEpostFrånID(ID);
+                model.addRow(new Object[]{ID, namn, epost});
+            }
+       }
+       else if(visaPlats){
+           System.out.println(plats);
+            int områdesID = db.getOmrådeId(plats);
+            System.out.println(områdesID);
+            ArrayList<String> AlienIDOmråde = db.getAlienIDFrånOmråde(områdesID);
+             for(String id : AlienIDOmråde){
+                  String namn = db.getAlienNamnFrånID(id);
+                 String epost = db.getAlienEpostFrånID(id);
+                 model.addRow(new Object[]{id, namn, epost});
+             }
        }
     }//GEN-LAST:event_btnHämtaActionPerformed
 
