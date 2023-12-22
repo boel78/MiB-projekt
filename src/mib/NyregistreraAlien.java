@@ -26,6 +26,7 @@ public class NyregistreraAlien extends javax.swing.JFrame {
         initComponents();
         db = new Databas();
         validering = new Validering();
+        plats = 1;
     }
 
     /**
@@ -196,7 +197,7 @@ public class NyregistreraAlien extends javax.swing.JFrame {
             System.out.println("Epost: " + epost);
         }
         //Validerar och sätter namnet
-        if(validering.valideraNamn(txtNamn.getText())) {
+        if(validering.valideraAlienNamn(txtNamn.getText())) {
             namn = txtNamn.getText();
             System.out.println("Namn: " + namn);
         }
@@ -220,9 +221,11 @@ public class NyregistreraAlien extends javax.swing.JFrame {
             System.out.println("Ansvarig agent: " + ansvarigAgent);
         }
         //Skapar alien i tabellen via databasklassen om eposten inte finns
-        if(!validering.valideraAlienEpostExisterar(txtEpost.getText())){
+        if(!validering.valideraAlienEpostExisterar(txtEpost.getText()) && !fältÄrNull()){    
         db.registreraNyAlien(alienId, datum, epost, lösenord, namn, telefonnummer, plats, ansvarigAgent);}
-            
+        else{
+            System.out.println("Validering misslyckades, något fält är null");
+        }    
         
                                   
     }//GEN-LAST:event_btnLäggTillActionPerformed
@@ -247,6 +250,14 @@ public class NyregistreraAlien extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_comboBoxActionPerformed
 
+    //Kolla om fälten är null
+    private boolean fältÄrNull(){
+        boolean ärNull = false;
+        if(epost == null || namn == null || lösenord == null || telefonnummer == null || datum == null){
+            ärNull = true;
+        }  
+        return ärNull;
+    }
     /**
      * @param args the command line arguments
      */

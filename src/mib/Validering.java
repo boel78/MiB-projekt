@@ -21,13 +21,13 @@ public class Validering {
     //Validerar en Alienemail
     public boolean valideraAlienEpostTypo(String epost){
         boolean valid = false;
-        String emailRegex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$";
+        String emailRegex = "^[a-zA-ZåäöÅÄÖ0-9._%+-]+@[a-zåäöA-ZÅÄÖ0-9.-]+\\.[a-zåäöA-ZÅÄÖ]{2,6}$";
         
         if(epost.matches(emailRegex)){
             valid = true;
         }
         else{
-            System.out.println("typo");
+            System.out.println("epost typo");
         }
         System.out.println("Alien epost: " + valid);
         return valid;
@@ -53,7 +53,7 @@ public class Validering {
         if(lösen.matches("^[a-zA-Z0-9][a-zA-Z0-9]*") && lösen.length() <= 6){
             valid = true;
         }
-        System.out.println(valid);
+        System.out.println("Lösenordet är " + valid);
         return valid;
     }
 
@@ -90,10 +90,10 @@ public class Validering {
     //validerar alienNamn
     public boolean valideraAlienNamn(String namn){
         boolean valid = false;
-        if(namn.matches("^[A-Z]{1}[a-z]+(\\s[A-Z]{1}[a-z]*)?")){
+        if(namn.matches("^[A-ZÅÄÖ]{1}[a-zåäö]+(\\s[A-ZÅÄÖ]{1}[a-zåäö]*)?")){
             valid = true;
         }
-        System.out.println(valid);
+        System.out.println("Namnet är " + valid);
         return valid;
     }
 
