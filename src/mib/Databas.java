@@ -412,8 +412,43 @@ public class Databas {
     }
     
     //Hämta plats id från namn
-    
+    public String getPlatsIDFrånNamn(String benämning){
+        String query = "SELECT Plats_ID FROM Plats where Benamning = '" + benämning + "'";
+        String platsID = "";
+        try{
+            platsID = idb.fetchSingle(query);
+        }
+        catch(InfException ex){
+            System.out.println(ex.getMessage());
+        }
+        return platsID;
+    }
     
     
     //Hämta Alien id på dom som finns i en plats
+    public ArrayList<String> getAlienIDnFrånPlats(String platsID){
+        String query = "SELECT Alien_ID FROM Alien where plats = " + platsID;
+        ArrayList<String> idLista = new ArrayList<>();
+        try{
+            idLista = idb.fetchColumn(query);
+        }
+        catch(InfException ex){
+            System.out.println(ex.getMessage());
+        }
+        System.out.println(idLista);
+        return idLista;
+    }
+    
+    //Hämta Alien id mellan 2 datum
+    public ArrayList<String> getAlienIDMellanDatum(String från, String till){
+        String query = "SELECT Alien_ID FROM Alien where DATE(Registreringsdatum) BETWEEN '" + från + "' AND '" + till + "'";
+        ArrayList<String> idLista = new ArrayList<>();
+        try{
+            idLista = idb.fetchColumn(query);
+        }
+        catch(InfException ex){
+            System.out.println(ex.getMessage());
+        }
+        return idLista;
+    }
 }

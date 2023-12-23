@@ -21,6 +21,9 @@ public class ListaAliens extends javax.swing.JFrame {
     private String ras;
     private Databas db;
     private DefaultTableModel model;
+    private Validering validering;
+    private String frånDatum;
+    private String tillDatum;
     /**
      * Creates new form ListaAliens
      */
@@ -36,6 +39,7 @@ public class ListaAliens extends javax.swing.JFrame {
         db = new Databas();
         model = (DefaultTableModel) tblInfo.getModel();
         model.setRowCount(0);
+        validering = new Validering();
     }
 
     /**
@@ -229,6 +233,7 @@ public class ListaAliens extends javax.swing.JFrame {
             txtAndraDatum.setVisible(true);
             lblFrån.setVisible(true);
             lblTill.setVisible(true);
+            visaDatum = true;
         }
         else if(!btnDatum.isSelected()){
             btnDatum.setBackground(Color.red);
@@ -250,16 +255,30 @@ public class ListaAliens extends javax.swing.JFrame {
             }
        }
        else if(visaPlats){
-           System.out.println(plats);
-            int områdesID = db.getOmrådeId(plats);
-            System.out.println(områdesID);
-            ArrayList<String> AlienIDOmråde = db.getAlienIDFrånOmråde(områdesID);
-             for(String id : AlienIDOmråde){
-                  String namn = db.getAlienNamnFrånID(id);
-                 String epost = db.getAlienEpostFrånID(id);
-                 model.addRow(new Object[]{id, namn, epost});
-             }
+            String platsID = db.getPlatsIDFrånNamn(plats);
+            ArrayList<String> AlienIDOmråde = db.getAlienIDnFrånPlats(platsID);
+            for(String id : AlienIDOmråde){
+                String namn = db.getAlienNamnFrånID(id);
+                String epost = db.getAlienEpostFrånID(id);
+                model.addRow(new Object[]{id, namn, epost});
+            }      
+        }
+       else if(visaDatum){
+           frånDatum = txtFörstaDatum.getText();
+           tillDatum = txtAndraDatum.getText();
+           if(validering.valideraAgentAnställningsDatum(tillDatum) && validering.valideraAgentAnställningsDatum(frånDatum)){
+              ArrayList<String> alienIDDatum = db.getAlienIDMellanDatum(frånDatum, tillDatum);
+               for(String id : alienIDDatum){
+                String namn = db.getAlienNamnFrånID(id);
+                String epost = db.getAlienEpostFrånID(id);
+                model.addRow(new Object[]{id, namn, epost});
+            } 
+           }
+           else{
+               System.out.println("Något är fel med input");
+           }
        }
+      
     }//GEN-LAST:event_btnHämtaActionPerformed
 
     /**
