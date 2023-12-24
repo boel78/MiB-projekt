@@ -24,6 +24,11 @@ public class ListaAliens extends javax.swing.JFrame {
     private Validering validering;
     private String frånDatum;
     private String tillDatum;
+    private ArrayList<String> idLista;
+    private ArrayList<String> rasLista;
+    private ArrayList<String> platsLista;
+    private ArrayList<String> datumLista;
+    
     /**
      * Creates new form ListaAliens
      */
@@ -40,6 +45,10 @@ public class ListaAliens extends javax.swing.JFrame {
         model = (DefaultTableModel) tblInfo.getModel();
         model.setRowCount(0);
         validering = new Validering();
+        idLista = new ArrayList<String>();
+        rasLista = new ArrayList<String>();
+        platsLista = new ArrayList<String>();
+        datumLista = new ArrayList<String>();
     }
 
     /**
@@ -208,9 +217,12 @@ public class ListaAliens extends javax.swing.JFrame {
         plats = comboBoxPlats.getSelectedItem().toString();
         if(plats.equals("---")){
             visaPlats = false;
+            platsLista.clear();
         }
         else{
             visaPlats = true;
+            String platsID = db.getPlatsIDFrånNamn(plats);
+            platsLista = db.getAlienIDnFrånPlats(platsID);
         }
     }//GEN-LAST:event_comboBoxPlatsActionPerformed
 
@@ -219,9 +231,11 @@ public class ListaAliens extends javax.swing.JFrame {
         ras = comboBoxRas.getSelectedItem().toString();
         if(ras.equals("---")){
             visaRas = false;
+            rasLista.clear();
         }
         else{
-            visaPlats = true;
+            visaRas = true;
+            rasLista = db.getIdnFrånRas(ras);
         }
     }//GEN-LAST:event_comboBoxRasActionPerformed
 
@@ -241,46 +255,86 @@ public class ListaAliens extends javax.swing.JFrame {
             txtAndraDatum.setVisible(false);
             lblFrån.setVisible(false);
             lblTill.setVisible(false);
+            txtFörstaDatum.setText("");
+            txtAndraDatum.setText("");
         }
     }//GEN-LAST:event_btnDatumActionPerformed
 
     //Hämta knappen
     private void btnHämtaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHämtaActionPerformed
-       if(visaRas){
-        ArrayList<String> AlienIDRas = db.getIdnFrånRas(ras);
-            for(String ID : AlienIDRas){
-                String namn = db.getAlienNamnFrånID(ID);
-                String epost = db.getAlienEpostFrånID(ID);
-                model.addRow(new Object[]{ID, namn, epost});
-            }
-       }
-       else if(visaPlats){
-            String platsID = db.getPlatsIDFrånNamn(plats);
-            ArrayList<String> AlienIDOmråde = db.getAlienIDnFrånPlats(platsID);
-            for(String id : AlienIDOmråde){
-                String namn = db.getAlienNamnFrånID(id);
-                String epost = db.getAlienEpostFrånID(id);
-                model.addRow(new Object[]{id, namn, epost});
-            }      
-        }
-       else if(visaDatum){
-           frånDatum = txtFörstaDatum.getText();
-           tillDatum = txtAndraDatum.getText();
-           if(validering.valideraAgentAnställningsDatum(tillDatum) && validering.valideraAgentAnställningsDatum(frånDatum)){
-              ArrayList<String> alienIDDatum = db.getAlienIDMellanDatum(frånDatum, tillDatum);
-               for(String id : alienIDDatum){
-                String namn = db.getAlienNamnFrånID(id);
-                String epost = db.getAlienEpostFrånID(id);
-                model.addRow(new Object[]{id, namn, epost});
-            } 
-           }
-           else{
-               System.out.println("Något är fel med input");
-           }
-       }
       
+       //Tar bort raderna när man klickar hämta
+       model.setRowCount(0);
+       
+        if(visaDatum){
+        frånDatum = txtFörstaDatum.getText();
+        tillDatum = txtAndraDatum.getText();
+            if(validering.valideraAgentAnställningsDatum(tillDatum) && validering.valideraAgentAnställningsDatum(frånDatum)){
+                datumLista = db.getAlienIDMellanDatum(frånDatum, tillDatum);
+            }
+            else{
+               System.out.println("Något är fel med input");
+            }
+        }
+        kombineraListor();
+        for(String id: idLista){
+                String namn = db.getAlienNamnFrånID(id);
+                String epost = db.getAlienEpostFrånID(id);
+                model.addRow(new Object[]{id, namn, epost});
+        }
+        rensaUrListorna();
     }//GEN-LAST:event_btnHämtaActionPerformed
 
+    
+    //Kombinera listor
+    private void kombineraListor(){
+        if(visaRas && visaPlats && !visaDatum){
+            idLista.addAll(rasLista);
+            idLista.retainAll(platsLista);
+        }
+        else if(visaRas && visaDatum && !visaPlats){
+            idLista.addAll(rasLista);
+            idLista.retainAll(datumLista);
+        }
+        
+        else if(visaDatum && visaPlats && !visaRas){
+            idLista.addAll(datumLista);
+            idLista.retainAll(platsLista);
+        
+        }
+        else if(visaRas && visaPlats && visaDatum){
+            idLista.addAll(rasLista);
+            idLista.retainAll(platsLista);
+            idLista.retainAll(datumLista);
+        }
+        
+        //När bara en utav rutorna är true
+        else if(visaRas && !visaPlats && !visaDatum){
+            idLista.addAll(rasLista);
+        }
+        else if(visaPlats && !visaRas && !visaDatum){
+            idLista.addAll(platsLista);
+        }
+        else if(visaDatum && !visaRas && !visaPlats){
+            idLista.addAll(datumLista);
+        }
+    }
+    
+    //Tömmer listorna
+    private void rensaUrListorna(){
+        if(!rasLista.isEmpty()){
+            rasLista.clear();
+        }
+        if(!datumLista.isEmpty()){
+            datumLista.clear();
+        }
+        if(!platsLista.isEmpty()){
+            platsLista.clear();
+        }
+        if(!idLista.isEmpty()){
+            idLista.clear();
+        }
+    }
     /**
      * @param args the command line arguments
      */
