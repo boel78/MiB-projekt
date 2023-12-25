@@ -104,6 +104,11 @@ public class TaBortUtrustning extends javax.swing.JFrame {
         txtÖvrigInfo.setColumns(12);
 
         btnLäggTill.setText("Lägg till");
+        btnLäggTill.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLäggTillActionPerformed(evt);
+            }
+        });
 
         lblBenämning.setText("Benämning");
 
@@ -284,6 +289,15 @@ public class TaBortUtrustning extends javax.swing.JFrame {
                     btnTaBort.setVisible(true);
                 }
     }//GEN-LAST:event_btnHämtaActionPerformed
+
+    //Lägg till knapp
+    private void btnLäggTillActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLäggTillActionPerformed
+        String benamning = txtBenämning.getText();
+        String information = txtÖvrigInfo.getText();
+        if(validering.valideraUtrustning(benamning)){
+            db.läggTillUtrustning(benamning, valdTyp, information);
+        }
+    }//GEN-LAST:event_btnLäggTillActionPerformed
 
 
     public static void main(String args[]) {

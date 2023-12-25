@@ -323,4 +323,73 @@ public class Databas {
         }
         return benämning;
     }
+    
+    //Hämta mängd utrustning
+    public int getMängdUtrustning(){
+        int antal = 0;
+        ArrayList<String> utrustning = new ArrayList<>();
+        try{
+           utrustning = idb.fetchColumn("SELECT Utrustnings_ID FROM Utrustning");
+        }
+        catch(InfException ex){
+            System.out.println(ex.getMessage());
+        }
+        return utrustning.size();
+    }
+    
+    //Lägg till utrustning
+    public void läggTillUtrustning(String benämning, String typ, String information){
+        int id = getMängdUtrustning() + 1;
+        String query = "INSERT INTO Utrustning VALUES(" + id + ",'" + benämning + "')";
+        try{
+            idb.insert(query);
+        }
+        catch(InfException ex){
+            System.out.println(ex.getMessage());
+        }
+        if(typ.equals("Vapen")){
+            Integer kaliber = Integer.parseInt(information);
+            läggTillVapen(id, kaliber);
+        }
+        else if(typ.equals("Kommunikation")){
+            läggTillKommunikation(id, information);
+        }
+        else if(typ.equals("Teknik")){
+            läggTillTeknik(id, information);
+        }
+    }
+    
+    //Lägg till vapen
+    public void läggTillVapen(int id, int kaliber){
+        
+        String query = "INSERT INTO Vapen VALUES(" + id + ",'" + kaliber + "')";
+        try{
+            idb.insert(query);
+        }
+        catch(InfException ex){
+            System.out.println(ex.getMessage());
+        }
+    }
+    
+    //Lägg till kommunikation
+    public void läggTillKommunikation(int id, String överföringsteknik){
+        String query = "INSERT INTO Kommunikation VALUES(" + id + ",'" + överföringsteknik + "')";
+        try{
+            idb.insert(query);
+        }
+        catch(InfException ex){
+            System.out.println(ex.getMessage());
+        }
+    }
+    
+    //Lägg till teknik
+    public void läggTillTeknik(int id, String kraftkälla){
+        String query = "INSERT INTO Teknik VALUES(" + id + ",'" + kraftkälla + "')";
+        try{
+            idb.insert(query);
+        }
+        catch(InfException ex){
+            System.out.println(ex.getMessage());
+        }
+    }
 }
