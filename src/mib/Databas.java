@@ -372,5 +372,82 @@ public class Databas {
         }
     }
     
+    //Hämta platsID från alien id
+    public String getPlatsIDFrånAlienID(String alienID){
+        String platsID = "";
+        String query = "SELECT Plats FROM Alien where Alien_ID = " + alienID;
+        try{
+            platsID = idb.fetchSingle(query);
+        }
+        catch(InfException ex){
+            System.out.println(ex.getMessage());
+        }
+        return platsID;
+    }
+    
+    //Hämta områdesID från platsID
+    public String getOmrådesIDFrånPlatsID(String platsID){
+        String områdesID = "";
+        String query = "SELECT Finns_I FROM Plats where Plats_ID = " + platsID;
+        try{
+            områdesID = idb.fetchSingle(query);
+        }
+        catch(InfException ex){
+            System.out.println(ex.getMessage());
+        }
+        return områdesID;
+    }
+    
+    //Hämta vem som är chef över ett område
+    public String getOmrådesChef(String områdesID){
+        String chefID = "";
+        String query = "SELECT Agent_ID FROM Omradeschef where Omrade = " + områdesID;
+        try{
+            chefID = idb.fetchSingle(query);
+        }
+        catch(InfException ex){
+            System.out.println(ex.getMessage());
+        }
+        return chefID;
+    }
+    
+    //hämta specifik agent Epost
+    public String getAgentsEpost(String agentID){
+        String epost = "";
+        String query = "SELECT Epost FROM Agent where Agent_ID = " + agentID;
+        try{
+            epost = idb.fetchSingle(query);
+        }
+        catch(InfException ex){
+            System.out.println(ex.getMessage());
+        }
+        return epost;
+    }
+    
+    //Hämta specifik agent telefonnummer
+    public String getAgentsTelefon(String agentID){
+        String telefon = "";
+        String query = "SELECT Telefon FROM Agent where Agent_ID = " + agentID;
+        try{
+            telefon = idb.fetchSingle(query);
+        }
+        catch(InfException ex){
+            System.out.println(ex.getMessage());
+        }
+        return telefon;
+    }
+    
+    //Hämta specifik agent namn
+    public String getAgentsNamn(String agentID){
+        String namn = "";
+        String query = "SELECT Namn FROM Agent where Agent_ID = " + agentID;
+        try{
+            namn = idb.fetchSingle(query);
+        }
+        catch(InfException ex){
+            System.out.println(ex.getMessage());
+        }
+        return namn;
+    }
     
 }
