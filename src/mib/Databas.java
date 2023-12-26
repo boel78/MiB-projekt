@@ -284,7 +284,7 @@ public class Databas {
         }
         return id;
     }
-    
+
     //Hämta Innehar utrustning utifrån ID
     public ArrayList<HashMap<String, String>> getInneharUtrustningFrånID(String ID){
         ArrayList<HashMap<String, String>> inneharUtrustning = new ArrayList<>();
@@ -295,9 +295,9 @@ public class Databas {
         catch(InfException ex){
             System.out.println(ex.getMessage());
         }
-        return inneharUtrustning;   
+        return inneharUtrustning;
     }
-    
+
     //Hämta Agent ID från namn
     public String getAgentIDFrånNamn(String namn){
         String id = "";
@@ -310,7 +310,7 @@ public class Databas {
         }
         return id;
     }
-    
+
     //Hämta utrustnings Benämning från ID
     public String getUtrustningsBenämningFrånID(String ID){
         String benämning = "";
@@ -323,7 +323,7 @@ public class Databas {
         }
         return benämning;
     }
-    
+
     //Hämta agentLösen från epost
     public String getAgentLösenordFrånEpost(String epost){
         String lösenord = "";
@@ -336,7 +336,7 @@ public class Databas {
         }
         return lösenord;
     }
-    
+
     //Byt agentLösen utifrån epost
     public void setAgentLösenordFrånEpost(String epost, String losenord){
         String query = "UPDATE Agent SET Losenord= '"+ losenord + "' where Epost = '" + epost + "'";
@@ -347,7 +347,7 @@ public class Databas {
             System.out.println(ex.getMessage());
         }
     }
-    
+
     //Hämta alienlösen från epost
     public String getAlienLösenordFrånEpost(String epost){
         String lösenord = "";
@@ -360,7 +360,7 @@ public class Databas {
         }
         return lösenord;
     }
-    
+
     //Byt Alien lösen utifrån epost
     public void setAlienLösenordFrånEpost(String epost, String losenord){
         String query = "UPDATE Alien SET Losenord= '"+ losenord + "' where Epost = '" + epost + "'";
@@ -371,20 +371,16 @@ public class Databas {
             System.out.println(ex.getMessage());
         }
     }
-    
+
     //Hämta platsID från alien id
     public String getPlatsIDFrånAlienID(String alienID){
         String platsID = "";
         String query = "SELECT Plats FROM Alien where Alien_ID = " + alienID;
         try{
             platsID = idb.fetchSingle(query);
-        }
-        catch(InfException ex){
-            System.out.println(ex.getMessage());
-        }
         return platsID;
     }
-    
+
     //Hämta områdesID från platsID
     public String getOmrådesIDFrånPlatsID(String platsID){
         String områdesID = "";
@@ -397,7 +393,7 @@ public class Databas {
         }
         return områdesID;
     }
-    
+
     //Hämta vem som är chef över ett område
     public String getOmrådesChef(String områdesID){
         String chefID = "";
@@ -410,7 +406,7 @@ public class Databas {
         }
         return chefID;
     }
-    
+
     //hämta specifik agent Epost
     public String getAgentsEpost(String agentID){
         String epost = "";
@@ -423,7 +419,7 @@ public class Databas {
         }
         return epost;
     }
-    
+
     //Hämta specifik agent telefonnummer
     public String getAgentsTelefon(String agentID){
         String telefon = "";
@@ -436,7 +432,7 @@ public class Databas {
         }
         return telefon;
     }
-    
+
     //Hämta specifik agent namn
     public String getAgentsNamn(String agentID){
         String namn = "";
@@ -448,6 +444,84 @@ public class Databas {
             System.out.println(ex.getMessage());
         }
         return namn;
+
+        //Hämta idn från Ras
+        public ArrayList<String> getIdnFrånRas(String ras){
+            ArrayList<String> IDn = new ArrayList<>();
+            String query = "SELECT Alien_ID FROM " + ras;
+            try{
+                IDn = idb.fetchColumn(query);
+            }
+            catch(InfException ex){
+                System.out.println(ex.getMessage());
+            }
+            return IDn;
+        }
+
+    //Hämta Alien namn från ID
+    public String getAlienNamnFrånID(String ID){
+        String query = "SELECT Namn FROM Alien where Alien_ID = " + ID;
+        String namn = "";
+        try{
+            namn = idb.fetchSingle(query);
+        }
+        catch(InfException ex){
+            System.out.println(ex.getMessage());
+        }
+        return namn;
     }
-    
+
+    //Hämta Alien epost från ID
+    public String getAlienEpostFrånID(String ID){
+        String query = "SELECT Epost FROM Alien where Alien_ID = " + ID;
+        String epost = "";
+        try{
+            epost = idb.fetchSingle(query);
+        }
+        catch(InfException ex){
+            System.out.println(ex.getMessage());
+        }
+        return epost;
+    }
+
+    //Hämta plats id från namn
+    public String getPlatsIDFrånNamn(String benämning){
+        String query = "SELECT Plats_ID FROM Plats where Benamning = '" + benämning + "'";
+        String platsID = "";
+        try{
+            platsID = idb.fetchSingle(query);
+        }
+        catch(InfException ex){
+            System.out.println(ex.getMessage());
+        }
+        return platsID;
+    }
+
+
+    //Hämta Alien id på dom som finns i en plats
+    public ArrayList<String> getAlienIDnFrånPlats(String platsID){
+        String query = "SELECT Alien_ID FROM Alien where plats = " + platsID;
+        ArrayList<String> idLista = new ArrayList<>();
+        try{
+            idLista = idb.fetchColumn(query);
+        }
+        catch(InfException ex){
+            System.out.println(ex.getMessage());
+        }
+        System.out.println(idLista);
+        return idLista;
+    }
+
+    //Hämta Alien id mellan 2 datum
+    public ArrayList<String> getAlienIDMellanDatum(String från, String till){
+        String query = "SELECT Alien_ID FROM Alien where DATE(Registreringsdatum) BETWEEN '" + från + "' AND '" + till + "'";
+        ArrayList<String> idLista = new ArrayList<>();
+        try{
+            idLista = idb.fetchColumn(query);
+        }
+        catch(InfException ex){
+            System.out.println(ex.getMessage());
+        }
+        return idLista;
+    }
 }
