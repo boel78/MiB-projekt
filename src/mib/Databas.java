@@ -565,6 +565,19 @@ public void taBortRas(int id) {
         }
         return epost;
     }
+    
+    //Hämta alien telefonnummer från ID
+    public String getAlienTelefonFrånID(String ID){
+        String query = "SELECT Telefon FROM Alien where Alien_ID = " + ID;
+        String telefon = "";
+        try{
+            telefon = idb.fetchSingle(query);
+        }
+        catch(InfException ex){
+            System.out.println(ex.getMessage());
+        }
+        return telefon;
+    }
 
     //Hämta plats id från namn
     public String getPlatsIDFrånNamn(String benämning){
@@ -646,4 +659,19 @@ public void taBortRas(int id) {
             System.out.println(ex.getMessage());
         }
     }
+    
+    
+    //Hämta vilka platser som finns i ett område
+    public ArrayList<String> getPlatser(String områdesID){
+        ArrayList<String> platser = new ArrayList<>();
+        String query = "SELECT Plats_ID FROM Plats where Finns_I = " + områdesID;
+        try{
+            platser = idb.fetchColumn(query);
+        }
+        catch(InfException ex){
+            System.out.println(ex.getMessage());
+        }
+        return platser;
+    }
+
 }
