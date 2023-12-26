@@ -378,6 +378,10 @@ public class Databas {
         String query = "SELECT Plats FROM Alien where Alien_ID = " + alienID;
         try{
             platsID = idb.fetchSingle(query);
+        }
+        catch(InfException ex){
+            System.out.println(ex.getMessage());
+        }
         return platsID;
     }
 
@@ -444,6 +448,7 @@ public class Databas {
             System.out.println(ex.getMessage());
         }
         return namn;
+    }
 
         //Hämta idn från Ras
         public ArrayList<String> getIdnFrånRas(String ras){
