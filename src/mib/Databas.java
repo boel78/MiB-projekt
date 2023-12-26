@@ -1,5 +1,6 @@
 package mib;
 
+
 import oru.inf.InfDB;
 import oru.inf.InfException;
 import java.util.logging.Level;
@@ -379,11 +380,61 @@ public class Databas {
         String query = "UPDATE Alien SET Losenord= '"+ losenord + "' where Epost = '" + epost + "'";
         try{
             idb.update(query);
-        }
-        catch(InfException ex){
-            System.out.println(ex.getMessage());
-        }
-    }
+          }
+          catch(InfException ex){
+              System.out.println(ex.getMessage());
+          }
+      }
+      // hämta all info om en alien utifrån ID.
+public HashMap<String,String> hämtaAlienInfo(int ID) {
+   String query = "SELECT * FROM alien WHERE alien_id=" + ID;
+   HashMap<String,String> alien = new HashMap<>();
+   try {
+   alien = idb.fetchRow(query);
+   } catch (InfException ex) {
+       System.out.println(ex.getMessage());
+   }
+   return alien;
+}
+// ta bort alien utifrån ID.
+public void taBortAlien(int ID) {
+   String query = "DELETE FROM alien WHERE alien_id=" + ID;
+   try {
+       idb.delete(query);
+   } catch (InfException ex) {
+     System.out.println(ex.getMessage());
+   }
+}
+
+   // hämta en aliens id utifrån namnet.
+public int hämtaAlienIdFrånNamn(String namn) {
+   String query = "SELECT alien_id FROM Alien WHERE namn= '" + namn + "'";
+   int id = 0;
+   try {
+   String strängId = idb.fetchSingle(query);
+
+   if (strängId != null && !strängId.isEmpty()) {
+       id = Integer.parseInt(strängId);
+   }
+   } catch (InfException ex) {
+   System.out.println(ex.getMessage());
+   }
+   return id;
+}
+
+
+//ta bort ras på alien utifrån id.
+public void taBortRas(int id) {
+   try{
+   idb.delete("DELETE FROM Boglodite WHERE Alien_ID=" + id);
+   idb.delete("DELETE FROM Squid WHERE Alien_ID=" + id);
+   idb.delete("DELETE FROM Worm WHERE Alien_ID=" + id);
+ }
+ catch(InfException ex){
+     System.out.println(ex.getMessage());
+ }
+}
+
 
     //Hämta platsID från alien id
     public String getPlatsIDFrånAlienID(String alienID){
@@ -554,5 +605,45 @@ public class Databas {
             System.out.println(ex.getMessage());
         }
         return idLista;
+    }
+    //Lägg till ny alien.
+    public void registreraNyAlien(int id, String datum, String epost, String lösenord, String namn, String telefon, int plats, int ansvarigAgent){
+        try {
+            String query = "INSERT INTO Alien (Alien_ID, Registreringsdatum, Epost, Losenord, Namn, Telefon, Plats, Ansvarig_Agent)" +
+            "VALUES (" + id + ", '" + datum + "', '" + epost + "', '" + lösenord + "', '" + namn + "', '" + telefon + "', '" + plats + "', '" + ansvarigAgent + "')";
+        idb.insert(query);
+            System.out.println("Ny alien har registrerats.");
+
+        } catch(InfException ex){
+            System.out.println(ex.getMessage());
+        }
+
+    }
+    //Hämta antal aliens.
+    public int antalAliensIDatabas(){
+        int antal = 0;
+        ArrayList<String> aliens = getAllaAlienEpost();
+        for(String epost : aliens){
+            antal++;
+        }
+        return antal;
+        }
+
+
+    public void ändraAlienInfo(int id, String datum, String lösenord, String namn, String telefon, int plats, int ansvarigAgent){
+        try {
+        String query = "UPDATE Alien SET "
+                + "Registreringsdatum = '" + datum + "', "
+                + "Losenord = '" + lösenord + "', "
+                + "Namn = '" + namn + "', "
+                + "Telefon = '" + telefon + "', "
+                + "Plats = " + plats + ", "
+                + "Ansvarig_Agent = " + ansvarigAgent
+                + " WHERE Alien_ID = " + id;
+        idb.update(query);
+        System.out.println("Informationen har uppdaterats.");
+        } catch(InfException ex){
+            System.out.println(ex.getMessage());
+        }
     }
 }

@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+  <Properties>
+    <Property name="defaultCloseOperation" type="int" value="3"/>
+  </Properties>
+  <SyntheticProperties>
+    <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
+  </SyntheticProperties>
+  <AuxValues>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+  </AuxValues>
+
+  <Layout>
+    <DimensionLayout dim="0">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" attributes="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="139" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="btnLäggTill" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblRubrik" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="84" max="-2" attributes="0"/>
+                      <Component id="lblDatum2" min="-2" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+              <EmptySpace max="32767" attributes="0"/>
+          </Group>
+          <Group type="102" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="lblEpost" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblTelefon" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblNamn" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblDatum" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblLösenord" alignment="0" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="txtDatum" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtNamn" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtTelefon" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtEpost" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="-2" pref="106" max="-2" attributes="0"/>
+                              <Component id="comboBox" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="lblAgent" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+                              <Component id="txtAgent" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <Component id="pswLösenord" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+          </Group>
+      </Group>
+    </DimensionLayout>
+    <DimensionLayout dim="1">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="lblRubrik" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="btnLäggTill" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="lblNamn" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
+                          <Component id="txtNamn" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="comboBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="txtEpost" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtAgent" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblAgent" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblEpost" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="lblLösenord" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="pswLösenord" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="lblTelefon" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtTelefon" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="lblDatum" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtDatum" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="lblDatum2" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+          </Group>
+      </Group>
+    </DimensionLayout>
+  </Layout>
+  <SubComponents>
+    <Component class="javax.swing.JButton" name="btnL&#xe4;ggTill">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="L&#xe4;gg till"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnL&#xe4;ggTillActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtEpost">
+      <Properties>
+        <Property name="columns" type="int" value="5"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtNamn">
+      <Properties>
+        <Property name="columns" type="int" value="5"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtTelefon">
+      <Properties>
+        <Property name="columns" type="int" value="5"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JPasswordField" name="pswL&#xf6;senord">
+      <Properties>
+        <Property name="columns" type="int" value="5"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtDatum">
+      <Properties>
+        <Property name="columns" type="int" value="5"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtAgent">
+      <Properties>
+        <Property name="columns" type="int" value="5"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="comboBox">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="4">
+            <StringItem index="0" value="&#xd6;rebro"/>
+            <StringItem index="1" value="V&#xe4;ster&#xe5;s"/>
+            <StringItem index="2" value="Vilhelmina"/>
+            <StringItem index="3" value="Bor&#xe5;s"/>
+          </StringArray>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="comboBoxActionPerformed"/>
+      </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblNamn">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Namn:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblEpost">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Epost:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblTelefon">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Telefon:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblDatum">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Datum:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblRubrik">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Registrera ny alien"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblDatum2">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="(&#xc5;&#xc5;&#xc5;&#xc5;-MM-DD)"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblAgent">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Ansvarig agent:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblL&#xf6;senord">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="L&#xf6;senord:"/>
+      </Properties>
+    </Component>
+  </SubComponents>
+</Form>
