@@ -272,7 +272,7 @@ public class Databas {
     }
 
     //Hämta områdesID från områdenamn
-    public int getOmrådeId(String namn){
+    public Integer getOmrådeId(String namn){
         int id = 0;
         String query = "SELECT Omrades_ID FROM Omrade WHERE Benamning= '" + namn + "'";
         try{
@@ -309,6 +309,19 @@ public class Databas {
             System.out.println(ex.getMessage());
         }
         return id;
+    }
+
+    //Hämta Agent namn från ID
+    public String getAgentNamnFrånID(int id){
+        String namn = "";
+        String query = "SELECT Namn from Agent where Agent_ID = " + id;
+        try{
+            namn = idb.fetchSingle(query);
+        }
+        catch(InfException ex){
+            System.out.println(ex.getMessage());
+        }
+        return namn;
     }
 
     //Hämta utrustnings Benämning från ID
@@ -379,10 +392,23 @@ public class Databas {
         try{
             platsID = idb.fetchSingle(query);
         }
-        catch(InfException ex){
-            System.out.println(ex.getMessage());
-        }
+          catch(InfException ex){
+              System.out.println(ex.getMessage());
+          }
         return platsID;
+    }
+
+    //Hämta en arraylist med ansvarig agenter på område och utifrån områdesID
+    public ArrayList<String> hämtaAgenterSomAnsvararFrånOmrådeID(String områdeID){
+        ArrayList<String> agentInstanser = new ArrayList<>();
+        String query = "SELECT Ansvarig_Agent FROM Alien where Plats = " + områdeID;
+        try{
+            agentInstanser = idb.fetchColumn(query);
+        }
+          catch(InfException ex){
+              System.out.println(ex.getMessage());
+        }
+        return agentInstanser;
     }
 
     //Hämta områdesID från platsID
