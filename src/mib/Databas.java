@@ -938,6 +938,40 @@ public void taBortRas(int id) {
         return kontor;
     }
     
+    //hämta områden
+    public ArrayList<String> getOmråden(){
+        ArrayList<String> områden = new ArrayList<>();
+        try{
+            områden = idb.fetchColumn("SELECT Benamning FROM Omrade");
+        }
+        catch(InfException ex){
+            System.out.println(ex.getMessage());
+        }
+        return områden;
+    }
+    
+    //Hämta kontorsbeteckningar
+    public ArrayList<String> getKontorsbeteckningar(){
+        ArrayList<String> kontorsbeteckningar = new ArrayList<>();
+        try{
+            kontorsbeteckningar = idb.fetchColumn("SELECT Kontorsbeteckning FROM Kontorschef");
+        }
+        catch(InfException ex){
+            System.out.println(ex.getMessage());
+        }
+        return kontorsbeteckningar;
+    }
+    
+    //Lägg till kontorschef
+    public void läggTillKontorschef(String agentID, String beteckning){
+        String query = "INSERT INTO Kontorschef VALUES(" + agentID + ", '" + beteckning + "')";
+        try{
+            idb.insert(query);
+        }
+        catch(InfException ex){
+            System.out.println(ex.getMessage());
+        }
+    }
     
 
 }

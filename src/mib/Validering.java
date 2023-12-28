@@ -266,7 +266,7 @@ public class Validering {
 
 
     //validera agentNamnFinns
-    public boolean valideraAgentNamnFinns(String namn){
+    public boolean valideraAgentNamnFinns(String namn, boolean skrivUt){
         boolean finns = false;
         if(valideraAgentNamn(namn)){
             for(String agentNamn : db.getAgentNamn()){
@@ -274,7 +274,7 @@ public class Validering {
                     finns = true;
                 }
             }
-            if(!finns){
+            if(!finns && skrivUt){
                 JOptionPane.showMessageDialog(null, "Namnet finns inte.");
         }
         }
@@ -343,4 +343,47 @@ public class Validering {
         }
         return existerar;
     }
+    
+    //validera om områdeschef finns
+    public boolean valideraOmrådesChefExisterar(String områdesID){
+        boolean finns = false;
+        if(db.getOmrådesChef(områdesID) == null){
+            finns = true;
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "En chef finns redan på den här positionen.");
+        }
+        return finns;
+    }
+    
+    //Validerar om området finns i databasen
+    public boolean valideraOmrådeExisterar(String område){
+        boolean finns = false;
+        if(!område.isEmpty()){
+            for(String området : db.getOmråden()){
+                if(området.equals(område)){
+                    finns = true;
+                }
+            }
+            if(!finns){
+                JOptionPane.showMessageDialog(null, "Området existerar inte");
+            }
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Var vänlig och fyll i ett område");
+        }
+        return finns;
+    }
+    
+    //Valiera om kontorsbeteckning existerar
+    public boolean valideraKontorsBeteckningExisterar(String kontorsbeteckning){
+        boolean existerar = false;
+        for(String beteckning : db.getKontorsbeteckningar()){
+            if(beteckning.equals(kontorsbeteckning)){
+                existerar = true;
+            }
+        }
+        return existerar;
+    }
+    
 }

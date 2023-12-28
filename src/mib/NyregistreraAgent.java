@@ -198,7 +198,7 @@ public class NyregistreraAgent extends javax.swing.JFrame {
      agentNamn = txtAgentNamn.getText();
      
      //Skapar mail och validerar
-     if(validering.valideraAgentNamn(agentNamn) && !validering.valideraAgentNamnFinns(agentNamn)){
+     if(validering.valideraAgentNamn(agentNamn) && !validering.valideraAgentNamnFinns(agentNamn, false)){
          epost = skapaEpost(agentNamn);
          System.out.println("Det givk att skapa mail");
      }
