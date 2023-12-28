@@ -60,9 +60,9 @@ public class Validering {
                     existerar = true;
                 }
             }
-        }
-        if(!existerar){
-            JOptionPane.showMessageDialog(null, "Den här eposten verkar inte finnas.");
+            if(!existerar){
+                JOptionPane.showMessageDialog(null, "Den här eposten verkar inte finnas.");
+            }
         }
         System.out.println("Agent Epost: " + valid);
         return valid;
@@ -76,7 +76,7 @@ public class Validering {
             valid = true;
         }
         else{
-            System.out.println("Typo");
+            JOptionPane.showMessageDialog(null, "Stavfel på epost");
         }
         return valid;
     }
@@ -147,7 +147,9 @@ public class Validering {
         if(namn.matches("^Agent\\s[A-Z]{1}")){
             valid = true;
         }
-        System.out.println(valid);
+        if(!valid){
+            JOptionPane.showMessageDialog(null, "Stavfel på agentnamnet");
+        }
         return valid;
     }
 
@@ -229,14 +231,19 @@ public class Validering {
 
 
 
-      //validera agentNamnFinns
-      public boolean valideraAgentNamnFinns(String namn){
-          boolean finns = false;
-          for(String agentNamn : db.getAgentNamn()){
-              if(agentNamn.equals(namn)){
-                  finns = true;
-              }
-          }
+    //validera agentNamnFinns
+    public boolean valideraAgentNamnFinns(String namn){
+        boolean finns = false;
+        if(valideraAgentNamn(namn)){
+            for(String agentNamn : db.getAgentNamn()){
+                if(agentNamn.equals(namn)){
+                    finns = true;
+                }
+            }
+            if(!finns){
+                JOptionPane.showMessageDialog(null, "Namnet finns inte.");
+        }
+        }
         return finns;
     }
 
@@ -282,6 +289,7 @@ public class Validering {
 	}  
 	catch (NumberFormatException e){ 
             System.out.println(id + " is not a valid integer"); 
+            JOptionPane.showMessageDialog(null, "Det här är ingen siffra.");
 	}
         return isNumber;
       }
@@ -289,9 +297,14 @@ public class Validering {
     //Validera om agentID Existerar
     public boolean valideraAgentIDExisterar(String id){   
         boolean existerar = false;
-        for(String idILista : db.getAgentIDn()){
-            if(idILista.equals(id)){
-                existerar = true;
+        if(valideraAgentIDTypo(id)){
+            for(String idILista : db.getAgentIDn()){
+                if(idILista.equals(id)){
+                    existerar = true;
+                }
+            }
+            if(!existerar){
+                JOptionPane.showMessageDialog(null, "Detta ID existerar inte.");
             }
         }
         return existerar;

@@ -49,6 +49,7 @@ public EnskildAgentInfo()
         comboBoxOmråde = new javax.swing.JComboBox<>();
         lblDatumHjälp = new javax.swing.JLabel();
         btnTaBort = new javax.swing.JButton();
+        btnRensa = new javax.swing.JButton();
 
         jLabel2.setText("jLabel2");
 
@@ -101,6 +102,13 @@ public EnskildAgentInfo()
             }
         });
 
+        btnRensa.setText("Rensa");
+        btnRensa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRensaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -120,19 +128,19 @@ public EnskildAgentInfo()
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(btnHämta)
                                 .addGap(141, 141, 141)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(btnÄndra)
-                                .addGap(107, 107, 107)
-                                .addComponent(btnTaBort))
+                                .addGap(24, 24, 24)
+                                .addComponent(btnRensa))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel1)
+                                .addComponent(txtAnställningsdatum, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lblDatumHjälp)
+                                .addComponent(lblAnställningsdatum)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(38, 38, 38)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel1)
-                                    .addComponent(txtAnställningsdatum, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lblDatumHjälp)
-                                    .addComponent(lblAnställningsdatum))
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
@@ -141,7 +149,10 @@ public EnskildAgentInfo()
                                             .addComponent(txtAdministratör, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(lblAdministratör)
                                             .addComponent(lblOmråde)))
-                                    .addComponent(comboBoxOmråde, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                    .addComponent(comboBoxOmråde, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(1, 1, 1)
+                                .addComponent(btnTaBort))))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(txtNamn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -151,7 +162,7 @@ public EnskildAgentInfo()
                             .addComponent(lblTelefon)
                             .addComponent(txtTelefonnummer, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(lblinformation))
-                .addContainerGap(71, Short.MAX_VALUE))
+                .addContainerGap(77, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -187,7 +198,8 @@ public EnskildAgentInfo()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnHämta)
                             .addComponent(btnÄndra)
-                            .addComponent(btnTaBort))
+                            .addComponent(btnTaBort)
+                            .addComponent(btnRensa))
                         .addGap(18, 18, 18))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -205,6 +217,7 @@ public EnskildAgentInfo()
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    //Hämta knappen
     private void btnHämtaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHämtaActionPerformed
         //Ifall man skriver i epost
         if(!txtEpost.getText().isEmpty() && validering.valideraAgentEpostFinns(txtEpost.getText())){
@@ -231,7 +244,7 @@ public EnskildAgentInfo()
             setOmrådeComboBox(id);
         }
         //Ifall man skriver i namn
-        else if(!txtNamn.getText().isEmpty() && validering.valideraAgentNamn(txtNamn.getText())){
+        else if(!txtNamn.getText().isEmpty() && validering.valideraAgentNamnFinns(txtNamn.getText())){
             namn = txtNamn.getText();
             String id = db.getAgentIDFrånNamn(namn);
             txtID.setText(id);
@@ -321,9 +334,9 @@ public EnskildAgentInfo()
             }
         }
         //Ifall man skriver i namn
-        else if(!txtNamn.getText().isEmpty() && validering.valideraAgentNamn(txtNamn.getText())){
+        else if(!txtNamn.getText().isEmpty() && validering.valideraAgentNamnFinns(txtNamn.getText())){
             String id = db.getAgentIDFrånNamn(txtNamn.getText());
-           ArrayList<String> tillhörandeAliens = db.getAlienListaFrånAgentID(id);
+            ArrayList<String> tillhörandeAliens = db.getAlienListaFrånAgentID(id);
             if(tillhörandeAliens.isEmpty()){
                 db.taBortInneharUtrustningVidAgentID(id);
                 db.taBortFältAgentVidAgentID(id);
@@ -341,6 +354,17 @@ public EnskildAgentInfo()
             }
         }
     }//GEN-LAST:event_btnTaBortActionPerformed
+
+    private void btnRensaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRensaActionPerformed
+            txtID.setText("");
+            txtNamn.setText("");
+            txtEpost.setText("");
+            txtAnställningsdatum.setText("");
+            txtLösenord.setText("");
+            txtTelefonnummer.setText("");
+            txtAdministratör.setText("");
+            
+    }//GEN-LAST:event_btnRensaActionPerformed
 
     private void setNamnTxtField(String id){  
         namn = db.getAgentsNamn(id);
@@ -397,6 +421,7 @@ public EnskildAgentInfo()
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnHämta;
+    private javax.swing.JButton btnRensa;
     private javax.swing.JButton btnTaBort;
     private javax.swing.JButton btnÄndra;
     private javax.swing.JComboBox<String> comboBoxOmråde;
