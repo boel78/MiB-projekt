@@ -252,12 +252,14 @@
     <Component class="javax.swing.JComboBox" name="comboBoxOmr&#xe5;de">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="3">
+          <StringArray count="4">
             <StringItem index="0" value="Svealand"/>
             <StringItem index="1" value="G&#xf6;taland"/>
             <StringItem index="2" value="Norrland"/>
+            <StringItem index="3" value="---"/>
           </StringArray>
         </Property>
+        <Property name="selectedIndex" type="int" value="3"/>
       </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>

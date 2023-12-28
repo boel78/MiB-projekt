@@ -71,12 +71,17 @@ public class Validering {
     //Validera agentEpost typo
     public boolean valideraAgentEpostTypo(String epost){
         boolean valid = false;
-        String emailRegex = "^[a][a-z]{1}+\\@mib.net";
-        if(epost.matches(emailRegex)){
-            valid = true;
+        if(!epost.isEmpty()){
+            String emailRegex = "^[a][a-z]{1}+\\@mib.net";
+            if(epost.matches(emailRegex)){
+                valid = true;
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Stavfel på epost");
+            }
         }
         else{
-            JOptionPane.showMessageDialog(null, "Stavfel på epost");
+            JOptionPane.showMessageDialog(null, "Var vänlig och fyll i en epost.");
         }
         return valid;
     }
@@ -85,7 +90,7 @@ public class Validering {
     public boolean valideraLösenord(String lösen){
         boolean valid = false;
         if(!lösen.isEmpty()){
-            if(lösen.matches("^[a-zA-Z0-9][a-zA-Z0-9]") && lösen.length() <= 6){
+            if(lösen.matches("^[a-zA-Z0-9][a-zA-Z0-9]*") && lösen.length() <= 6){
                 valid = true;
             }
             else{

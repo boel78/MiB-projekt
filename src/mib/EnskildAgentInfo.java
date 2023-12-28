@@ -91,7 +91,8 @@ public EnskildAgentInfo()
 
         lblinformation.setText("Skriv in Namn, Epost eller Agent ID");
 
-        comboBoxOmråde.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Svealand", "Götaland", "Norrland" }));
+        comboBoxOmråde.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Svealand", "Götaland", "Norrland", "---" }));
+        comboBoxOmråde.setSelectedIndex(3);
 
         lblDatumHjälp.setText("(YYYY-MM-DD)");
 
@@ -269,55 +270,133 @@ public EnskildAgentInfo()
         String datum = txtAnställningsdatum.getText();
         String telefon = txtTelefonnummer.getText();
         String lösenord = txtLösenord.getText();
+        String område = comboBoxOmråde.getSelectedItem().toString();
+        boolean ändrad = false;
         
         //Om man skriver i epost
         if(!epost.isEmpty() && validering.valideraAgentEpostFinns(epost)){
+            id = db.getAgentIDFrånEpost(epost);
+            if(!datum.isEmpty() && validering.valideraAgentAnställningsDatum(datum)){
+                db.uppdateraAgentAnställningsdatum(id, datum);
+                ändrad = true;
+            }
+            
+            if(!lösenord.isEmpty() && validering.valideraLösenord(lösenord)){
+                db.uppdateraAgentLösenord(id, lösenord);
+                ändrad = true;
+            }
+            if(!namn.isEmpty() && validering.valideraAgentNamn(namn)){
+                db.uppdateraAgentNamn(id, namn); 
+                ändrad = true;
+            }
+            if(!telefon.isEmpty() && validering.valideraAgentTelefonnummer(telefon)){
+                db.uppdateraAgentTelefonnummer(id, telefon);
+                ändrad = true;
+            }
+            if(!område.equals("---")){
+                String områdesID = "";
+                switch(område){
+                    case "Svealand" :
+                        områdesID = "1";
+                    break;
+                    case "Götaland" :
+                        områdesID = "2";
+                    break;
+                    case "Norrland" :
+                        områdesID = "4";
+                    break;
+                }
+                db.uppdateraAgentOmråde(id, områdesID); 
+                ändrad = true;
+            }
+        }
+        
+        //Ifall man skriver in namn
+        else if(!namn.isEmpty() && validering.valideraAgentNamnFinns(namn)){
+            id = db.getAgentIDFrånNamn(namn);
             if(validering.valideraAgentAnställningsDatum(datum)){
                 db.uppdateraAgentAnställningsdatum(id, datum);
+                ändrad = true;
             }
             if(validering.valideraLösenord(lösenord)){
                 db.uppdateraAgentLösenord(id, lösenord);
+                ändrad = true;
             }
             if(validering.valideraAgentNamn(namn)){
-                db.uppdateraAgentNamn(id, namn);    
+                db.uppdateraAgentNamn(id, namn);
+                ändrad = true;
             }
             if(validering.valideraAgentTelefonnummer(telefon)){
                 db.uppdateraAgentTelefonnummer(id, telefon);
+                ändrad = true;
             }
-            område = comboBoxOmråde.getSelectedItem().toString();
-            String områdesID = "";
-            switch(område){
-                case "Svealand" :
-                    områdesID = "1";
-                break;
-                case "Götaland" :
-                    områdesID = "2";
-                break;
-                case "Norrland" :
-                    områdesID = "4";
-                break;
+            if(validering.valideraAgentEpostTypo(epost) && !validering.valideraAgentEpostFinns(txtEpost.getText())){
+                db.uppdateraAgentEpost(id, txtEpost.getText());
+                ändrad = true;
             }
-            db.uppdateraAgentOmråde(id, områdesID); 
+            if(!område.equals("---")){
+                String områdesID = "";
+                switch(område){
+                    case "Svealand" :
+                        områdesID = "1";
+                    break;
+                    case "Götaland" :
+                        områdesID = "2";
+                    break;
+                    case "Norrland" :
+                        områdesID = "4";
+                    break;
+                }
+                db.uppdateraAgentOmråde(id, områdesID); 
+                ändrad = true;
+            }
+        }
+        
+        //Ifall man skriver in ID
+        else if(!id.isEmpty() && validering.valideraAgentIDExisterar(id)){
+            id = txtID.getText();
+            if(validering.valideraAgentAnställningsDatum(datum)){
+                db.uppdateraAgentAnställningsdatum(id, datum);
+                ändrad = true;
+            }
+            if(validering.valideraLösenord(lösenord)){
+                db.uppdateraAgentLösenord(id, lösenord);
+                ändrad = true;
+            }
+            if(validering.valideraAgentNamn(namn)){
+                db.uppdateraAgentNamn(id, namn);   
+                ändrad = true;
+            }
+            if(validering.valideraAgentTelefonnummer(telefon)){
+                db.uppdateraAgentTelefonnummer(id, telefon);
+                ändrad = true;
+            }
+            if(validering.valideraAgentEpostTypo(epost) && !validering.valideraAgentEpostFinns(txtEpost.getText())){
+                db.uppdateraAgentEpost(id, txtEpost.getText());
+                ändrad = true;
+            }
+            if(!område.equals("---")){
+                String områdesID = "";
+                switch(område){
+                    case "Svealand" :
+                        områdesID = "1";
+                    break;
+                    case "Götaland" :
+                        områdesID = "2";
+                    break;
+                    case "Norrland" :
+                        områdesID = "4";
+                    break;
+                }
+                db.uppdateraAgentOmråde(id, områdesID); 
+                ändrad = true;
+            }
+        }
+        
+        if(ändrad){
             JOptionPane.showMessageDialog(null, "Dina ändringar har sparats");
         }
-
         
-        if(validering.valideraAgentEpostFinns(txtEpost.getText())){
-            db.uppdateraAgentEpost(id, txtEpost.getText());
-        }
-        område = comboBoxOmråde.getSelectedItem().toString();
-        String områdesID = "";
-        switch(område){
-            case "Svealand" :
-                områdesID = "1";
-                break;
-            case "Götaland" :
-                områdesID = "2";
-                break;
-            case "Norrland" :
-                områdesID = "4";
-                break;
-        }
     }//GEN-LAST:event_btnÄndraActionPerformed
 
     //Ta bort knappen
@@ -384,6 +463,7 @@ public EnskildAgentInfo()
         }
     }//GEN-LAST:event_btnTaBortActionPerformed
 
+    //Rensa knappen
     private void btnRensaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRensaActionPerformed
             txtID.setText("");
             txtNamn.setText("");
@@ -392,6 +472,7 @@ public EnskildAgentInfo()
             txtLösenord.setText("");
             txtTelefonnummer.setText("");
             txtAdministratör.setText("");
+            comboBoxOmråde.setSelectedIndex(3);
             
     }//GEN-LAST:event_btnRensaActionPerformed
 
