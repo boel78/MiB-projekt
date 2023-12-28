@@ -72,15 +72,19 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
+                                  <Component id="comboBoxOmråde" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="comboBoxChef" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtOmrådesAnsvar" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Group type="102" attributes="0">
+                                      <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Component id="txtAdministratör" min="-2" pref="144" max="-2" attributes="0"/>
                                           <Component id="lblAdministratör" min="-2" max="-2" attributes="0"/>
                                           <Component id="lblOmråde" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lblChef" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lblOmrådesAnsvar" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
-                                  <Component id="comboBoxOmråde" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
@@ -142,14 +146,6 @@
                           <Component id="txtLösenord" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="txtEpost" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="143" max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="btnHämta" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnÄndra" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnTaBort" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnRensa" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -163,9 +159,24 @@
                           <Component id="comboBoxOmråde" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="txtID" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="lblChef" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="comboBoxChef" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
+              <Component id="lblOmrådesAnsvar" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="txtOmrådesAnsvar" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="24" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="btnHämta" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnÄndra" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnTaBort" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnRensa" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -285,6 +296,36 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRensaActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="comboBoxChef">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="3">
+            <StringItem index="0" value="Kontorschef"/>
+            <StringItem index="1" value="Omr&#xe5;deschef"/>
+            <StringItem index="2" value="---"/>
+          </StringArray>
+        </Property>
+        <Property name="selectedIndex" type="int" value="2"/>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblChef">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Chefsposition"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtOmr&#xe5;desAnsvar">
+      <Properties>
+        <Property name="columns" type="int" value="9"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblOmr&#xe5;desAnsvar">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Omr&#xe5;desansvar"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>

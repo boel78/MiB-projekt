@@ -860,7 +860,7 @@ public void taBortRas(int id) {
     //Hämta lista med aliens en agent bär ansvar över
     public ArrayList<String> getAlienListaFrånAgentID(String agentID){
         ArrayList<String> listan = new ArrayList<>();
-        String query = "SELECT Alien_ID FROM Alien where Agent_ID = " + agentID;
+        String query = "SELECT Alien_ID FROM Alien where Ansvarig_Agent = " + agentID;
         try{
             listan = idb.fetchColumn(query);
         }
@@ -870,11 +870,14 @@ public void taBortRas(int id) {
         return listan;
     }
     
-    //Ta bort agent från områdesChef
+    //Ta bort agent från områdesChef lägg till en slumpad agent från 
     public void taBortAgentFrånOmrådesChef(String agentID){
         String query = "DELETE FROM Omradeschef where Agent_ID = " + agentID;
+        String nyChefsID = "";
+        
         try{
             idb.delete(query);
+           // läggTillOmrådeschef(nyChefsID);
         }
         catch(InfException ex){
             System.out.println(ex.getMessage());
@@ -891,5 +894,50 @@ public void taBortRas(int id) {
             System.out.println(ex.getMessage());
         }
     }
+    
+    //lägg till områdeschef
+    public void läggTillOmrådeschef(String agent_ID, String områdesID){
+        String query = "INSERT INTO Omradeschef VALUES(" + agent_ID + ", " + områdesID + ")";
+        try{
+            idb.insert(query);
+        }
+        catch(InfException ex){
+            System.out.println(ex.getMessage());
+        }
+    }
+    
+    //kontrollerar om man är områdeschef, isf skickas området tbx
+    public String kontrolleraOmrådeschef(String id){
+        String område = "";
+        String query = "SELECT Omrade FROM Omradeschef where Agent_ID = " + id;
+        try{
+            område = idb.fetchSingle(query);
+        }
+        catch(InfException ex){
+            System.out.println(ex.getMessage());
+        }
+        if(område == null){
+            område = "---";
+        }
+        return område;
+    }
+    
+    //kontrollerar om man är kontorschef, isf skickas kontoret tbx.
+    public String kontrolleraKontorschef(String id){
+        String kontor = "";
+        String query = "SELECT Kontorsbeteckning FROM Kontorschef where Agent_ID = " + id;
+        try{
+            kontor = idb.fetchSingle(query);
+        }
+        catch(InfException ex){
+            System.out.println(ex.getMessage());
+        }
+        if(kontor == null){
+            kontor = "---";
+        }
+        return kontor;
+    }
+    
+    
 
 }

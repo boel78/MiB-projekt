@@ -14,12 +14,17 @@ public class EnskildAgentInfo extends javax.swing.JFrame {
     private String lösenord;
     private String område;
     private String epost;
+    private String områdesChefOmråde;
+    private String kontorsChefBeteckning;
+    private String chef;
     
 public EnskildAgentInfo()
 {
     db = new Databas();
     initComponents();
     validering = new Validering();
+    txtOmrådesAnsvar.setVisible(false);
+    lblOmrådesAnsvar.setVisible(false);
     
 }
     @SuppressWarnings("unchecked")
@@ -50,6 +55,10 @@ public EnskildAgentInfo()
         lblDatumHjälp = new javax.swing.JLabel();
         btnTaBort = new javax.swing.JButton();
         btnRensa = new javax.swing.JButton();
+        comboBoxChef = new javax.swing.JComboBox<>();
+        lblChef = new javax.swing.JLabel();
+        txtOmrådesAnsvar = new javax.swing.JTextField();
+        lblOmrådesAnsvar = new javax.swing.JLabel();
 
         jLabel2.setText("jLabel2");
 
@@ -110,6 +119,15 @@ public EnskildAgentInfo()
             }
         });
 
+        comboBoxChef.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Kontorschef", "Områdeschef", "---" }));
+        comboBoxChef.setSelectedIndex(2);
+
+        lblChef.setText("Chefsposition");
+
+        txtOmrådesAnsvar.setColumns(9);
+
+        lblOmrådesAnsvar.setText("Områdesansvar");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -144,13 +162,17 @@ public EnskildAgentInfo()
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(comboBoxOmråde, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(comboBoxChef, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtOmrådesAnsvar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(6, 6, 6)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(txtAdministratör, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(lblAdministratör)
-                                            .addComponent(lblOmråde)))
-                                    .addComponent(comboBoxOmråde, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                            .addComponent(lblOmråde)
+                                            .addComponent(lblChef)
+                                            .addComponent(lblOmrådesAnsvar)))))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(1, 1, 1)
                                 .addComponent(btnTaBort))))
@@ -194,14 +216,7 @@ public EnskildAgentInfo()
                         .addGap(6, 6, 6)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtLösenord, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtEpost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 143, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnHämta)
-                            .addComponent(btnÄndra)
-                            .addComponent(btnTaBort)
-                            .addComponent(btnRensa))
-                        .addGap(18, 18, 18))
+                            .addComponent(txtEpost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtAdministratör, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -211,8 +226,22 @@ public EnskildAgentInfo()
                         .addGap(6, 6, 6)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(comboBoxOmråde, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(18, 18, 18)
+                .addComponent(lblChef)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(comboBoxChef, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(1, 1, 1)
+                .addComponent(lblOmrådesAnsvar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtOmrådesAnsvar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnHämta)
+                    .addComponent(btnÄndra)
+                    .addComponent(btnTaBort)
+                    .addComponent(btnRensa))
+                .addGap(18, 18, 18))
         );
 
         pack();
@@ -220,6 +249,8 @@ public EnskildAgentInfo()
 
     //Hämta knappen
     private void btnHämtaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHämtaActionPerformed
+        txtOmrådesAnsvar.setVisible(false);
+        lblOmrådesAnsvar.setVisible(false);
         //Ifall man skriver i epost
         if(!txtEpost.getText().isEmpty() && validering.valideraAgentEpostFinns(txtEpost.getText())){
             String epost = txtEpost.getText();
@@ -231,6 +262,8 @@ public EnskildAgentInfo()
             setAdminTxtField(epost);
             setLösenordTxtField(epost);
             setOmrådeComboBox(id);
+            setChefComboBox(id);
+            
             
         }
         //ifall man skriver i ID
@@ -243,6 +276,7 @@ public EnskildAgentInfo()
             setAdminTxtField(epost);
             setLösenordTxtField(epost);
             setOmrådeComboBox(id);
+            setChefComboBox(id);
         }
         //Ifall man skriver i namn
         else if(!txtNamn.getText().isEmpty() && validering.valideraAgentNamnFinns(txtNamn.getText())){
@@ -255,7 +289,8 @@ public EnskildAgentInfo()
             setAnställningsdatumTxtField(id);
             setAdminTxtField(epost);
             setLösenordTxtField(epost);
-            setOmrådeComboBox(id);  
+            setOmrådeComboBox(id); 
+            setChefComboBox(id);
         }
         else if(txtNamn.getText().isEmpty() && txtEpost.getText().isEmpty() && txtID.getText().isEmpty()){
             JOptionPane.showMessageDialog(null, "Var vänlig och fyll i Namn, Epost eller ett ID");
@@ -272,6 +307,8 @@ public EnskildAgentInfo()
         String lösenord = txtLösenord.getText();
         String område = comboBoxOmråde.getSelectedItem().toString();
         boolean ändrad = false;
+        txtOmrådesAnsvar.setVisible(false);
+        lblOmrådesAnsvar.setVisible(false);
         
         //Om man skriver i epost
         if(!epost.isEmpty() && validering.valideraAgentEpostFinns(epost)){
@@ -473,9 +510,12 @@ public EnskildAgentInfo()
             txtTelefonnummer.setText("");
             txtAdministratör.setText("");
             comboBoxOmråde.setSelectedIndex(3);
-            
+            txtOmrådesAnsvar.setVisible(false);
+            lblOmrådesAnsvar.setVisible(false);
+            comboBoxChef.setSelectedIndex(2);
     }//GEN-LAST:event_btnRensaActionPerformed
 
+    //Metoder för att sätta in text i textfälten.
     private void setNamnTxtField(String id){  
         namn = db.getAgentsNamn(id);
         txtNamn.setText(namn); 
@@ -517,6 +557,37 @@ public EnskildAgentInfo()
         txtEpost.setText(epost);
     }
     
+    private void setChefComboBox(String id){
+        områdesChefOmråde = db.kontrolleraOmrådeschef(id);
+        kontorsChefBeteckning = db.kontrolleraKontorschef(id);
+        if(!områdesChefOmråde.equals("---")){
+            comboBoxChef.setSelectedIndex(1);
+            txtOmrådesAnsvar.setVisible(true);
+            lblOmrådesAnsvar.setVisible(true);
+            switch(områdesChefOmråde){
+                case "1":
+                    txtOmrådesAnsvar.setText("Svealand");
+                break;
+                case "2":
+                    txtOmrådesAnsvar.setText("Götaland");
+                break;
+                case "4":
+                    txtOmrådesAnsvar.setText("Norrland");
+                break;
+            }
+        }
+        else if(!kontorsChefBeteckning.equals("---")){
+            txtOmrådesAnsvar.setVisible(true);
+            lblOmrådesAnsvar.setVisible(true);
+            comboBoxChef.setSelectedIndex(0);
+            lblOmrådesAnsvar.setText("Kontorsbeteckning");
+            txtOmrådesAnsvar.setText(kontorsChefBeteckning);
+        }
+        else{
+            comboBoxChef.setSelectedIndex(2);
+        }
+    }
+    
     
     
 
@@ -536,17 +607,20 @@ public EnskildAgentInfo()
     private javax.swing.JButton btnRensa;
     private javax.swing.JButton btnTaBort;
     private javax.swing.JButton btnÄndra;
+    private javax.swing.JComboBox<String> comboBoxChef;
     private javax.swing.JComboBox<String> comboBoxOmråde;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private java.awt.Label label1;
     private javax.swing.JLabel lblAdministratör;
     private javax.swing.JLabel lblAnställningsdatum;
+    private javax.swing.JLabel lblChef;
     private javax.swing.JLabel lblDatumHjälp;
     private javax.swing.JLabel lblEpost;
     private javax.swing.JLabel lblLösenord;
     private javax.swing.JLabel lblNamn;
     private javax.swing.JLabel lblOmråde;
+    private javax.swing.JLabel lblOmrådesAnsvar;
     private javax.swing.JLabel lblTelefon;
     private javax.swing.JLabel lblinformation;
     private javax.swing.JTextField txtAdministratör;
@@ -555,6 +629,7 @@ public EnskildAgentInfo()
     private javax.swing.JTextField txtID;
     private javax.swing.JTextField txtLösenord;
     private javax.swing.JTextField txtNamn;
+    private javax.swing.JTextField txtOmrådesAnsvar;
     private javax.swing.JTextField txtTelefonnummer;
     // End of variables declaration//GEN-END:variables
 }
