@@ -1,6 +1,7 @@
 package mib;
 
 import java.util.HashMap;
+import javax.swing.JOptionPane;
 
 public class Validering {
     private Databas db;
@@ -48,23 +49,35 @@ public class Validering {
     }
 
     //Validerar en AgentEmail
-    public boolean valideraAgentEpost(String epost){
+    public boolean valideraAgentEpostFinns(String epost){
         boolean valid = false;
-        String emailRegex = "^[a][a-z]{1}+\\@mib.net";
         boolean existerar = false;
-        for(String email : db.getAllaAgentEpost()){
-            if(email.equals(epost)){
-                System.out.println("Email finns redan.");
-                existerar = true;
+        if(valideraAgentEpostTypo(epost)){
+            for(String email : db.getAllaAgentEpost()){
+                if(email.equals(epost)){
+                    System.out.println("Email finns redan.");
+                    valid = true;
+                    existerar = true;
+                }
             }
         }
-        if(epost.matches(emailRegex) && !existerar){
+        if(!existerar){
+            JOptionPane.showMessageDialog(null, "Den här eposten verkar inte finnas.");
+        }
+        System.out.println("Agent Epost: " + valid);
+        return valid;
+    }
+    
+    //Validera agentEpost typo
+    public boolean valideraAgentEpostTypo(String epost){
+        boolean valid = false;
+        String emailRegex = "^[a][a-z]{1}+\\@mib.net";
+        if(epost.matches(emailRegex)){
             valid = true;
         }
         else{
             System.out.println("Typo");
         }
-        System.out.println("Agent Epost: " + valid);
         return valid;
     }
 
@@ -214,16 +227,7 @@ public class Validering {
         return finns;
       }
 
-      //validera agentEpostFinns
-      public boolean valideraAgentEpostFinns(String epost){
-          boolean finns = false;
-          for(String email : db.getAllaAgentEpost()){
-              if(epost.equals(email)){
-                  finns = true;
-              }
-          }
-          return finns;
-      }
+
 
       //validera agentNamnFinns
       public boolean valideraAgentNamnFinns(String namn){
@@ -267,6 +271,29 @@ public class Validering {
             }
             return rättLösenord;
         }
+      
+    //Validera om agentID är en siffra
+    public boolean valideraAgentIDTypo(String id){
+        boolean isNumber = false;
+        try { 
+            Integer.parseInt(id); 
+            System.out.println(id + " is a valid integer");
+            isNumber = true;
+	}  
+	catch (NumberFormatException e){ 
+            System.out.println(id + " is not a valid integer"); 
+	}
+        return isNumber;
+      }
 
-
+    //Validera om agentID Existerar
+    public boolean valideraAgentIDExisterar(String id){   
+        boolean existerar = false;
+        for(String idILista : db.getAgentIDn()){
+            if(idILista.equals(id)){
+                existerar = true;
+            }
+        }
+        return existerar;
+    }
 }

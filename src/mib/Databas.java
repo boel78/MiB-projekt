@@ -673,5 +673,213 @@ public void taBortRas(int id) {
         }
         return platser;
     }
+    
+    //Hämta Agent ID från epost
+    public String getAgentIDFrånEpost(String epost){
+        String namn = "";
+        String query = "SELECT Agent_ID FROM Agent where Epost = '" + epost + "'";
+        try{
+            namn = idb.fetchSingle(query);
+        }
+        catch(InfException ex){
+            System.out.println(ex.getMessage());
+        }
+        return namn;
+    }
+    
+    //Hämta agent anställningsdatum
+    public String getAgentAnställningsdatum(String id){
+        String datum = "";
+        String query = "SELECT Anstallningsdatum FROM Agent where Agent_ID = " + id;
+        try{
+            datum = idb.fetchSingle(query);
+        }
+        catch(InfException ex){
+            System.out.println(ex.getMessage());
+        }
+        return datum;
+    }
+    
+    //Hämta agents område från id
+    public String getAgentOmråde(String id){
+        String områdesID = "";
+        String query = "SELECT Omrade FROM Agent where Agent_ID = " + id;
+        try{
+            områdesID = idb.fetchSingle(query);
+        }
+        catch(InfException ex){
+            System.out.println(ex.getMessage());
+        }
+        return områdesID;
+    }
+    
+    //Hämta områdesBenämning från id
+    public String getOmrådeBenämningFrånID(String id){
+        String benämning = "";
+        String query = "SELECT Benamning FROM Omrade where Omrades_ID = " + id;
+        try{
+            benämning = idb.fetchSingle(query);
+        }
+        catch(InfException ex){
+            System.out.println(ex.getMessage());
+        }
+        return benämning;
+    }
+    
+    //Hämta alla agentIdn
+    public ArrayList<String> getAgentIDn(){
+        ArrayList<String> idn = new ArrayList<>();
+        try{
+            idn = idb.fetchColumn("SELECT Agent_ID FROM Agent");
+        }
+        catch(InfException ex){
+            System.out.println(ex.getMessage());
+        }
+        return idn;
+    }
+    
+
+    //Uppdaterar agent namn
+    public void uppdateraAgentNamn(String id, String namn){
+        String query = "UPDATE Agent SET Namn = '" + namn + "' where Agent_ID = " + id;
+        try{
+            idb.update(query);
+        }
+        catch(InfException ex){
+            System.out.println(ex.getMessage());
+        }
+    }
+    
+    //Uppdaterar agent epost
+    public void uppdateraAgentEpost(String id, String epost){
+        String query = "UPDATE Agent SET Epost = '" + epost + "' where Agent_ID = " + id;
+        try{
+            idb.update(query);
+        }
+        catch(InfException ex){
+            System.out.println(ex.getMessage());
+        }
+    }
+    
+    //uppdaterar agent lösenord
+    public void uppdateraAgentLösenord(String id, String lösenord){
+        String query = "UPDATE Agent SET Losenord = '" + lösenord + "' where Agent_ID = " + id;
+        try{
+            idb.update(query);
+        }
+        catch(InfException ex){
+            System.out.println(ex.getMessage());
+        }
+    }
+    
+    //uppdaterar agent anställningsdatum
+    public void uppdateraAgentAnställningsdatum(String id, String anställningsdatum){
+        String query = "UPDATE Agent SET Anstallningsdatum = '" + anställningsdatum + "' where Agent_ID = " + id;
+        try{
+            idb.update(query);
+        }
+        catch(InfException ex){
+            System.out.println(ex.getMessage());
+        }
+    }
+    
+    //uppdaterar agent område
+    public void uppdateraAgentOmråde(String id, String område){
+        String query = "UPDATE Agent SET Omrade = " + område + " where Agent_ID = " + id;
+        try{
+            idb.update(query);
+        }
+        catch(InfException ex){
+            System.out.println(ex.getMessage());
+        }
+    }
+    
+
+    //Tar bort en agent utifrån agent id
+    public void taBortAgent(String id){
+        String query = "DELETE FROM Agent where Agent_ID = " + id;
+        try{
+            idb.delete(query);
+        }
+        catch(InfException ex){
+            System.out.println(ex.getMessage());
+        }
+    }
+            
+    //Ta bort innehar utrustning där det finns agent id
+    public void taBortInneharUtrustningVidAgentID(String id){
+        String query = "DELETE FROM Innehar_utrustning where Agent_ID = " + id;
+        try{
+            idb.delete(query);
+        }
+        catch(InfException ex){
+            System.out.println(ex.getMessage());
+        }
+    }
+    
+    //ta bort fältagent agent id
+    public void taBortFältAgentVidAgentID(String id){
+        String query = "DELETE FROM Faltagent where Agent_ID = " + id;
+        try{
+            idb.delete(query);
+        }
+        catch(InfException ex){
+            System.out.println(ex.getMessage());
+        }
+    }
+    
+    //uppdaterar agent_ID från alien till områdeschefen, returnerar chefen
+    public int bytUtAgentFrånAlienTillChef(String id){
+        String alienID = getAlienIDFrånAgentID(id);
+        String områdesID = getOmrådesIDFrånPlatsID(getPlatsIDFrånAlienID(alienID));
+        String områdeschef = getOmrådesChef(områdesID);
+        int områdesChefID = Integer.parseInt(områdeschef);
+        String query = "UPDATE Alien SET Ansvarig_Agent = " + områdesChefID + " where Ansvarig_Agent = " + id;
+        try{
+            idb.update(query);
+        }
+        catch(InfException ex){
+            System.out.println(ex.getMessage());
+        }
+        return områdesChefID;
+    }
+    
+    //hämta alien id från agent id
+    public String getAlienIDFrånAgentID(String agentID){
+        String alienID = "";
+        String query = "SELECT Alien_ID FROM Alien where Ansvarig_Agent = " + agentID;
+        try{
+            idb.fetchSingle(query);
+        }
+        catch(InfException ex){
+            System.out.println(ex.getMessage());
+        }
+        return alienID;
+    }
+    
+    //Hämta lista med aliens en agent bär ansvar över
+    public ArrayList<String> getAlienListaFrånAgentID(String agentID){
+        ArrayList<String> listan = new ArrayList<>();
+        String query = "SELECT Alien_ID FROM Alien where Agent_ID = " + agentID;
+        try{
+            listan = idb.fetchColumn(query);
+        }
+        catch(InfException ex){
+            System.out.println(ex.getMessage());
+        }
+        return listan;
+    }
+    
+    //Ta bort agent från områdesChef
+    public void taBortAgentFrånOmrådesChef(String agentID){
+        String query = "DELETE FROM Omradeschef where Agent_ID = " + agentID;
+        try{
+            idb.delete(query);
+        }
+        catch(InfException ex){
+            System.out.println(ex.getMessage());
+        }
+    }
+    
 
 }
