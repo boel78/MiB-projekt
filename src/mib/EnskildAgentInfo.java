@@ -256,20 +256,51 @@ public EnskildAgentInfo()
             setLösenordTxtField(epost);
             setOmrådeComboBox(id);  
         }
+        else if(txtNamn.getText().isEmpty() && txtEpost.getText().isEmpty() && txtID.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Var vänlig och fyll i Namn, Epost eller ett ID");
+        }
     }//GEN-LAST:event_btnHämtaActionPerformed
 
     //ändra knappen
     private void btnÄndraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnÄndraActionPerformed
         String id = txtID.getText();
-        if(validering.valideraAgentAnställningsDatum(txtAnställningsdatum.getText())){
-            db.uppdateraAgentAnställningsdatum(id, txtAnställningsdatum.getText());
+        String namn = txtNamn.getText();
+        String epost = txtEpost.getText();
+        String datum = txtAnställningsdatum.getText();
+        String telefon = txtTelefonnummer.getText();
+        String lösenord = txtLösenord.getText();
+        
+        //Om man skriver i epost
+        if(!epost.isEmpty() && validering.valideraAgentEpostFinns(epost)){
+            if(validering.valideraAgentAnställningsDatum(datum)){
+                db.uppdateraAgentAnställningsdatum(id, datum);
+            }
+            if(validering.valideraLösenord(lösenord)){
+                db.uppdateraAgentLösenord(id, lösenord);
+            }
+            if(validering.valideraAgentNamn(namn)){
+                db.uppdateraAgentNamn(id, namn);    
+            }
+            if(validering.valideraAgentTelefonnummer(telefon)){
+                db.uppdateraAgentTelefonnummer(id, telefon);
+            }
+            område = comboBoxOmråde.getSelectedItem().toString();
+            String områdesID = "";
+            switch(område){
+                case "Svealand" :
+                    områdesID = "1";
+                break;
+                case "Götaland" :
+                    områdesID = "2";
+                break;
+                case "Norrland" :
+                    områdesID = "4";
+                break;
+            }
+            db.uppdateraAgentOmråde(id, områdesID); 
+            JOptionPane.showMessageDialog(null, "Dina ändringar har sparats");
         }
-        if(validering.valideraLösenord(txtLösenord.getText())){
-            db.uppdateraAgentLösenord(id, txtLösenord.getText());
-        }
-        if(validering.valideraAgentNamn(txtNamn.getText())){
-            db.uppdateraAgentNamn(id, txtNamn.getText());    
-        }
+
         
         if(validering.valideraAgentEpostFinns(txtEpost.getText())){
             db.uppdateraAgentEpost(id, txtEpost.getText());
@@ -287,8 +318,6 @@ public EnskildAgentInfo()
                 områdesID = "4";
                 break;
         }
-        db.uppdateraAgentOmråde(id, områdesID);
-        JOptionPane.showMessageDialog(null, "Dina ändringar har sparats");
     }//GEN-LAST:event_btnÄndraActionPerformed
 
     //Ta bort knappen
@@ -406,6 +435,8 @@ public EnskildAgentInfo()
         epost = db.getAgentsEpost(id);
         txtEpost.setText(epost);
     }
+    
+    
     
 
     

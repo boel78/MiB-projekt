@@ -881,5 +881,15 @@ public void taBortRas(int id) {
         }
     }
     
+    //uppdatera agent telefonnummer från id
+    public void uppdateraAgentTelefonnummer(String id, String telefon){
+        String query = "UPDATE Agent SET Telefon = '" + telefon + "' where Agent_ID = " + id;
+        try{
+            idb.update(query);
+        }
+        catch(InfException ex){
+            System.out.println(ex.getMessage());
+        }
+    }
 
 }

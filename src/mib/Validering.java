@@ -84,8 +84,16 @@ public class Validering {
     //Validerar ett lösenord
     public boolean valideraLösenord(String lösen){
         boolean valid = false;
-        if(lösen.matches("^[a-zA-Z0-9][a-zA-Z0-9]*") && lösen.length() <= 6){
-            valid = true;
+        if(!lösen.isEmpty()){
+            if(lösen.matches("^[a-zA-Z0-9][a-zA-Z0-9]") && lösen.length() <= 6){
+                valid = true;
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Stavfel på lösenord, var vänlig och fyll i ett lösenord som innehåller bokstäver och/eller siffror kontrollera samt att lösenordet inte överstiger 6 st tecken.");
+            }
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Var vänlig och fyll i ett lösenord.");
         }
         System.out.println("Lösenordet är " + valid);
         return valid;
@@ -144,11 +152,16 @@ public class Validering {
     //validerar ett agentNamn
     public boolean valideraAgentNamn(String namn){
         boolean valid = false;
-        if(namn.matches("^Agent\\s[A-Z]{1}")){
-            valid = true;
+        if(!namn.isEmpty()){
+            if(namn.matches("^Agent\\s[A-Z]{1}")){
+                valid = true;
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Stavfel på agentnamnet.");
+            }
         }
-        if(!valid){
-            JOptionPane.showMessageDialog(null, "Stavfel på agentnamnet");
+        else{
+            JOptionPane.showMessageDialog(null, "Var vänligt och fyll i ett agentnamn.");
         }
         return valid;
     }
@@ -156,8 +169,16 @@ public class Validering {
     //validera agentAnställningsDatum
     public boolean valideraAgentAnställningsDatum(String datum){
         boolean valid = false;
-        if(datum.matches("\\d{4}-(0?[1-9]|1[012])-(0?[1-9]|1?[0-9]|2?[0-9]|3[01])")){
-            valid = true;
+        if(!datum.isEmpty()){
+            if(datum.matches("\\d{4}-(0?[1-9]|1[012])-(0?[1-9]|1?[0-9]|2?[0-9]|3[01])")){
+                valid = true;
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Stavfel på Anställnigsdatum.");
+            }
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Var vänlig och fyll i ett datum.");
         }
         System.out.println(valid);
         return valid;
@@ -166,8 +187,16 @@ public class Validering {
     //validera agentTelefon
     public boolean valideraAgentTelefonnummer(String nummer){
         boolean valid = false;
-        if(nummer.matches("^555-\\d[0-9]{1,5}")){
-            valid = true;
+        if(!nummer.isEmpty()){
+            if(nummer.matches("^555-\\d[0-9]{1,5}")){
+                valid = true;
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Stavfel på telefon, se till så att numret börjar på 555-\"dina siffror(max 6)\"");
+            }
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Var vänlig och fyll i ett telefonnummer.");
         }
         System.out.println(valid);
         return valid;
