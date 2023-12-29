@@ -149,20 +149,25 @@ public class Inloggning extends javax.swing.JFrame {
         if(!txtEpost.getText().isEmpty() || !pwField.getText().isEmpty()){
             String user = txtEpost.getText();
             String pass = pwField.getText();
-            typ = ÄrInloggTyp(user);
-            if(typ.equals("Alien")){
-                if(validering.valideraAlienLösenord(pass, user)){
-                   id = idb.getAlienIDFrånEpost(user);
-                   valid = true; 
+            if(validering.valideraAgentEpostTypo(user) && validering.valideraAlienEpostTypo(user) && validering.valideraLösenord(pass)){
+                typ = ÄrInloggTyp(user);
+                if(typ.equals("Alien")){
+                    if(validering.valideraAlienLösenord(pass, user)){
+                        id = idb.getAlienIDFrånEpost(user);
+                        valid = true; 
+                    }
+                }
+                else if(typ.equals("Agent") ||typ.equals("Admin")){                
+                    if(validering.valideraAgentLösenord(pass, user)){
+                        id = idb.getAgentIDFrånEpost(user);
+                        valid = true;
+                    } 
+                System.out.println(valid);
                 }
             }
-            else if(typ.equals("Agent") ||typ.equals("Admin")){                
-                if(validering.valideraAgentLösenord(pass, user)){
-                    id = idb.getAgentIDFrånEpost(user);
-                    valid = true;
-                } 
-            System.out.println(valid);
-            }
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Fyll i epost och lösenord.");
         }
         return valid;
     }
