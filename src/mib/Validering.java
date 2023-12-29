@@ -308,8 +308,23 @@ public class Validering {
             if(valideraLösenord(lösenord) && db.getAgentLösenordFrånEpost(epost).equals(lösenord)){
                 rättLösenord = true;
             }
+            else{
+              JOptionPane.showMessageDialog(null, "Fel lösenord.");
+            }
             return rättLösenord;
         }
+      
+      //Validera om aliens lösenord stämmer
+      public boolean valideraAlienLösenord(String lösenord, String epost){
+          boolean rättLösenord = false;
+          if(valideraLösenord(lösenord) && db.getAlienLösenordFrånEpost(epost).equals(lösenord)){
+              rättLösenord = true;
+          }
+          else{
+              JOptionPane.showMessageDialog(null, "Fel lösenord.");
+          }
+          return rättLösenord;
+      }
 
     //Validera om agentID är en siffra
     public boolean valideraAgentIDTypo(String id){

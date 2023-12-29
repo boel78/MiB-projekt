@@ -398,7 +398,7 @@ public class Databas {
             System.out.println(ex.getMessage());
         }
         return alien;
-    }
+}
 // ta bort alien utifrån ID.
 public void taBortAlien(int ID) {
    String query = "DELETE FROM alien WHERE alien_id=" + ID;

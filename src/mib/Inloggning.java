@@ -1,13 +1,19 @@
 package mib;
 
+import javax.swing.JOptionPane;
+
 
 public class Inloggning extends javax.swing.JFrame {
 
     private Databas idb;
+    private String typ;
+    private String id;
+    private Validering validering;
    
     public Inloggning() {
         initComponents();
         idb = new Databas();
+        validering = new Validering();
     }
 
 
@@ -17,43 +23,63 @@ public class Inloggning extends javax.swing.JFrame {
 
         pwField = new javax.swing.JPasswordField();
         btnLogin = new javax.swing.JButton();
-        txtField = new javax.swing.JTextField();
+        txtEpost = new javax.swing.JTextField();
+        lblRubrik = new javax.swing.JLabel();
+        lblEpost = new javax.swing.JLabel();
+        lblLösen = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         pwField.setColumns(20);
 
-        btnLogin.setText("jButton1");
+        btnLogin.setText("Logga in");
         btnLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLoginActionPerformed(evt);
             }
         });
 
-        txtField.setText("jTextField1");
+        txtEpost.setColumns(20);
+
+        lblRubrik.setText("Välkommen till MIB");
+
+        lblEpost.setText("Epost");
+
+        lblLösen.setText("Lösenord");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(146, 146, 146)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pwField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(65, 65, 65)
-                        .addComponent(txtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(146, 146, 146)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtEpost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(pwField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(70, 70, 70)
+                                .addComponent(btnLogin))
+                            .addComponent(lblEpost)
+                            .addComponent(lblLösen)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(70, 70, 70)
-                        .addComponent(btnLogin)))
-                .addContainerGap(336, Short.MAX_VALUE))
+                        .addGap(210, 210, 210)
+                        .addComponent(lblRubrik)))
+                .addContainerGap(166, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(94, Short.MAX_VALUE)
-                .addComponent(txtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36)
+                .addContainerGap()
+                .addComponent(lblRubrik)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
+                .addComponent(lblEpost)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtEpost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblLösen)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pwField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(34, 34, 34)
                 .addComponent(btnLogin)
@@ -64,7 +90,19 @@ public class Inloggning extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        inlogKontroll();
+        if(inlogKontroll()){
+            if(typ.equals("Agent")){
+                AgentHemsida agentHemsida = new AgentHemsida();
+                agentHemsida.show();
+                dispose();
+            }
+            else if(typ.equals("Admin")){
+                JOptionPane.showMessageDialog(null, "Admin");
+            }
+            else if(typ.equals("Alien")){
+                JOptionPane.showMessageDialog(null, "Alien");
+            }
+        }
     }//GEN-LAST:event_btnLoginActionPerformed
 
     /**
@@ -104,18 +142,26 @@ public class Inloggning extends javax.swing.JFrame {
     
     public boolean inlogKontroll(){
         boolean valid = false;
-        String user = txtField.getText();
-        String pass = pwField.getText();
-        String typ = ÄrInloggTyp(user);
-            if(pass.equals(idb.getAlienLösenordPåEpost(user, typ))){
-                 valid = true;
-            } 
-        System.out.println(valid);
+        if(!txtEpost.getText().isEmpty() || !pwField.getText().isEmpty()){
+            String user = txtEpost.getText();
+            String pass = pwField.getText();
+            String typ = ÄrInloggTyp(user);
+            if(typ.equals("Alien")){
+                if(validering.valideraAlienLösenord(pass, user)){
+                   valid = true; 
+                }
+            }
+            else if(typ.equals("Agent") ||typ.equals("Admin"))
+                if(validering.valideraAgentLösenord(pass, user)){
+                    valid = true;
+                } 
+            System.out.println(valid);
+        }
         return valid;
     }
     
     public String ÄrInloggTyp(String email){
-        String typ = "Alien";
+        typ = "Alien";
         String[] emailTyper = email.split("@");
             if(emailTyper[1].equals("mib.net")){
                 boolean ärAdmin = idb.getAdminStatus(email);
@@ -129,8 +175,11 @@ public class Inloggning extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLogin;
+    private javax.swing.JLabel lblEpost;
+    private javax.swing.JLabel lblLösen;
+    private javax.swing.JLabel lblRubrik;
     private javax.swing.JPasswordField pwField;
-    private javax.swing.JTextField txtField;
+    private javax.swing.JTextField txtEpost;
     // End of variables declaration//GEN-END:variables
 }
 
