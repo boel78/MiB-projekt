@@ -347,17 +347,14 @@ public class Validering {
     //validera om områdeschef finns utifrån områdesID
     public boolean valideraOmrådesChefExisterarPåOmråde(String områdesID){
         boolean finns = false;
-        if(db.getOmrådesChef(områdesID) == null){
+        if(db.getOmrådesChef(områdesID) != null){
             finns = true;
-        }
-        else{
-            JOptionPane.showMessageDialog(null, "En chef finns redan på den här positionen.");
         }
         return finns;
     }
     
     //Validerar om området finns i databasen
-    public boolean valideraOmrådeExisterar(String område){
+    public boolean valideraOmrådeExisterar(String område, boolean skrivUt){
         boolean finns = false;
         if(!område.isEmpty()){
             for(String området : db.getOmråden()){
@@ -365,7 +362,7 @@ public class Validering {
                     finns = true;
                 }
             }
-            if(!finns){
+            if(!finns && skrivUt){
                 JOptionPane.showMessageDialog(null, "Området existerar inte");
             }
         }
@@ -408,6 +405,20 @@ public class Validering {
         return existerar;
     }
     
+    //Validera om kontorschef existerar på enskilt kontor
+    public boolean valideraKontorschefPåSpecifik(String id, String kontor){
+        boolean stämmer = false;
+        for(HashMap<String, String> mapar : db.getAllaRaderKontorschef()){
+                System.out.println(mapar.get("Agent_ID"));
+                System.out.println(mapar.get("Kontorsbeteckning"));
+                if(mapar.get("Agent_ID").equals(id) && mapar.get("Kontorsbeteckning").equals(kontor)){
+                    stämmer = true;
+                
+            }
+        }
+        return stämmer;
+    }
+    
     //Validera om man skrivit ja eller nej..
     public boolean valideraAdminInput(String input){
         input = input.toLowerCase();
@@ -426,5 +437,17 @@ public class Validering {
         return rättstavning;
     }
 
+    //Validera om agent är chef på specifikt område
+    public boolean valideraOmrådeschefPåSpecifik(String id, String område){
+        boolean stämmer = false;
+        Integer områdesID = db.getOmrådeId(område);
+        for(HashMap<String, String> mapar : db.getAllaRaderOmrådeschef()){
+                if(mapar.get("Agent_ID").equals(id) && mapar.get("Omrade").equals(områdesID.toString())){
+                    stämmer = true; 
+            }
+        }
+        
+        return stämmer;
+    }
 }
 

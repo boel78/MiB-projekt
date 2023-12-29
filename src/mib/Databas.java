@@ -1015,4 +1015,28 @@ public void taBortRas(int id) {
             System.out.println(ex.getMessage());
         }
     }
+    
+    //hämta alla rader i kontorschef
+    public ArrayList<HashMap<String, String>> getAllaRaderKontorschef(){
+        ArrayList<HashMap<String, String>> rader = new ArrayList<>();
+        try{
+            rader = idb.fetchRows("SELECT * FROM Kontorschef");
+        }
+        catch(InfException ex){
+            System.out.println(ex.getMessage());
+        }
+        return rader;
+    }
+    
+    //Hämta alla rader i områdeschef
+    public ArrayList<HashMap<String, String>> getAllaRaderOmrådeschef(){
+        ArrayList<HashMap<String, String>> rader = new ArrayList<>();
+        try{
+            rader = idb.fetchRows("SELECT * FROM Omradeschef");
+        }
+        catch(InfException ex){
+            System.out.println(ex.getMessage());
+        }
+        return rader;
+    }
 }
