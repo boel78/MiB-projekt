@@ -16,14 +16,18 @@ public class VisaTop3Agenter extends javax.swing.JFrame {
     private Databas db;
     private String områdeID;
     private DefaultListModel mod;
+    private String anvID;
+    private String anvTyp;
     /**
      * Creates new form VisaTop3Agenter
      */
-    public VisaTop3Agenter() {
+    public VisaTop3Agenter(String anvID, String anvTyp) {
         initComponents();
         db = new Databas();
         mod = new DefaultListModel();
         listAgenter.setModel(mod);
+        this.anvID = anvID;
+        this.anvTyp = anvTyp;
         
     }
 
@@ -126,7 +130,7 @@ public class VisaTop3Agenter extends javax.swing.JFrame {
 
     //Tillbaka till hemsidan
     private void btnTillbakaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakaActionPerformed
-        AgentHemsida agentHemsida = new AgentHemsida();
+        AgentHemsida agentHemsida = new AgentHemsida(anvID, anvTyp);
         agentHemsida.show();
         dispose();
     }//GEN-LAST:event_btnTillbakaActionPerformed

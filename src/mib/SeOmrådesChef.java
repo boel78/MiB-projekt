@@ -6,22 +6,25 @@ package mib;
 
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author joakimfockstedt
- */
+
 public class SeOmrådesChef extends javax.swing.JFrame {
     private Databas databas;
     private DefaultTableModel model;
+    private String anvID;
+    private String anvTyp;
 
     /**
      * Creates new form SeOmrådesChef
      */
-    public SeOmrådesChef() {
+    public SeOmrådesChef(String anvID, String anvTyp) {
         initComponents();
         databas = new Databas();
         model = (DefaultTableModel) table.getModel();
         model.setRowCount(0);
+        this.anvID = anvID;
+        this.anvTyp = anvTyp;
+        lblAlienID.setText(anvID);
+        System.out.println(anvID);
     }
 
     /**
@@ -44,6 +47,7 @@ public class SeOmrådesChef extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         txtIDFält.setColumns(4);
+        txtIDFält.setText(anvID);
 
         btnHämta.setText("Hämta");
         btnHämta.addActionListener(new java.awt.event.ActionListener() {
@@ -100,7 +104,7 @@ public class SeOmrådesChef extends javax.swing.JFrame {
                         .addComponent(lblAlienID)
                         .addGap(114, 114, 114)
                         .addComponent(lblRubrik)))
-                .addContainerGap(126, Short.MAX_VALUE))
+                .addContainerGap(120, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(185, 185, 185)
                 .addComponent(btnHämta)
@@ -132,7 +136,6 @@ public class SeOmrådesChef extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnHämtaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHämtaActionPerformed
-
         String alienID = txtIDFält.getText();
         String områdesID = databas.getOmrådesIDFrånPlatsID(databas.getPlatsIDFrånAlienID(alienID));
         String områdesChef = databas.getOmrådesChef(områdesID);
@@ -144,45 +147,23 @@ public class SeOmrådesChef extends javax.swing.JFrame {
 
     //Tillbaka till hemsidan
     private void btnTillbakaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakaActionPerformed
-        AgentHemsida agentHemsida = new AgentHemsida();
-        agentHemsida.show();
-        dispose();
+        if(anvTyp.equals("Agent")){
+            AgentHemsida agentHemsida = new AgentHemsida(anvID, anvTyp);
+            agentHemsida.show();
+            dispose();
+        }
+        else if(anvTyp.equals("Alien")){
+            //AlienHemsida aliensida = new AlienHemsida(anvID, anvTyp);
+            
+        
+        }
+        else if(anvTyp.equals("Admin")){
+            AdminHemsida adminsida = new AdminHemsida(anvID, anvTyp);
+            adminsida.show();
+            dispose();
+        }
     }//GEN-LAST:event_btnTillbakaActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(SeOmrådesChef.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(SeOmrådesChef.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(SeOmrådesChef.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(SeOmrådesChef.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new SeOmrådesChef().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnHämta;

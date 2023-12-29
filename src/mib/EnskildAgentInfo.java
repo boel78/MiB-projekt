@@ -20,14 +20,17 @@ public class EnskildAgentInfo extends javax.swing.JFrame {
     private String kontorsChefBeteckning;
     private String chef;
     private String admin;
+    private String anvID;
+    private String anvTyp;
     
-public EnskildAgentInfo()
-{
-    db = new Databas();
-    initComponents();
-    validering = new Validering();
-    txtOmrådesAnsvar.setVisible(false);
-    lblOmrådesAnsvar.setVisible(false);
+    public EnskildAgentInfo(String anvID, String anvTyp){
+        db = new Databas();
+        initComponents();
+        validering = new Validering();
+        txtOmrådesAnsvar.setVisible(false);
+        lblOmrådesAnsvar.setVisible(false);
+        this.anvID = anvID;
+        this.anvTyp = anvTyp;
 }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -392,7 +395,7 @@ public EnskildAgentInfo()
     }//GEN-LAST:event_comboBoxChefActionPerformed
 
     private void btnTillbakaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakaActionPerformed
-        AdminHemsida ah = new AdminHemsida();
+        AdminHemsida ah = new AdminHemsida(anvID, anvTyp);
         ah.show();
         dispose();
     }//GEN-LAST:event_btnTillbakaActionPerformed
@@ -614,15 +617,7 @@ public EnskildAgentInfo()
             JOptionPane.showMessageDialog(null, "Agenten är borttagen.");
         }
     }
-   
-    public static void main(String args[]) {
-        
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new EnskildAgentInfo().setVisible(true);
-            }
-        });
-    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnHämta;

@@ -4,17 +4,16 @@
  */
 package mib;
 
-/**
- *
- * @author joakimfockstedt
- */
 public class AdminHemsida extends javax.swing.JFrame {
 
-    /**
-     * Creates new form AgentHemsida
-     */
-    public AdminHemsida() {
+    private String anvID;
+    private String anvTyp;
+    
+    public AdminHemsida(String anvID, String anvTyp) {
         initComponents();
+        this.anvID = anvID;
+        this.anvTyp = anvTyp;
+        System.out.println(anvID);
     }
 
     @SuppressWarnings("unchecked")
@@ -193,109 +192,78 @@ public class AdminHemsida extends javax.swing.JFrame {
 
     //Byt lösenord
     private void btnBytLösenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBytLösenActionPerformed
-       BytaLösenord lösensida = new BytaLösenord();
+       BytaLösenord lösensida = new BytaLösenord(anvID, anvTyp);
        lösensida.show();
        dispose();
     }//GEN-LAST:event_btnBytLösenActionPerformed
 
     //logga ut knapp
     private void btnLoggaUtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoggaUtActionPerformed
+        Inloggning inlog = new Inloggning();
+        inlog.show();
         dispose();
     }//GEN-LAST:event_btnLoggaUtActionPerformed
 
     //Lista aliens
     private void btnListaAliensActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListaAliensActionPerformed
-        ListaAliens listaAliens = new ListaAliens();
+        ListaAliens listaAliens = new ListaAliens(anvID, anvTyp);
         listaAliens.show();
         dispose();
     }//GEN-LAST:event_btnListaAliensActionPerformed
 
     //Ändra aliens
     private void btnÄndraAlienInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnÄndraAlienInfoActionPerformed
-        ÄndraAlienInfo ändraAlien = new ÄndraAlienInfo();
+        ÄndraAlienInfo ändraAlien = new ÄndraAlienInfo(anvID, anvTyp);
         ändraAlien.show();
         dispose();
     }//GEN-LAST:event_btnÄndraAlienInfoActionPerformed
 
     //Nyregistrera alien
     private void btnNyregistreraAliensActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNyregistreraAliensActionPerformed
-        NyregistreraAlien na = new NyregistreraAlien();
+        NyregistreraAlien na = new NyregistreraAlien(anvID, anvTyp);
         na.show();
         dispose();
     }//GEN-LAST:event_btnNyregistreraAliensActionPerformed
 
     //Visa områdeschef
     private void btnVisaOmrådeschefActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVisaOmrådeschefActionPerformed
-        SeOmrådesChef soc = new SeOmrådesChef();
+        SeOmrådesChef soc = new SeOmrådesChef(anvID, anvTyp);
         soc.show();
         dispose();
     }//GEN-LAST:event_btnVisaOmrådeschefActionPerformed
 
     //Utrustningssida
     private void btnRegUtrustningActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegUtrustningActionPerformed
-        TaBortUtrustning utrustningsida = new TaBortUtrustning();
+        TaBortUtrustning utrustningsida = new TaBortUtrustning(anvID, anvTyp);
         utrustningsida.show();
         dispose();
     }//GEN-LAST:event_btnRegUtrustningActionPerformed
 
     //Visa top 3 agenter
     private void btnVisaTop3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVisaTop3ActionPerformed
-        VisaTop3Agenter v3a = new VisaTop3Agenter();
+        VisaTop3Agenter v3a = new VisaTop3Agenter(anvID, anvTyp);
         v3a.show();
         dispose();
     }//GEN-LAST:event_btnVisaTop3ActionPerformed
 
     private void btnÄndraTabortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnÄndraTabortActionPerformed
-        EnskildAgentInfo agentInfo = new EnskildAgentInfo();
+        EnskildAgentInfo agentInfo = new EnskildAgentInfo(anvID, anvTyp);
         agentInfo.show();
         dispose();
     }//GEN-LAST:event_btnÄndraTabortActionPerformed
 
     private void btnNyRegAgentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNyRegAgentActionPerformed
-        NyregistreraAgent na = new NyregistreraAgent();
+        NyregistreraAgent na = new NyregistreraAgent(anvID, anvTyp);
         na.show();
         dispose();
     }//GEN-LAST:event_btnNyRegAgentActionPerformed
 
     private void btnTaBortAlienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaBortAlienActionPerformed
-        TaBortAlien ta = new TaBortAlien();
+        TaBortAlien ta = new TaBortAlien(anvID, anvTyp);
         ta.show();
         dispose();
     }//GEN-LAST:event_btnTaBortAlienActionPerformed
 
-
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AdminHemsida.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AdminHemsida.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AdminHemsida.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AdminHemsida.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new AdminHemsida().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBytLösen;

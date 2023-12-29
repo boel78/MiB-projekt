@@ -57,6 +57,19 @@ public class Databas {
         }
         return alienEmail;
     }
+    
+    //Hämta alien id från epost
+    public String getAlienIDFrånEpost(String epost){
+        String query = "SELECT Alien_ID FROM Alien where epost = '" + epost + "'";
+        String id = "";
+        try{
+            id = idb.fetchSingle(query);
+        }
+        catch(InfException ex){
+            System.out.println(ex.getMessage());
+        }
+        return id;
+    }
 
     //Hämtar AlienLösenord från epost
     public String getAlienLösenordPåEpost(String email, String typ){

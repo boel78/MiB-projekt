@@ -13,10 +13,11 @@ public class TaBortUtrustning extends javax.swing.JFrame {
     private String valdSträng;
     private String valdTyp;
     private String kategoriText;
-    private String agentID;
+    private String anvID;
+    private String anvTyp;
 
 
-    public TaBortUtrustning() {
+    public TaBortUtrustning(String anvID, String anvTyp) {
         initComponents();
         db = new Databas();
         validering = new Validering();
@@ -25,6 +26,19 @@ public class TaBortUtrustning extends javax.swing.JFrame {
             comboBox.addItem("Ingen utrustning finns");
         }
         setKolumnITabell();
+        this.anvID = anvID;
+        this.anvTyp = anvTyp;
+        System.out.println(anvTyp);
+        if(anvTyp.equals("Agent")){
+                lblTaBort.setVisible(false);
+                comboBox.setVisible(false);
+                btnTaBort.setVisible(false);
+            }
+            else{
+                lblTaBort.setVisible(true);
+                comboBox.setVisible(true);
+                btnTaBort.setVisible(true);
+            }
     }
 
 
@@ -252,6 +266,7 @@ public class TaBortUtrustning extends javax.swing.JFrame {
             System.out.println("Tog bort utrustning " + valdID);
             comboBox.removeItem(valdSträng);
             valideraCombo();
+            
         }
         else{
             JOptionPane.showMessageDialog(null, "Det finns ingen utrustning att ta bort");
@@ -283,58 +298,24 @@ public class TaBortUtrustning extends javax.swing.JFrame {
 
     //Hämta knappen
     private void btnHämtaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHämtaActionPerformed
-        setDataITabell();
-                if(txtAdmin.getText().equals("Nej")){
-                    lblTaBort.setVisible(false);
-                    comboBox.setVisible(false);
-                    btnTaBort.setVisible(false);
-        }
-                else{
-                    lblTaBort.setVisible(true);
-                    comboBox.setVisible(true);
-                    btnTaBort.setVisible(true);
-                }
+        setDataITabell();           
     }//GEN-LAST:event_btnHämtaActionPerformed
 
     //Tillbaka till hemsidan
     private void btnTillbakaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakaActionPerformed
-        AgentHemsida agentHemsida = new AgentHemsida();
-        agentHemsida.show();
-        dispose();
+        if(anvTyp.equals("Agent")){
+            AgentHemsida agentHemsida = new AgentHemsida(anvID, anvTyp);
+            agentHemsida.show();
+            dispose();
+        }
+        else if(anvTyp.equals("Admin")){
+            AdminHemsida adminsida = new AdminHemsida(anvID, anvTyp);
+            adminsida.show();
+            dispose();
+        }
     }//GEN-LAST:event_btnTillbakaActionPerformed
 
 
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TaBortUtrustning.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TaBortUtrustning.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TaBortUtrustning.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TaBortUtrustning.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new TaBortUtrustning().setVisible(true);
-            }
-        });
-    }
     
     //Ta bort utrustning metod
     public void taBortUtrustning(String namn){

@@ -92,12 +92,14 @@ public class Inloggning extends javax.swing.JFrame {
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         if(inlogKontroll()){
             if(typ.equals("Agent")){
-                AgentHemsida agentHemsida = new AgentHemsida();
+                AgentHemsida agentHemsida = new AgentHemsida(id, typ);
                 agentHemsida.show();
                 dispose();
             }
             else if(typ.equals("Admin")){
-                JOptionPane.showMessageDialog(null, "Admin");
+                AdminHemsida adminsida = new AdminHemsida(id, typ);
+                adminsida.show();
+                dispose();
             }
             else if(typ.equals("Alien")){
                 JOptionPane.showMessageDialog(null, "Alien");
@@ -145,17 +147,20 @@ public class Inloggning extends javax.swing.JFrame {
         if(!txtEpost.getText().isEmpty() || !pwField.getText().isEmpty()){
             String user = txtEpost.getText();
             String pass = pwField.getText();
-            String typ = ÄrInloggTyp(user);
+            typ = ÄrInloggTyp(user);
             if(typ.equals("Alien")){
                 if(validering.valideraAlienLösenord(pass, user)){
+                   id = idb.getAlienIDFrånEpost(user);
                    valid = true; 
                 }
             }
-            else if(typ.equals("Agent") ||typ.equals("Admin"))
+            else if(typ.equals("Agent") ||typ.equals("Admin")){                
                 if(validering.valideraAgentLösenord(pass, user)){
+                    id = idb.getAgentIDFrånEpost(user);
                     valid = true;
                 } 
             System.out.println(valid);
+            }
         }
         return valid;
     }

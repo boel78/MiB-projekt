@@ -19,12 +19,15 @@ public class NyregistreraAgent extends javax.swing.JFrame {
     private Validering validering;
     private String område = "Svealand";
     private String epost = "";
-    
+    private String anvID;
+    private String anvTyp;
 
-    public NyregistreraAgent() {
+    public NyregistreraAgent(String anvID, String anvTyp) {
         initComponents();
         db = new Databas();
         validering = new Validering();
+        this.anvID = anvID;
+        this.anvTyp = anvTyp;
     }
 
     /**
@@ -273,44 +276,12 @@ public class NyregistreraAgent extends javax.swing.JFrame {
     }//GEN-LAST:event_comboBoxActionPerformed
 
     private void btnTillbakaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakaActionPerformed
-        AdminHemsida ah = new AdminHemsida();
+        AdminHemsida ah = new AdminHemsida(anvID, anvTyp);
         ah.show();
         dispose();
     }//GEN-LAST:event_btnTillbakaActionPerformed
 
-  
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(NyregistreraAgent.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(NyregistreraAgent.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(NyregistreraAgent.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(NyregistreraAgent.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new NyregistreraAgent().setVisible(true);
-            }
-        });
-    }
-    
     
     //Skapar en agentEpost
     public String skapaEpost(String agentNamn){
