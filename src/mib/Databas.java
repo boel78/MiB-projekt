@@ -567,7 +567,7 @@ public void taBortRas(int id) {
         }
         return epost;
     }
-    
+
     //Hämta alien telefonnummer från ID
     public String getAlienTelefonFrånID(String ID){
         String query = "SELECT Telefon FROM Alien where Alien_ID = " + ID;
@@ -661,8 +661,8 @@ public void taBortRas(int id) {
             System.out.println(ex.getMessage());
         }
     }
-    
-    
+
+
     //Hämta vilka platser som finns i ett område
     public ArrayList<String> getPlatser(String områdesID){
         ArrayList<String> platser = new ArrayList<>();
@@ -675,7 +675,7 @@ public void taBortRas(int id) {
         }
         return platser;
     }
-    
+
     //Hämta Agent ID från epost
     public String getAgentIDFrånEpost(String epost){
         String namn = "";
@@ -688,7 +688,7 @@ public void taBortRas(int id) {
         }
         return namn;
     }
-    
+
     //Hämta agent anställningsdatum
     public String getAgentAnställningsdatum(String id){
         String datum = "";
@@ -701,7 +701,7 @@ public void taBortRas(int id) {
         }
         return datum;
     }
-    
+
     //Hämta agents område från id
     public String getAgentOmråde(String id){
         String områdesID = "";
@@ -714,7 +714,7 @@ public void taBortRas(int id) {
         }
         return områdesID;
     }
-    
+
     //Hämta områdesBenämning från id
     public String getOmrådeBenämningFrånID(String id){
         String benämning = "";
@@ -727,7 +727,7 @@ public void taBortRas(int id) {
         }
         return benämning;
     }
-    
+
     //Hämta alla agentIdn
     public ArrayList<String> getAgentIDn(){
         ArrayList<String> idn = new ArrayList<>();
@@ -739,7 +739,7 @@ public void taBortRas(int id) {
         }
         return idn;
     }
-    
+
 
     //Uppdaterar agent namn
     public void uppdateraAgentNamn(String id, String namn){
@@ -751,7 +751,7 @@ public void taBortRas(int id) {
             System.out.println(ex.getMessage());
         }
     }
-    
+
     //Uppdaterar agent epost
     public void uppdateraAgentEpost(String id, String epost){
         String query = "UPDATE Agent SET Epost = '" + epost + "' where Agent_ID = " + id;
@@ -762,7 +762,7 @@ public void taBortRas(int id) {
             System.out.println(ex.getMessage());
         }
     }
-    
+
     //uppdaterar agent lösenord
     public void uppdateraAgentLösenord(String id, String lösenord){
         String query = "UPDATE Agent SET Losenord = '" + lösenord + "' where Agent_ID = " + id;
@@ -773,7 +773,7 @@ public void taBortRas(int id) {
             System.out.println(ex.getMessage());
         }
     }
-    
+
     //uppdaterar agent anställningsdatum
     public void uppdateraAgentAnställningsdatum(String id, String anställningsdatum){
         String query = "UPDATE Agent SET Anstallningsdatum = '" + anställningsdatum + "' where Agent_ID = " + id;
@@ -784,7 +784,7 @@ public void taBortRas(int id) {
             System.out.println(ex.getMessage());
         }
     }
-    
+
     //uppdaterar agent område
     public void uppdateraAgentOmråde(String id, String område){
         String query = "UPDATE Agent SET Omrade = " + område + " where Agent_ID = " + id;
@@ -795,7 +795,7 @@ public void taBortRas(int id) {
             System.out.println(ex.getMessage());
         }
     }
-    
+
 
     //Tar bort en agent utifrån agent id
     public void taBortAgent(String id){
@@ -807,7 +807,7 @@ public void taBortRas(int id) {
             System.out.println(ex.getMessage());
         }
     }
-            
+
     //Ta bort innehar utrustning där det finns agent id
     public void taBortInneharUtrustningVidAgentID(String id){
         String query = "DELETE FROM Innehar_utrustning where Agent_ID = " + id;
@@ -818,7 +818,7 @@ public void taBortRas(int id) {
             System.out.println(ex.getMessage());
         }
     }
-    
+
     //ta bort fältagent agent id
     public void taBortFältAgentVidAgentID(String id){
         String query = "DELETE FROM Faltagent where Agent_ID = " + id;
@@ -829,7 +829,7 @@ public void taBortRas(int id) {
             System.out.println(ex.getMessage());
         }
     }
-    
+
     //uppdaterar agent_ID från alien till områdeschefen, returnerar chefen
     public void bytUtAgentFrånAlienTillChef(String agentID, String områdesChef){
         boolean ändrad = false;
@@ -841,9 +841,9 @@ public void taBortRas(int id) {
             }
             catch(InfException ex){
                 System.out.println(ex.getMessage());
-            }      
+            }
     }
-    
+
     //hämta alien id från agent id
     public String getAlienIDFrånAgentID(String agentID){
         String alienID = "";
@@ -856,7 +856,7 @@ public void taBortRas(int id) {
         }
         return alienID;
     }
-    
+
     //Hämta lista med aliens en agent bär ansvar över
     public ArrayList<String> getAlienListaFrånAgentID(String agentID){
         ArrayList<String> listan = new ArrayList<>();
@@ -869,10 +869,10 @@ public void taBortRas(int id) {
         }
         return listan;
     }
-    
+
     //Ta bort områdeschef
     public void taBortOmrådesChef(String agentID){
-        String query = "DELETE FROM Omradeschef where Agent_ID = " + agentID;     
+        String query = "DELETE FROM Omradeschef where Agent_ID = " + agentID;
         try{
             idb.delete(query);
         }
@@ -880,10 +880,10 @@ public void taBortRas(int id) {
             System.out.println(ex.getMessage());
         }
     }
-    
+
     //Ta bort kontorschef
     public void taBortKontorsChef(String agentID){
-        String query = "DELETE FROM Kontorschef where Agent_ID = " + agentID;      
+        String query = "DELETE FROM Kontorschef where Agent_ID = " + agentID;
         try{
             idb.delete(query);
         }
@@ -891,7 +891,7 @@ public void taBortRas(int id) {
             System.out.println(ex.getMessage());
         }
     }
-    
+
     //uppdatera agent telefonnummer från id
     public void uppdateraAgentTelefonnummer(String id, String telefon){
         String query = "UPDATE Agent SET Telefon = '" + telefon + "' where Agent_ID = " + id;
@@ -902,7 +902,7 @@ public void taBortRas(int id) {
             System.out.println(ex.getMessage());
         }
     }
-    
+
     //lägg till områdeschef
     public void läggTillOmrådeschef(String agent_ID, String områdesID){
         String query = "INSERT INTO Omradeschef VALUES(" + agent_ID + ", " + områdesID + ")";
@@ -913,7 +913,7 @@ public void taBortRas(int id) {
             System.out.println(ex.getMessage());
         }
     }
-    
+
     //kontrollerar om man är områdeschef, isf skickas området tbx
     public String kontrolleraOmrådeschef(String id){
         String område = "";
@@ -929,7 +929,7 @@ public void taBortRas(int id) {
         }
         return område;
     }
-    
+
     //kontrollerar om man är kontorschef, isf skickas kontoret tbx.
     public String kontrolleraKontorschef(String id){
         String kontor = "";
@@ -945,7 +945,7 @@ public void taBortRas(int id) {
         }
         return kontor;
     }
-    
+
     //hämta områden
     public ArrayList<String> getOmråden(){
         ArrayList<String> områden = new ArrayList<>();
@@ -957,7 +957,7 @@ public void taBortRas(int id) {
         }
         return områden;
     }
-    
+
     //Hämta kontorsbeteckningar
     public ArrayList<String> getKontorsbeteckningar(){
         ArrayList<String> kontorsbeteckningar = new ArrayList<>();
@@ -969,7 +969,7 @@ public void taBortRas(int id) {
         }
         return kontorsbeteckningar;
     }
-    
+
     //Lägg till kontorschef
     public void läggTillKontorschef(String agentID, String beteckning){
         String query = "INSERT INTO Kontorschef VALUES(" + agentID + ", '" + beteckning + "')";
@@ -980,7 +980,7 @@ public void taBortRas(int id) {
             System.out.println(ex.getMessage());
         }
     }
-    
+
     //Hämta kontorschefer
     public ArrayList<String> getKontorschefer(){
         ArrayList<String> chefer = new ArrayList<>();
@@ -992,7 +992,7 @@ public void taBortRas(int id) {
         }
         return chefer;
     }
-    
+
     //Hämta områdeschefer
     public ArrayList<String> getOmrådeschefer(){
         ArrayList<String> chefer = new ArrayList<>();
@@ -1004,7 +1004,7 @@ public void taBortRas(int id) {
         }
         return chefer;
     }
-    
+
     //Uppdatera admin status
     public void uppdateraAdminStatus(String id, String status){
         String query = "UPDATE Agent SET Administrator = '" + status + "' where Agent_ID = " + id;
@@ -1015,7 +1015,7 @@ public void taBortRas(int id) {
             System.out.println(ex.getMessage());
         }
     }
-    
+
     //hämta alla rader i kontorschef
     public ArrayList<HashMap<String, String>> getAllaRaderKontorschef(){
         ArrayList<HashMap<String, String>> rader = new ArrayList<>();
@@ -1027,7 +1027,7 @@ public void taBortRas(int id) {
         }
         return rader;
     }
-    
+
     //Hämta alla rader i områdeschef
     public ArrayList<HashMap<String, String>> getAllaRaderOmrådeschef(){
         ArrayList<HashMap<String, String>> rader = new ArrayList<>();

@@ -27,6 +27,9 @@ public class Validering {
         if(epost.matches(emailRegex)){
             valid = true;
         }
+        else if (existerar){
+            System.out.println("Eposten finns redan");
+        }
         else{
             System.out.println("epost typo");
         }
@@ -67,7 +70,7 @@ public class Validering {
         System.out.println("Agent Epost: " + valid);
         return valid;
     }
-    
+
     //Validera agentEpost typo
     public boolean valideraAgentEpostTypo(String epost){
         boolean valid = false;
@@ -312,24 +315,24 @@ public class Validering {
             }
             return rättLösenord;
         }
-      
+
     //Validera om agentID är en siffra
     public boolean valideraAgentIDTypo(String id){
         boolean isNumber = false;
-        try { 
-            Integer.parseInt(id); 
+        try {
+            Integer.parseInt(id);
             System.out.println(id + " is a valid integer");
             isNumber = true;
-	}  
-	catch (NumberFormatException e){ 
-            System.out.println(id + " is not a valid integer"); 
+	}
+	catch (NumberFormatException e){
+            System.out.println(id + " is not a valid integer");
             JOptionPane.showMessageDialog(null, "Det här är ingen siffra.");
 	}
         return isNumber;
       }
 
     //Validera om agentID Existerar
-    public boolean valideraAgentIDExisterar(String id){   
+    public boolean valideraAgentIDExisterar(String id){
         boolean existerar = false;
         if(valideraAgentIDTypo(id)){
             for(String idILista : db.getAgentIDn()){
@@ -343,7 +346,7 @@ public class Validering {
         }
         return existerar;
     }
-    
+
     //validera om områdeschef finns utifrån områdesID
     public boolean valideraOmrådesChefExisterarPåOmråde(String områdesID){
         boolean finns = false;
@@ -352,7 +355,7 @@ public class Validering {
         }
         return finns;
     }
-    
+
     //Validerar om området finns i databasen
     public boolean valideraOmrådeExisterar(String område, boolean skrivUt){
         boolean finns = false;
@@ -371,7 +374,7 @@ public class Validering {
         }
         return finns;
     }
-    
+
     //Valiera om kontorsbeteckning existerar
     public boolean valideraKontorsBeteckningExisterar(String kontorsbeteckning){
         boolean existerar = false;
@@ -382,7 +385,7 @@ public class Validering {
         }
         return existerar;
     }
-    
+
     //Validera om en områdeschef finns
     public boolean valideraOmrådeschefExisterar(String id){
         boolean existerar = false;
@@ -393,7 +396,7 @@ public class Validering {
         }
         return existerar;
     }
-    
+
     //Validera om en kontorschef finns
     public boolean valideraKontorschefExisterar(String id){
         boolean existerar = false;
@@ -404,7 +407,7 @@ public class Validering {
         }
         return existerar;
     }
-    
+
     //Validera om kontorschef existerar på enskilt kontor
     public boolean valideraKontorschefPåSpecifik(String id, String kontor){
         boolean stämmer = false;
@@ -413,12 +416,12 @@ public class Validering {
                 System.out.println(mapar.get("Kontorsbeteckning"));
                 if(mapar.get("Agent_ID").equals(id) && mapar.get("Kontorsbeteckning").equals(kontor)){
                     stämmer = true;
-                
+
             }
         }
         return stämmer;
     }
-    
+
     //Validera om man skrivit ja eller nej..
     public boolean valideraAdminInput(String input){
         input = input.toLowerCase();
@@ -443,11 +446,10 @@ public class Validering {
         Integer områdesID = db.getOmrådeId(område);
         for(HashMap<String, String> mapar : db.getAllaRaderOmrådeschef()){
                 if(mapar.get("Agent_ID").equals(id) && mapar.get("Omrade").equals(områdesID.toString())){
-                    stämmer = true; 
+                    stämmer = true;
             }
         }
-        
+
         return stämmer;
     }
 }
-
