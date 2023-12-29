@@ -14,14 +14,19 @@ import javax.swing.table.DefaultTableModel;
 public class ListaAliensIDittOmråde extends javax.swing.JFrame {
     private Databas db;
     private DefaultTableModel model;
+    private String anvID;
+    private String anvTyp;
 
     /**
      * Creates new form ListaAliensIDittOmråde
      */
-    public ListaAliensIDittOmråde() {
+    public ListaAliensIDittOmråde(String anvID, String anvTyp) {
         initComponents();
         db = new Databas();
         model = (DefaultTableModel) table.getModel();
+        this.anvID = anvID;
+        this.anvTyp = anvTyp;
+        fyllLista();
     }
 
     /**
@@ -35,10 +40,8 @@ public class ListaAliensIDittOmråde extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         table = new javax.swing.JTable();
-        txtIDFält = new javax.swing.JTextField();
-        btnHämta = new javax.swing.JButton();
-        lblID = new javax.swing.JLabel();
         lblRubrik = new javax.swing.JLabel();
+        lblTillbaka = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -60,18 +63,14 @@ public class ListaAliensIDittOmråde extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(table);
 
-        txtIDFält.setColumns(4);
+        lblRubrik.setText("Alla aliens i ditt område");
 
-        btnHämta.setText("Hämta");
-        btnHämta.addActionListener(new java.awt.event.ActionListener() {
+        lblTillbaka.setText("Tillbaka");
+        lblTillbaka.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnHämtaActionPerformed(evt);
+                lblTillbakaActionPerformed(evt);
             }
         });
-
-        lblID.setText("Ditt ID");
-
-        lblRubrik.setText("Alla aliens i ditt område");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -82,16 +81,9 @@ public class ListaAliensIDittOmråde extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(77, 77, 77)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblTillbaka)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(txtIDFält, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(208, 208, 208)
-                        .addComponent(btnHämta))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(lblID)
-                        .addGap(145, 145, 145)
+                        .addGap(187, 187, 187)
                         .addComponent(lblRubrik)))
                 .addContainerGap(82, Short.MAX_VALUE))
         );
@@ -99,23 +91,19 @@ public class ListaAliensIDittOmråde extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblID)
-                    .addComponent(lblRubrik))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtIDFält, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                .addComponent(lblRubrik)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34)
-                .addComponent(btnHämta)
-                .addGap(17, 17, 17))
+                .addGap(45, 45, 45)
+                .addComponent(lblTillbaka)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnHämtaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHämtaActionPerformed
-        String dinPlats = db.getPlatsIDFrånAlienID(txtIDFält.getText());
+    private void fyllLista(){
+        String dinPlats = db.getPlatsIDFrånAlienID(anvID);
         String områdesID = db.getOmrådesIDFrånPlatsID(dinPlats);
         ArrayList<String> platser = db.getPlatser(områdesID);
         for(String platsID : platser){
@@ -127,49 +115,18 @@ public class ListaAliensIDittOmråde extends javax.swing.JFrame {
                 model.addRow(new Object[]{namn, epost, telefon});
             }
         }
-    }//GEN-LAST:event_btnHämtaActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ListaAliensIDittOmråde.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ListaAliensIDittOmråde.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ListaAliensIDittOmråde.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ListaAliensIDittOmråde.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ListaAliensIDittOmråde().setVisible(true);
-            }
-        });
     }
+    
+    private void lblTillbakaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lblTillbakaActionPerformed
+        AlienHemsida aliensida = new AlienHemsida(anvID, anvTyp);
+        aliensida.show();
+        dispose();
+    }//GEN-LAST:event_lblTillbakaActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnHämta;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel lblID;
     private javax.swing.JLabel lblRubrik;
+    private javax.swing.JButton lblTillbaka;
     private javax.swing.JTable table;
-    private javax.swing.JTextField txtIDFält;
     // End of variables declaration//GEN-END:variables
 }

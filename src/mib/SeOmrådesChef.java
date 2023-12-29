@@ -12,6 +12,7 @@ public class SeOmrådesChef extends javax.swing.JFrame {
     private DefaultTableModel model;
     private String anvID;
     private String anvTyp;
+    private String områdesID;
 
     /**
      * Creates new form SeOmrådesChef
@@ -23,8 +24,7 @@ public class SeOmrådesChef extends javax.swing.JFrame {
         model.setRowCount(0);
         this.anvID = anvID;
         this.anvTyp = anvTyp;
-        lblAlienID.setText(anvID);
-        System.out.println(anvID);
+        fyllListan();
     }
 
     /**
@@ -36,25 +36,12 @@ public class SeOmrådesChef extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        txtIDFält = new javax.swing.JTextField();
-        btnHämta = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         table = new javax.swing.JTable();
-        lblAlienID = new javax.swing.JLabel();
         lblRubrik = new javax.swing.JLabel();
         btnTillbaka = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        txtIDFält.setColumns(4);
-        txtIDFält.setText(anvID);
-
-        btnHämta.setText("Hämta");
-        btnHämta.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnHämtaActionPerformed(evt);
-            }
-        });
 
         table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -77,8 +64,6 @@ public class SeOmrådesChef extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(table);
 
-        lblAlienID.setText("Ditt ID");
-
         lblRubrik.setText("Chef för ditt område");
 
         btnTillbaka.setText("Tillbaka");
@@ -95,55 +80,30 @@ public class SeOmrådesChef extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(3, 3, 3)
-                        .addComponent(txtIDFält, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(77, 77, 77)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(lblAlienID)
-                        .addGap(114, 114, 114)
-                        .addComponent(lblRubrik)))
+                        .addGap(168, 168, 168)
+                        .addComponent(lblRubrik))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(171, 171, 171)
+                        .addComponent(btnTillbaka)))
                 .addContainerGap(120, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(185, 185, 185)
-                .addComponent(btnHämta)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnTillbaka)
-                .addGap(20, 20, 20))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(10, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lblRubrik)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(128, 128, 128)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnHämta)
-                    .addComponent(btnTillbaka))
-                .addGap(34, 34, 34))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblAlienID)
-                .addGap(5, 5, 5)
-                .addComponent(txtIDFält, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(36, 36, 36)
+                .addComponent(btnTillbaka)
+                .addGap(126, 126, 126))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnHämtaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHämtaActionPerformed
-        String alienID = txtIDFält.getText();
-        String områdesID = databas.getOmrådesIDFrånPlatsID(databas.getPlatsIDFrånAlienID(alienID));
-        String områdesChef = databas.getOmrådesChef(områdesID);
-        String agentEpost = databas.getAgentsEpost(områdesChef);
-        String agentTelefon = databas.getAgentsTelefon(områdesChef);
-        String agentNamn = databas.getAgentsNamn(områdesChef);
-        model.addRow(new Object[] {agentNamn, agentEpost, agentTelefon});
-    }//GEN-LAST:event_btnHämtaActionPerformed
 
     //Tillbaka till hemsidan
     private void btnTillbakaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakaActionPerformed
@@ -153,9 +113,9 @@ public class SeOmrådesChef extends javax.swing.JFrame {
             dispose();
         }
         else if(anvTyp.equals("Alien")){
-            //AlienHemsida aliensida = new AlienHemsida(anvID, anvTyp);
-            
-        
+            AlienHemsida aliensida = new AlienHemsida(anvID, anvTyp);
+            aliensida.show();
+            dispose();
         }
         else if(anvTyp.equals("Admin")){
             AdminHemsida adminsida = new AdminHemsida(anvID, anvTyp);
@@ -164,14 +124,25 @@ public class SeOmrådesChef extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnTillbakaActionPerformed
 
+    private void fyllListan(){
+        if(anvTyp.equals("Alien")){
+            String alienID = anvID;
+            områdesID = databas.getOmrådesIDFrånPlatsID(databas.getPlatsIDFrånAlienID(alienID));
+        }
+        else if(anvTyp.equals("Agent") ||anvTyp.equals("Admin")){
+            områdesID = databas.getAgentOmråde(anvID);
+        }  
+        String områdesChef = databas.getOmrådesChef(områdesID);
+        String agentEpost = databas.getAgentsEpost(områdesChef);
+        String agentTelefon = databas.getAgentsTelefon(områdesChef);
+        String agentNamn = databas.getAgentsNamn(områdesChef);
+        model.addRow(new Object[] {agentNamn, agentEpost, agentTelefon});
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnHämta;
     private javax.swing.JButton btnTillbaka;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel lblAlienID;
     private javax.swing.JLabel lblRubrik;
     private javax.swing.JTable table;
-    private javax.swing.JTextField txtIDFält;
     // End of variables declaration//GEN-END:variables
 }

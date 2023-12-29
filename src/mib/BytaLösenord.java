@@ -4,6 +4,8 @@
  */
 package mib;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author joakimfockstedt
@@ -139,20 +141,20 @@ public class BytaLösenord extends javax.swing.JFrame {
         if(validering.getÄrEpostAgent(epost)){
             if(validering.valideraAgentLösenord(nuvarandeLösenord, epost)){
                     db.setAgentLösenordFrånEpost(epost, nyttLösenord);
-                    System.out.println("Bytte lösenord");
+                    JOptionPane.showMessageDialog(null, "Bytte lösenord.");
             }
             else{
-                System.out.println("Felskrivet lösenord");
+                JOptionPane.showMessageDialog(null, "Felskrivet lösenord.");
             }
         }
         //Alien lösenord
         else{
             if(validering.valideraAlienEpostExisterar(epost)){
                 db.setAlienLösenordFrånEpost(epost, nyttLösenord);
-                System.out.println("Bytte lösenord");
+                JOptionPane.showMessageDialog(null, "Bytte lösenord.");
             }
             else{
-                System.out.println("Felskrivet lösenord");
+                JOptionPane.showMessageDialog(null, "Felskrivet lösenord.");
             }
         }
     }//GEN-LAST:event_btnBytLösenordActionPerformed
@@ -176,7 +178,7 @@ public class BytaLösenord extends javax.swing.JFrame {
             nyttLösenord = pwNyttLösenord.getText();
         }
         else{
-            System.out.println("Typo");
+            JOptionPane.showMessageDialog(null, "Nya lösenordet är felskrivet.");
         }
     }
 

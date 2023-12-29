@@ -102,7 +102,9 @@ public class Inloggning extends javax.swing.JFrame {
                 dispose();
             }
             else if(typ.equals("Alien")){
-                JOptionPane.showMessageDialog(null, "Alien");
+                AlienHemsida aliensida = new AlienHemsida(id, typ);
+                aliensida.show();
+                dispose();
             }
         }
     }//GEN-LAST:event_btnLoginActionPerformed
