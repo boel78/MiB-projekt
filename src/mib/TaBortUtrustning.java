@@ -48,6 +48,7 @@ public class TaBortUtrustning extends javax.swing.JFrame {
         lblKategoriTyp = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         btnHämta = new javax.swing.JButton();
+        btnTillbaka = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -118,6 +119,13 @@ public class TaBortUtrustning extends javax.swing.JFrame {
             }
         });
 
+        btnTillbaka.setText("Tillbaka");
+        btnTillbaka.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTillbakaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -169,12 +177,13 @@ public class TaBortUtrustning extends javax.swing.JFrame {
                                     .addComponent(lblBenämning))
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblKategoriTyp)
-                                    .addComponent(txtÖvrigInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                    .addComponent(txtÖvrigInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblKategoriTyp)))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(125, 125, 125)
+                        .addComponent(btnTillbaka)
+                        .addGap(43, 43, 43)
                         .addComponent(btnLäggTill)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(72, 72, 72))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -195,7 +204,7 @@ public class TaBortUtrustning extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(comboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel1))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
                                 .addComponent(btnTaBort)
                                 .addGap(93, 93, 93))
                             .addGroup(layout.createSequentialGroup()
@@ -209,12 +218,14 @@ public class TaBortUtrustning extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblBenämning)
                             .addComponent(lblKategoriTyp))
-                        .addGap(3, 3, 3)
+                        .addGap(8, 8, 8)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtBenämning, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtÖvrigInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(11, 11, 11)
-                        .addComponent(btnLäggTill))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnLäggTill)
+                            .addComponent(btnTillbaka)))
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblTaBort)
@@ -284,6 +295,13 @@ public class TaBortUtrustning extends javax.swing.JFrame {
                     btnTaBort.setVisible(true);
                 }
     }//GEN-LAST:event_btnHämtaActionPerformed
+
+    //Tillbaka till hemsidan
+    private void btnTillbakaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakaActionPerformed
+        AgentHemsida agentHemsida = new AgentHemsida();
+        agentHemsida.show();
+        dispose();
+    }//GEN-LAST:event_btnTillbakaActionPerformed
 
 
     public static void main(String args[]) {
@@ -408,6 +426,7 @@ public class TaBortUtrustning extends javax.swing.JFrame {
     private javax.swing.JButton btnHämta;
     private javax.swing.JButton btnLäggTill;
     private javax.swing.JButton btnTaBort;
+    private javax.swing.JButton btnTillbaka;
     private javax.swing.JComboBox<String> comboBox;
     private javax.swing.JComboBox<String> comboBoxValAvTyp;
     private javax.swing.JLabel jLabel1;

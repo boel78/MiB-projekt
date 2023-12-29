@@ -39,6 +39,7 @@ public class BytaLösenord extends javax.swing.JFrame {
         lblNuvarandeLösenord = new javax.swing.JLabel();
         lblNyttLösenord = new javax.swing.JLabel();
         btnBytLösenord = new javax.swing.JButton();
+        btnTillbaka = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -56,10 +57,17 @@ public class BytaLösenord extends javax.swing.JFrame {
 
         lblNyttLösenord.setText("Nytt Lösenord");
 
-        btnBytLösenord.setText("Lösenord");
+        btnBytLösenord.setText("Byt lösenord");
         btnBytLösenord.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBytLösenordActionPerformed(evt);
+            }
+        });
+
+        btnTillbaka.setText("Tillbaka");
+        btnTillbaka.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTillbakaActionPerformed(evt);
             }
         });
 
@@ -67,10 +75,6 @@ public class BytaLösenord extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(208, 208, 208)
-                .addComponent(lblBytLösenord)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(125, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -86,6 +90,15 @@ public class BytaLösenord extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(btnBytLösenord)
                         .addGap(198, 198, 198))))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(208, 208, 208)
+                        .addComponent(lblBytLösenord))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btnTillbaka)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -106,7 +119,9 @@ public class BytaLösenord extends javax.swing.JFrame {
                 .addComponent(pwNyttLösenord, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnBytLösenord)
-                .addContainerGap(46, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnTillbaka)
+                .addContainerGap(7, Short.MAX_VALUE))
         );
 
         pack();
@@ -137,6 +152,13 @@ public class BytaLösenord extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_btnBytLösenordActionPerformed
+
+    //Tillbaka till hemsidan
+    private void btnTillbakaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakaActionPerformed
+        AgentHemsida agentHemsida = new AgentHemsida();
+        agentHemsida.show();
+        dispose();
+    }//GEN-LAST:event_btnTillbakaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -184,6 +206,7 @@ public class BytaLösenord extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBytLösenord;
+    private javax.swing.JButton btnTillbaka;
     private javax.swing.JLabel lblBytLösenord;
     private javax.swing.JLabel lblEpost;
     private javax.swing.JLabel lblNuvarandeLösenord;

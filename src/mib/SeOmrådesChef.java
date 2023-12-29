@@ -39,6 +39,7 @@ public class SeOmrådesChef extends javax.swing.JFrame {
         table = new javax.swing.JTable();
         lblAlienID = new javax.swing.JLabel();
         lblRubrik = new javax.swing.JLabel();
+        btnTillbaka = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -76,6 +77,13 @@ public class SeOmrådesChef extends javax.swing.JFrame {
 
         lblRubrik.setText("Chef för ditt område");
 
+        btnTillbaka.setText("Tillbaka");
+        btnTillbaka.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTillbakaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -88,14 +96,17 @@ public class SeOmrådesChef extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(185, 185, 185)
-                        .addComponent(btnHämta))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(lblAlienID)
                         .addGap(114, 114, 114)
                         .addComponent(lblRubrik)))
                 .addContainerGap(126, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(185, 185, 185)
+                .addComponent(btnHämta)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnTillbaka)
+                .addGap(20, 20, 20))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -105,7 +116,9 @@ public class SeOmrådesChef extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(128, 128, 128)
-                .addComponent(btnHämta)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnHämta)
+                    .addComponent(btnTillbaka))
                 .addGap(34, 34, 34))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
@@ -128,6 +141,13 @@ public class SeOmrådesChef extends javax.swing.JFrame {
         String agentNamn = databas.getAgentsNamn(områdesChef);
         model.addRow(new Object[] {agentNamn, agentEpost, agentTelefon});
     }//GEN-LAST:event_btnHämtaActionPerformed
+
+    //Tillbaka till hemsidan
+    private void btnTillbakaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakaActionPerformed
+        AgentHemsida agentHemsida = new AgentHemsida();
+        agentHemsida.show();
+        dispose();
+    }//GEN-LAST:event_btnTillbakaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -166,6 +186,7 @@ public class SeOmrådesChef extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnHämta;
+    private javax.swing.JButton btnTillbaka;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblAlienID;
     private javax.swing.JLabel lblRubrik;

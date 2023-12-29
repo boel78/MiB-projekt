@@ -73,6 +73,7 @@ public class ListaAliens extends javax.swing.JFrame {
         tblInfo = new javax.swing.JTable();
         lblFrån = new javax.swing.JLabel();
         lblTill = new javax.swing.JLabel();
+        btnTillbaka = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -142,6 +143,13 @@ public class ListaAliens extends javax.swing.JFrame {
 
         lblTill.setText("Tillochmed");
 
+        btnTillbaka.setText("Tillbaka");
+        btnTillbaka.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTillbakaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -149,6 +157,11 @@ public class ListaAliens extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnTillbaka)
+                        .addGap(68, 68, 68)
+                        .addComponent(btnHämta)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 357, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -172,10 +185,6 @@ public class ListaAliens extends javax.swing.JFrame {
                             .addComponent(comboBoxRas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblRas))
                         .addGap(49, 49, 49))))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(169, 169, 169)
-                .addComponent(btnHämta)
-                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -205,7 +214,9 @@ public class ListaAliens extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnHämta)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnHämta)
+                    .addComponent(btnTillbaka))
                 .addGap(12, 12, 12))
         );
 
@@ -284,6 +295,13 @@ public class ListaAliens extends javax.swing.JFrame {
         }
         rensaUrListorna();
     }//GEN-LAST:event_btnHämtaActionPerformed
+
+    //Gå tillbaka till hemsidan
+    private void btnTillbakaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakaActionPerformed
+        AgentHemsida agentHemsida = new AgentHemsida();
+        agentHemsida.show();
+        dispose();
+    }//GEN-LAST:event_btnTillbakaActionPerformed
 
     
     //Kombinera listor
@@ -373,6 +391,7 @@ public class ListaAliens extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton btnDatum;
     private javax.swing.JButton btnHämta;
+    private javax.swing.JButton btnTillbaka;
     private javax.swing.JComboBox<String> comboBoxPlats;
     private javax.swing.JComboBox<String> comboBoxRas;
     private javax.swing.JScrollPane jScrollPane2;

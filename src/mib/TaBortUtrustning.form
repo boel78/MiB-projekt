@@ -85,18 +85,19 @@
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="lblKategoriTyp" min="-2" max="-2" attributes="0"/>
                                   <Component id="txtÖvrigInfo" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblKategoriTyp" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="125" max="-2" attributes="0"/>
+                      <Component id="btnTillbaka" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
                       <Component id="btnLäggTill" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="72" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -122,7 +123,7 @@
                                   <Component id="comboBox" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace pref="23" max="32767" attributes="0"/>
+                              <EmptySpace pref="16" max="32767" attributes="0"/>
                               <Component id="btnTaBort" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="93" max="-2" attributes="0"/>
                           </Group>
@@ -140,13 +141,16 @@
                           <Component id="lblBenämning" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lblKategoriTyp" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="txtBenämning" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="txtÖvrigInfo" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
-                      <Component id="btnLäggTill" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="btnLäggTill" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnTillbaka" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
@@ -271,6 +275,14 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnH&#xe4;mtaActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnTillbaka">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Tillbaka"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTillbakaActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

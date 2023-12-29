@@ -51,6 +51,7 @@ public class ÄndraAlienInfo extends javax.swing.JFrame {
         btnOk = new javax.swing.JButton();
         lblNyttNamn = new javax.swing.JLabel();
         txtNyttNamn = new javax.swing.JTextField();
+        btnTillbaka = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -97,6 +98,13 @@ public class ÄndraAlienInfo extends javax.swing.JFrame {
         lblNyttNamn.setText("Nytt namn:");
 
         txtNyttNamn.setColumns(5);
+
+        btnTillbaka.setText("Tillbaka");
+        btnTillbaka.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTillbakaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -148,16 +156,17 @@ public class ÄndraAlienInfo extends javax.swing.JFrame {
                 .addComponent(lblDatum)
                 .addGap(45, 45, 45))
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(txtAgent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(58, 58, 58)
-                        .addComponent(btnOk))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(lblAgent)))
+                .addContainerGap()
+                .addComponent(lblAgent)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(txtAgent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(58, 58, 58)
+                .addComponent(btnOk)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnTillbaka)
+                .addGap(15, 15, 15))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -201,7 +210,8 @@ public class ÄndraAlienInfo extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnOk)
-                    .addComponent(txtAgent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtAgent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnTillbaka))
                 .addContainerGap(17, Short.MAX_VALUE))
         );
 
@@ -275,6 +285,13 @@ public class ÄndraAlienInfo extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnOkMouseClicked
 
+    //Tillbaka till hemsidan
+    private void btnTillbakaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakaActionPerformed
+        AgentHemsida agentHemsida = new AgentHemsida();
+        agentHemsida.show();
+        dispose();
+    }//GEN-LAST:event_btnTillbakaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -312,6 +329,7 @@ public class ÄndraAlienInfo extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnOk;
+    private javax.swing.JButton btnTillbaka;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel lblAgent;
     private javax.swing.JLabel lblDatum;

@@ -41,6 +41,7 @@ public class VisaTop3Agenter extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         listAgenter = new javax.swing.JList<>();
         comboBox = new javax.swing.JComboBox<>();
+        btnTillbaka = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -57,6 +58,13 @@ public class VisaTop3Agenter extends javax.swing.JFrame {
 
         comboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Svealand", "Götaland", "Norrland" }));
 
+        btnTillbaka.setText("Tillbaka");
+        btnTillbaka.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTillbakaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -68,15 +76,18 @@ public class VisaTop3Agenter extends javax.swing.JFrame {
                         .addComponent(lblOmråde)
                         .addGap(223, 223, 223))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnHämta)
-                        .addGap(199, 199, 199))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(152, 152, 152))))
             .addGroup(layout.createSequentialGroup()
                 .addGap(203, 203, 203)
                 .addComponent(comboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnTillbaka)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnHämta)
+                .addGap(199, 199, 199))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -90,6 +101,10 @@ public class VisaTop3Agenter extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
                 .addComponent(btnHämta)
                 .addGap(27, 27, 27))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnTillbaka)
+                .addContainerGap())
         );
 
         pack();
@@ -108,6 +123,13 @@ public class VisaTop3Agenter extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_btnHämtaActionPerformed
+
+    //Tillbaka till hemsidan
+    private void btnTillbakaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakaActionPerformed
+        AgentHemsida agentHemsida = new AgentHemsida();
+        agentHemsida.show();
+        dispose();
+    }//GEN-LAST:event_btnTillbakaActionPerformed
     
     public ArrayList<Integer> omvandlaStringTillInt(ArrayList<String> stringLista){
         ArrayList<Integer> nummerLista = new ArrayList<>();
@@ -216,6 +238,7 @@ public class VisaTop3Agenter extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnHämta;
+    private javax.swing.JButton btnTillbaka;
     private javax.swing.JComboBox<String> comboBox;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblOmråde;
