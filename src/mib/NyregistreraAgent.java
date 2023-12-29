@@ -52,6 +52,7 @@ public class NyregistreraAgent extends javax.swing.JFrame {
         filler3 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
         comboBox = new javax.swing.JComboBox<>();
         lblOmråde = new javax.swing.JLabel();
+        btnTillbaka = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -96,6 +97,13 @@ public class NyregistreraAgent extends javax.swing.JFrame {
 
         lblOmråde.setText("Område");
 
+        btnTillbaka.setText("Tillbaka");
+        btnTillbaka.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTillbakaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -115,9 +123,14 @@ public class NyregistreraAgent extends javax.swing.JFrame {
                                 .addComponent(filler2, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnSkapa)
-                                    .addComponent(lblLösenord))))
-                        .addContainerGap(78, Short.MAX_VALUE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(btnSkapa)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                                        .addComponent(btnTillbaka))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(lblLösenord)
+                                        .addGap(0, 0, Short.MAX_VALUE)))))
+                        .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -186,7 +199,8 @@ public class NyregistreraAgent extends javax.swing.JFrame {
                         .addGap(21, 21, 21)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnSkapa)
-                            .addComponent(tbtnAdmin))))
+                            .addComponent(tbtnAdmin)
+                            .addComponent(btnTillbaka))))
                 .addGap(23, 23, 23))
         );
 
@@ -258,6 +272,12 @@ public class NyregistreraAgent extends javax.swing.JFrame {
                
     }//GEN-LAST:event_comboBoxActionPerformed
 
+    private void btnTillbakaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakaActionPerformed
+        AdminHemsida ah = new AdminHemsida();
+        ah.show();
+        dispose();
+    }//GEN-LAST:event_btnTillbakaActionPerformed
+
   
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -303,6 +323,7 @@ public class NyregistreraAgent extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSkapa;
+    private javax.swing.JButton btnTillbaka;
     private javax.swing.JComboBox<String> comboBox;
     private javax.swing.Box.Filler filler1;
     private javax.swing.Box.Filler filler2;

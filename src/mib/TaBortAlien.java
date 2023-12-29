@@ -35,6 +35,7 @@ public class TaBortAlien extends javax.swing.JFrame {
         btnTaBort = new javax.swing.JButton();
         txtNamnAttTaBort = new javax.swing.JTextField();
         lblRubrik = new javax.swing.JLabel();
+        btnTillbaka = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -48,6 +49,13 @@ public class TaBortAlien extends javax.swing.JFrame {
         txtNamnAttTaBort.setColumns(8);
 
         lblRubrik.setText("Ange namn på alien att ta bort");
+
+        btnTillbaka.setText("Tillbaka");
+        btnTillbaka.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTillbakaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -64,7 +72,10 @@ public class TaBortAlien extends javax.swing.JFrame {
                             .addComponent(txtNamnAttTaBort, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(17, 17, 17)
-                                .addComponent(btnTaBort)))))
+                                .addComponent(btnTaBort))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btnTillbaka)))
                 .addContainerGap(120, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -76,7 +87,9 @@ public class TaBortAlien extends javax.swing.JFrame {
                 .addComponent(txtNamnAttTaBort, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(43, 43, 43)
                 .addComponent(btnTaBort)
-                .addGap(63, 63, 63))
+                .addGap(30, 30, 30)
+                .addComponent(btnTillbaka)
+                .addContainerGap())
         );
 
         pack();
@@ -99,6 +112,12 @@ public class TaBortAlien extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Var vänlig och fyll i ett namn");
         }
     }//GEN-LAST:event_btnTaBortMouseClicked
+
+    private void btnTillbakaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakaActionPerformed
+        AdminHemsida ah = new AdminHemsida();
+        ah.show();
+        dispose();
+    }//GEN-LAST:event_btnTillbakaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -137,6 +156,7 @@ public class TaBortAlien extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnTaBort;
+    private javax.swing.JButton btnTillbaka;
     private javax.swing.JLabel lblRubrik;
     private javax.swing.JTextField txtNamnAttTaBort;
     // End of variables declaration//GEN-END:variables

@@ -61,6 +61,7 @@ public EnskildAgentInfo()
         lblChef = new javax.swing.JLabel();
         txtOmrådesAnsvar = new javax.swing.JTextField();
         lblOmrådesAnsvar = new javax.swing.JLabel();
+        btnTillbaka = new javax.swing.JButton();
 
         jLabel2.setText("jLabel2");
 
@@ -135,6 +136,13 @@ public EnskildAgentInfo()
 
         lblOmrådesAnsvar.setText("Områdesansvar");
 
+        btnTillbaka.setText("Tillbaka");
+        btnTillbaka.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTillbakaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -152,6 +160,8 @@ public EnskildAgentInfo()
                                     .addComponent(txtLösenord, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addComponent(lblEpost)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(btnTillbaka)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnHämta)
                                 .addGap(141, 141, 141)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -192,7 +202,7 @@ public EnskildAgentInfo()
                             .addComponent(lblTelefon)
                             .addComponent(txtTelefonnummer, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(lblinformation))
-                .addContainerGap(77, Short.MAX_VALUE))
+                .addContainerGap(75, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -247,7 +257,8 @@ public EnskildAgentInfo()
                     .addComponent(btnHämta)
                     .addComponent(btnÄndra)
                     .addComponent(btnTaBort)
-                    .addComponent(btnRensa))
+                    .addComponent(btnRensa)
+                    .addComponent(btnTillbaka))
                 .addGap(18, 18, 18))
         );
 
@@ -379,6 +390,12 @@ public EnskildAgentInfo()
             lblOmrådesAnsvar.setVisible(false);
         }
     }//GEN-LAST:event_comboBoxChefActionPerformed
+
+    private void btnTillbakaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakaActionPerformed
+        AdminHemsida ah = new AdminHemsida();
+        ah.show();
+        dispose();
+    }//GEN-LAST:event_btnTillbakaActionPerformed
 
     //Metoder för att sätta in text i textfälten.
     private void setNamnTxtField(String id){  
@@ -611,6 +628,7 @@ public EnskildAgentInfo()
     private javax.swing.JButton btnHämta;
     private javax.swing.JButton btnRensa;
     private javax.swing.JButton btnTaBort;
+    private javax.swing.JButton btnTillbaka;
     private javax.swing.JButton btnÄndra;
     private javax.swing.JComboBox<String> comboBoxChef;
     private javax.swing.JComboBox<String> comboBoxOmråde;
