@@ -1,6 +1,7 @@
 package mib;
 
 import java.util.ArrayList;
+import java.util.Random;
 import javax.swing.JOptionPane;
 
 
@@ -526,7 +527,6 @@ public EnskildAgentInfo()
                 if(validering.valideraKontorschefExisterar(id)){
                     db.taBortKontorsChef(id);
                 }
-                db.bytUtAgentFrånAlienTillChef(id);
                 db.taBortAgent(id);
                 JOptionPane.showMessageDialog(null, "Agenten är borttagen.");
             }
@@ -539,7 +539,7 @@ public EnskildAgentInfo()
                 if(validering.valideraKontorschefExisterar(id)){
                     db.taBortKontorsChef(id);
                 }
-                db.bytUtAgentFrånAlienTillChef(id);
+                uppdateraAliensKontaktperson(id);
                 db.taBortAgent(id);
                 JOptionPane.showMessageDialog(null, "Agenten är borttagen.");
 
@@ -558,7 +558,6 @@ public EnskildAgentInfo()
                 if(validering.valideraKontorschefExisterar(id)){
                     db.taBortKontorsChef(id);
                 }
-                db.bytUtAgentFrånAlienTillChef(id);
                 db.taBortAgent(id);
                 JOptionPane.showMessageDialog(null, "Agenten är borttagen.");
             }
@@ -571,7 +570,7 @@ public EnskildAgentInfo()
                 if(validering.valideraKontorschefExisterar(id)){
                     db.taBortKontorsChef(id);
                 }
-                db.bytUtAgentFrånAlienTillChef(id);
+                uppdateraAliensKontaktperson(id);
                 db.taBortAgent(id);
                 JOptionPane.showMessageDialog(null, "Agenten är borttagen.");
 
@@ -590,7 +589,6 @@ public EnskildAgentInfo()
                 if(validering.valideraKontorschefExisterar(id)){
                     db.taBortKontorsChef(id);
                 }
-                db.bytUtAgentFrånAlienTillChef(id);
                 db.taBortAgent(id);
                 JOptionPane.showMessageDialog(null, "Agenten är borttagen.");
             }
@@ -603,7 +601,8 @@ public EnskildAgentInfo()
                 if(validering.valideraKontorschefExisterar(id)){
                     db.taBortKontorsChef(id);
                 }
-                db.bytUtAgentFrånAlienTillChef(id);
+                
+                uppdateraAliensKontaktperson(id);
                 db.taBortAgent(id);
                 JOptionPane.showMessageDialog(null, "Agenten är borttagen.");
 
@@ -719,6 +718,22 @@ public EnskildAgentInfo()
             comboBoxChef.setSelectedIndex(2);
         }
     }
+    
+    private void uppdateraAliensKontaktperson(String agentID){     
+        ArrayList<String> alienIDn = db.getAlienListaFrånAgentID(agentID);
+        for(String alienID : alienIDn){
+            String områdesID = db.getOmrådesIDFrånPlatsID(db.getPlatsIDFrånAlienID(alienID));
+            String områdeschef = db.getOmrådesChef(områdesID);
+            String nyOmrådesChef = "";
+            if(områdeschef == null){
+                Random random = new Random();
+                ArrayList<String> områdeschefer = db.getOmrådeschefer();
+                nyOmrådesChef = områdeschefer.get(random.nextInt(områdeschefer.size()));
+            }
+            db.bytUtAgentFrånAlienTillChef(agentID, nyOmrådesChef);  
+        }
+    }
+
     
     
     
