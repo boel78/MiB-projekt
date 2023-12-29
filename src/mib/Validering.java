@@ -407,4 +407,24 @@ public class Validering {
         }
         return existerar;
     }
+    
+    //Validera om man skrivit ja eller nej..
+    public boolean valideraAdminInput(String input){
+        input = input.toLowerCase();
+        boolean rättstavning = false;
+        if(!input.isEmpty()){
+            if(input.equals("ja") || input.equals("nej")){
+                rättstavning = true;
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Se till att du har skrivit in Ja eller Nej.");
+            }
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Se till att du har skrivit in något i Admin fältet.");
+        }
+        return rättstavning;
+    }
+
 }
+

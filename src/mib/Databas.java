@@ -1009,4 +1009,15 @@ public void taBortRas(int id) {
         }
         return chefer;
     }
+    
+    //Uppdatera admin status
+    public void uppdateraAdminStatus(String id, String status){
+        String query = "UPDATE Agent SET Administrator = '" + status + "' where Agent_ID = " + id;
+        try{
+            idb.update(query);
+        }
+        catch(InfException ex){
+            System.out.println(ex.getMessage());
+        }
+    }
 }

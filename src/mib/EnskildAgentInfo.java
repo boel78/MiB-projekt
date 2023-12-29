@@ -311,6 +311,7 @@ public EnskildAgentInfo()
         String telefon = txtTelefonnummer.getText();
         String lösenord = txtLösenord.getText();
         String område = comboBoxOmråde.getSelectedItem().toString();
+        String admin = txtAdministratör.getText().toLowerCase();
         boolean ändrad = false;
         txtOmrådesAnsvar.setVisible(false);
         lblOmrådesAnsvar.setVisible(false);
@@ -348,6 +349,15 @@ public EnskildAgentInfo()
                         områdesID = "4";
                     break;
                 }
+                if(!admin.isEmpty() && validering.valideraAdminInput(admin)){
+                    if(admin.equals("ja")){
+                        admin = "J";
+                    }
+                    else{
+                        admin = "N";
+                    }
+                    db.uppdateraAdminStatus(id, admin);
+                }
                 db.uppdateraAgentOmråde(id, områdesID); 
                 ändrad = true;
             }
@@ -362,7 +372,7 @@ public EnskildAgentInfo()
                 db.läggTillKontorschef(id, txtOmrådesAnsvar.getText());
                 ändrad = true;
             }
-            else if(validering.valideraKontorsBeteckningExisterar(txtOmrådesAnsvar.getText())){
+            else if(validering.valideraKontorsBeteckningExisterar(txtOmrådesAnsvar.getText()) && !txtOmrådesAnsvar.getText().equals(db.kontrolleraKontorschef(id))){
                 JOptionPane.showMessageDialog(null, "En chef finns redan på den här positionen.");
             }
         }
@@ -403,6 +413,15 @@ public EnskildAgentInfo()
                         områdesID = "4";
                     break;
                 }
+                if(!admin.isEmpty() && validering.valideraAdminInput(admin)){
+                    if(admin.equals("ja")){
+                        admin = "J";
+                    }
+                    else{
+                        admin = "N";
+                    }
+                    db.uppdateraAdminStatus(id, admin);
+                }
                 db.uppdateraAgentOmråde(id, områdesID); 
                 ändrad = true;
             }
@@ -417,7 +436,7 @@ public EnskildAgentInfo()
                 db.läggTillKontorschef(id, txtOmrådesAnsvar.getText());
                 ändrad = true;
             }
-            else if(validering.valideraKontorsBeteckningExisterar(txtOmrådesAnsvar.getText())){
+            else if(validering.valideraKontorsBeteckningExisterar(txtOmrådesAnsvar.getText()) && !txtOmrådesAnsvar.getText().equals(db.kontrolleraKontorschef(id))){
                 JOptionPane.showMessageDialog(null, "En chef finns redan på den här positionen.");
             }
         }
@@ -458,6 +477,15 @@ public EnskildAgentInfo()
                         områdesID = "4";
                     break;
                 }
+                if(!admin.isEmpty() && validering.valideraAdminInput(admin)){
+                    if(admin.equals("ja")){
+                        admin = "J";
+                    }
+                    else{
+                        admin = "N";
+                    }
+                    db.uppdateraAdminStatus(id, admin);
+                }
                 db.uppdateraAgentOmråde(id, områdesID); 
                 ändrad = true;
             }
@@ -472,7 +500,7 @@ public EnskildAgentInfo()
                 db.läggTillKontorschef(id, txtOmrådesAnsvar.getText());
                 ändrad = true;
             }
-            else if(validering.valideraKontorsBeteckningExisterar(txtOmrådesAnsvar.getText())){
+            else if(validering.valideraKontorsBeteckningExisterar(txtOmrådesAnsvar.getText()) && !txtOmrådesAnsvar.getText().equals(db.kontrolleraKontorschef(id))){
                 JOptionPane.showMessageDialog(null, "En chef finns redan på den här positionen.");
             }
             
@@ -691,6 +719,7 @@ public EnskildAgentInfo()
             comboBoxChef.setSelectedIndex(2);
         }
     }
+    
     
     
     
