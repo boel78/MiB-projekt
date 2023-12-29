@@ -352,7 +352,7 @@ public EnskildAgentInfo()
                 ändrad = true;
             }
             //kollar områdeschef
-            if(comboBoxChef.getSelectedIndex() == 1 && validering.valideraOmrådeExisterar(txtOmrådesAnsvar.getText()) && !validering.valideraOmrådesChefExisterar(txtOmrådesAnsvar.getText())){
+            if(comboBoxChef.getSelectedIndex() == 1 && validering.valideraOmrådeExisterar(txtOmrådesAnsvar.getText()) && !validering.valideraOmrådesChefExisterarPåOmråde(txtOmrådesAnsvar.getText())){
                 Integer nyttChefOmrådesID = db.getOmrådeId(txtOmrådesAnsvar.getText());
                 db.läggTillOmrådeschef(id, nyttChefOmrådesID.toString());
                 ändrad = true;
@@ -407,7 +407,7 @@ public EnskildAgentInfo()
                 ändrad = true;
             }
             //kollar områdeschef
-            if(comboBoxChef.getSelectedIndex() == 1 && validering.valideraOmrådeExisterar(txtOmrådesAnsvar.getText()) && !validering.valideraOmrådesChefExisterar(txtOmrådesAnsvar.getText())){
+            if(comboBoxChef.getSelectedIndex() == 1 && validering.valideraOmrådeExisterar(txtOmrådesAnsvar.getText()) && !validering.valideraOmrådesChefExisterarPåOmråde(txtOmrådesAnsvar.getText())){
                 Integer nyttChefOmrådesID = db.getOmrådeId(txtOmrådesAnsvar.getText());
                 db.läggTillOmrådeschef(id, nyttChefOmrådesID.toString());
                 ändrad = true;
@@ -462,7 +462,7 @@ public EnskildAgentInfo()
                 ändrad = true;
             }
             //kollar områdeschef
-            if(comboBoxChef.getSelectedIndex() == 1 && validering.valideraOmrådeExisterar(txtOmrådesAnsvar.getText()) && !validering.valideraOmrådesChefExisterar(txtOmrådesAnsvar.getText())){
+            if(comboBoxChef.getSelectedIndex() == 1 && validering.valideraOmrådeExisterar(txtOmrådesAnsvar.getText()) && !validering.valideraOmrådesChefExisterarPåOmråde(txtOmrådesAnsvar.getText())){
                 Integer nyttChefOmrådesID = db.getOmrådeId(txtOmrådesAnsvar.getText());
                 db.läggTillOmrådeschef(id, nyttChefOmrådesID.toString());
                 ändrad = true;
@@ -492,17 +492,29 @@ public EnskildAgentInfo()
             if(tillhörandeAliens.isEmpty()){
                 db.taBortInneharUtrustningVidAgentID(id);
                 db.taBortFältAgentVidAgentID(id);
-                db.taBortAgentFrånOmrådesChef(id);
+                if(validering.valideraOmrådeschefExisterar(id)){
+                    db.taBortOmrådesChef(id);
+                }
+                if(validering.valideraKontorschefExisterar(id)){
+                    db.taBortKontorsChef(id);
+                }
+                db.bytUtAgentFrånAlienTillChef(id);
                 db.taBortAgent(id);
                 JOptionPane.showMessageDialog(null, "Agenten är borttagen.");
             }
             else{
                 db.taBortInneharUtrustningVidAgentID(id);
                 db.taBortFältAgentVidAgentID(id);
-                db.taBortAgentFrånOmrådesChef(id);
-                String chefNamn = db.getAgentNamnFrånID(db.bytUtAgentFrånAlienTillChef(id));
-                JOptionPane.showMessageDialog(null, "Agenten är borttagen och ansvaret har gått över till Områdeschefen " + chefNamn);
+                if(validering.valideraOmrådeschefExisterar(id)){
+                    db.taBortOmrådesChef(id);
+                }
+                if(validering.valideraKontorschefExisterar(id)){
+                    db.taBortKontorsChef(id);
+                }
+                db.bytUtAgentFrånAlienTillChef(id);
                 db.taBortAgent(id);
+                JOptionPane.showMessageDialog(null, "Agenten är borttagen.");
+
             }
         }
         //ifall man skriver i ID
@@ -512,17 +524,29 @@ public EnskildAgentInfo()
             if(tillhörandeAliens.isEmpty()){
                 db.taBortInneharUtrustningVidAgentID(id);
                 db.taBortFältAgentVidAgentID(id);
-                db.taBortAgentFrånOmrådesChef(id);
+                if(validering.valideraOmrådeschefExisterar(id)){
+                    db.taBortOmrådesChef(id);
+                }
+                if(validering.valideraKontorschefExisterar(id)){
+                    db.taBortKontorsChef(id);
+                }
+                db.bytUtAgentFrånAlienTillChef(id);
                 db.taBortAgent(id);
                 JOptionPane.showMessageDialog(null, "Agenten är borttagen.");
             }
             else{
                 db.taBortInneharUtrustningVidAgentID(id);
                 db.taBortFältAgentVidAgentID(id);
-                db.taBortAgentFrånOmrådesChef(id);
-                String chefNamn = db.getAgentNamnFrånID(db.bytUtAgentFrånAlienTillChef(id));
-                JOptionPane.showMessageDialog(null, "Agenten är borttagen och ansvaret har gått över till Områdeschefen " + chefNamn);
+                if(validering.valideraOmrådeschefExisterar(id)){
+                    db.taBortOmrådesChef(id);
+                }
+                if(validering.valideraKontorschefExisterar(id)){
+                    db.taBortKontorsChef(id);
+                }
+                db.bytUtAgentFrånAlienTillChef(id);
                 db.taBortAgent(id);
+                JOptionPane.showMessageDialog(null, "Agenten är borttagen.");
+
             }
         }
         //Ifall man skriver i namn
@@ -532,17 +556,29 @@ public EnskildAgentInfo()
             if(tillhörandeAliens.isEmpty()){
                 db.taBortInneharUtrustningVidAgentID(id);
                 db.taBortFältAgentVidAgentID(id);
-                db.taBortAgentFrånOmrådesChef(id);
+                if(validering.valideraOmrådeschefExisterar(id)){
+                    db.taBortOmrådesChef(id);
+                }
+                if(validering.valideraKontorschefExisterar(id)){
+                    db.taBortKontorsChef(id);
+                }
+                db.bytUtAgentFrånAlienTillChef(id);
                 db.taBortAgent(id);
                 JOptionPane.showMessageDialog(null, "Agenten är borttagen.");
             }
             else{
                 db.taBortInneharUtrustningVidAgentID(id);
                 db.taBortFältAgentVidAgentID(id);
-                db.taBortAgentFrånOmrådesChef(id);
-                String chefNamn = db.getAgentNamnFrånID(db.bytUtAgentFrånAlienTillChef(id));
-                JOptionPane.showMessageDialog(null, "Agenten är borttagen och ansvaret har gått över till Områdeschefen " + chefNamn);
+                if(validering.valideraOmrådeschefExisterar(id)){
+                    db.taBortOmrådesChef(id);
+                }
+                if(validering.valideraKontorschefExisterar(id)){
+                    db.taBortKontorsChef(id);
+                }
+                db.bytUtAgentFrånAlienTillChef(id);
                 db.taBortAgent(id);
+                JOptionPane.showMessageDialog(null, "Agenten är borttagen.");
+
             }
         }
     }//GEN-LAST:event_btnTaBortActionPerformed

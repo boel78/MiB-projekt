@@ -7,6 +7,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
+import javax.swing.JOptionPane;
 
 public class Databas {
     private InfDB idb;
@@ -829,7 +831,7 @@ public void taBortRas(int id) {
     }
     
     //uppdaterar agent_ID från alien till områdeschefen, returnerar chefen
-    public int bytUtAgentFrånAlienTillChef(String id){
+    public void bytUtAgentFrånAlienTillChef(String id){
         String alienID = getAlienIDFrånAgentID(id);
         String områdesID = getOmrådesIDFrånPlatsID(getPlatsIDFrånAlienID(alienID));
         String områdeschef = getOmrådesChef(områdesID);
@@ -837,11 +839,13 @@ public void taBortRas(int id) {
         String query = "UPDATE Alien SET Ansvarig_Agent = " + områdesChefID + " where Ansvarig_Agent = " + id;
         try{
             idb.update(query);
+                String chefNamn = getAgentNamnFrånID(områdesChefID);
+                JOptionPane.showMessageDialog(null, "Agenten är borttagen och ansvaret har gått över till Områdeschefen " + chefNamn);
         }
         catch(InfException ex){
+            JOptionPane.showMessageDialog(null, "Det verkar inte finnas en områdeschef på den valda agentens område. Var vänlig och lägg till en ny områdeschef först.");
             System.out.println(ex.getMessage());
         }
-        return områdesChefID;
     }
     
     //hämta alien id från agent id
@@ -849,7 +853,7 @@ public void taBortRas(int id) {
         String alienID = "";
         String query = "SELECT Alien_ID FROM Alien where Ansvarig_Agent = " + agentID;
         try{
-            idb.fetchSingle(query);
+            alienID = idb.fetchSingle(query);
         }
         catch(InfException ex){
             System.out.println(ex.getMessage());
@@ -870,14 +874,23 @@ public void taBortRas(int id) {
         return listan;
     }
     
-    //Ta bort agent från områdesChef lägg till en slumpad agent från 
-    public void taBortAgentFrånOmrådesChef(String agentID){
-        String query = "DELETE FROM Omradeschef where Agent_ID = " + agentID;
-        String nyChefsID = "";
-        
+    //Ta bort områdeschef
+    public void taBortOmrådesChef(String agentID){
+        String query = "DELETE FROM Omradeschef where Agent_ID = " + agentID;     
         try{
             idb.delete(query);
-           // läggTillOmrådeschef(nyChefsID);
+            bytUtAgentFrånAlienTillChef(agentID);
+        }
+        catch(InfException ex){
+            System.out.println(ex.getMessage());
+        }
+    }
+    
+    //Ta bort kontorschef
+    public void taBortKontorsChef(String agentID){
+        String query = "DELETE FROM Kontorschef where Agent_ID = " + agentID;      
+        try{
+            idb.delete(query);
         }
         catch(InfException ex){
             System.out.println(ex.getMessage());
@@ -973,5 +986,27 @@ public void taBortRas(int id) {
         }
     }
     
-
+    //Hämta kontorschefer
+    public ArrayList<String> getKontorschefer(){
+        ArrayList<String> chefer = new ArrayList<>();
+        try{
+            chefer = idb.fetchColumn("SELECT Agent_ID FROM Kontorschef");
+        }
+        catch(InfException ex){
+            System.out.println(ex.getMessage());
+        }
+        return chefer;
+    }
+    
+    //Hämta områdeschefer
+    public ArrayList<String> getOmrådeschefer(){
+        ArrayList<String> chefer = new ArrayList<>();
+        try{
+            chefer = idb.fetchColumn("SELECT Agent_ID FROM Omradeschef");
+        }
+        catch(InfException ex){
+            System.out.println(ex.getMessage());
+        }
+        return chefer;
+    }
 }

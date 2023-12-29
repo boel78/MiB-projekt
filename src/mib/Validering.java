@@ -344,8 +344,8 @@ public class Validering {
         return existerar;
     }
     
-    //validera om områdeschef finns
-    public boolean valideraOmrådesChefExisterar(String områdesID){
+    //validera om områdeschef finns utifrån områdesID
+    public boolean valideraOmrådesChefExisterarPåOmråde(String områdesID){
         boolean finns = false;
         if(db.getOmrådesChef(områdesID) == null){
             finns = true;
@@ -386,4 +386,25 @@ public class Validering {
         return existerar;
     }
     
+    //Validera om en områdeschef finns
+    public boolean valideraOmrådeschefExisterar(String id){
+        boolean existerar = false;
+        for(String chefsid : db.getOmrådeschefer()){
+            if(chefsid.equals(id)){
+                existerar = true;
+            }
+        }
+        return existerar;
+    }
+    
+    //Validera om en kontorschef finns
+    public boolean valideraKontorschefExisterar(String id){
+        boolean existerar = false;
+        for(String chefsid : db.getKontorschefer()){
+            if(chefsid.equals(id)){
+                existerar = true;
+            }
+        }
+        return existerar;
+    }
 }
