@@ -27,9 +27,6 @@ public class Validering {
         if(epost.matches(emailRegex)){
             valid = true;
         }
-        else if (existerar){
-            System.out.println("Eposten finns redan");
-        }
         else{
             System.out.println("epost typo");
         }
@@ -288,12 +285,10 @@ public class Validering {
     public boolean valideraAlienId(int id){
         boolean finns=false;
             HashMap<String, String> alienInfo = db.hämtaAlienInfo(id);
-        for(String strängId : alienInfo.keySet()){
-            int alienId = Integer.parseInt(alienInfo.get(strängId));
-        if(alienId == id){
-            finns = true;
-        }
-        }
+            int alienId = Integer.parseInt(alienInfo.get("Alien_ID"));
+            if(alienId == id){
+                finns = true;
+            }
             return finns;
     }
 

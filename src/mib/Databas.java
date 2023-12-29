@@ -388,16 +388,17 @@ public class Databas {
           }
       }
       // hämta all info om en alien utifrån ID.
-public HashMap<String,String> hämtaAlienInfo(int ID) {
-   String query = "SELECT * FROM alien WHERE alien_id=" + ID;
-   HashMap<String,String> alien = new HashMap<>();
-   try {
-   alien = idb.fetchRow(query);
-   } catch (InfException ex) {
-       System.out.println(ex.getMessage());
-   }
-   return alien;
-}
+    public HashMap<String,String> hämtaAlienInfo(int ID) {
+        String query = "SELECT * FROM alien WHERE alien_id=" + ID;
+        HashMap<String,String> alien = new HashMap<>();
+        try {
+            alien = idb.fetchRow(query);
+        } 
+        catch (InfException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return alien;
+    }
 // ta bort alien utifrån ID.
 public void taBortAlien(int ID) {
    String query = "DELETE FROM alien WHERE alien_id=" + ID;
