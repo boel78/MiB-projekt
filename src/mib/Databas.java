@@ -841,14 +841,7 @@ public void taBortRas(int id) {
             }
             catch(InfException ex){
                 System.out.println(ex.getMessage());
-            }
-            if(ändrad){
-                JOptionPane.showMessageDialog(null, "Agenten är borttagen och ansvaret har gått över till Områdeschefen " + chefNamn);
-            }
-            else{
-                JOptionPane.showMessageDialog(null, "Det verkar inte finnas en områdeschef på den valda agentens område. Var vänlig och lägg till en ny områdeschef först.");
-            }
-        
+            }      
     }
     
     //hämta alien id från agent id
