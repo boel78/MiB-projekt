@@ -101,7 +101,7 @@ public class Databas {
         return alien;
     }
     // ta bort alien utifrån ID.
-    public void taBortAlien(int ID) throws InfException {
+    public void taBortAlien(int ID){
         String query = "DELETE FROM alien WHERE alien_id=" + ID;
         try {
             idb.delete(query);
@@ -111,27 +111,31 @@ public class Databas {
     }
     
         // hämta en aliens id utifrån namnet.
-public int hämtaAlienIdFrånNamn(String namn) {
-    String query = "SELECT alien_id FROM Alien WHERE namn= '" + namn + "'";
-    int id = 0;
-    try {
-        String strängId = idb.fetchSingle(query);
-
-        if (strängId != null && !strängId.isEmpty()) {
-            id = Integer.parseInt(strängId);
-        }
-    } catch (InfException ex) {
+    public int hämtaAlienIdFrånNamn(String namn) {
+        String query = "SELECT alien_id FROM Alien WHERE namn= '" + namn + "'";
+        int id = 0;
+        try {
+            String strängId = idb.fetchSingle(query);
+            if (strängId != null && !strängId.isEmpty()) {
+                id = Integer.parseInt(strängId);
+            }
+        } 
+        catch (InfException ex) {
         System.out.println(ex.getMessage());
+        }
+        return id;
     }
-    return id;
-}
         
     
     //ta bort ras på alien utifrån id.
-    public void taBortRas(int id) throws InfException {
-
-        idb.delete("DELETE FROM Boglodite WHERE Alien_ID=" + id);
-        idb.delete("DELETE FROM Squid WHERE Alien_ID=" + id);
-        idb.delete("DELETE FROM Worm WHERE Alien_ID=" + id);        
-            }
+    public void taBortRas(int id){
+        try{
+            idb.delete("DELETE FROM Boglodite WHERE Alien_ID=" + id);
+            idb.delete("DELETE FROM Squid WHERE Alien_ID=" + id);
+            idb.delete("DELETE FROM Worm WHERE Alien_ID=" + id);        
+        }
+        catch(InfException ex){
+            System.out.println(ex.getMessage());  
+        }
     }
+}

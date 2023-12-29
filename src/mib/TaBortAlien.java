@@ -4,11 +4,7 @@
  */
 package mib;
 
-import java.util.HashMap;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import mib.Validering;
-import oru.inf.InfException;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -16,6 +12,7 @@ import oru.inf.InfException;
  */
 public class TaBortAlien extends javax.swing.JFrame {
     private Databas db;
+    private Validering validering;
 
     /**
      * Creates new form TaBortAlien
@@ -23,6 +20,7 @@ public class TaBortAlien extends javax.swing.JFrame {
     public TaBortAlien() {
         initComponents();
         db = new Databas();
+        validering = new Validering();
     }
 
     /**
@@ -86,21 +84,20 @@ public class TaBortAlien extends javax.swing.JFrame {
     
     // Ta bort alien
     private void btnTaBortMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTaBortMouseClicked
-         try {
         String namnAttTaBort = txtNamnAttTaBort.getText();
         Integer id = db.hämtaAlienIdFrånNamn(namnAttTaBort);
-        Validering validering = new Validering();
-
-        if (validering.valideraAlienId(id)) {
-            db.taBortRas(id);
-            db.taBortAlien(id);
-            System.out.println(namnAttTaBort + " har tagits bort ur systemet.");
-        } else {
-            System.out.println(namnAttTaBort + " finns inte i systemet eller ogiltigt Alien-ID.");
+        if(!namnAttTaBort.isEmpty()){
+            if (validering.valideraAlienId(id)) {
+                db.taBortRas(id);
+                db.taBortAlien(id);
+                JOptionPane.showMessageDialog(null, "Tog bort " + namnAttTaBort + " från systemet");
+            } else {
+                JOptionPane.showMessageDialog(null, namnAttTaBort + " finns inte i systemet eller ogiltigt Alien-ID.");
+            }
         }
-    } catch (InfException ex) {
-        Logger.getLogger(TaBortAlien.class.getName()).log(Level.SEVERE, null, ex);
-    }   
+        else{
+            JOptionPane.showMessageDialog(null, "Var vänlig och fyll i ett namn");
+        }
     }//GEN-LAST:event_btnTaBortMouseClicked
 
     /**
