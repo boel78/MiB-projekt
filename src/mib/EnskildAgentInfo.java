@@ -546,18 +546,24 @@ public class EnskildAgentInfo extends javax.swing.JFrame {
                     områdesID = "4";
                 break;
             }
-            if(!admin.isEmpty() && validering.valideraAdminInput(admin)){
-                if(admin.equals("ja")){
-                    admin = "J";
+            db.uppdateraAgentOmråde(id, områdesID); 
+            ändrad = true;  
+        }
+        if(!admin.isEmpty() && validering.valideraAdminInput(admin)){
+                if(!id.equals(anvID)){
+                    if(admin.equals("ja")){
+                        admin = "J";
+                    }
+                    else{
+                        admin = "N";
+                    }
+                    db.uppdateraAdminStatus(id, admin);
+                    ändrad = true;
                 }
                 else{
-                    admin = "N";
+                    JOptionPane.showMessageDialog(null, "Du kan inte byta din egna administratör status.");
                 }
-                db.uppdateraAdminStatus(id, admin);
             }
-            db.uppdateraAgentOmråde(id, områdesID); 
-            ändrad = true;
-        }
         //kollar områdeschef
         if(comboBoxChef.getSelectedIndex() == 1 && validering.valideraOmrådeExisterar(område, true) && validering.valideraOmrådeschefPåSpecifik(id, txtOmrådesAnsvar.getText())){
             JOptionPane.showMessageDialog(null, "Du är redan chef här.");
