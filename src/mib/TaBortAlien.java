@@ -102,18 +102,20 @@ public class TaBortAlien extends javax.swing.JFrame {
     // Ta bort alien
     private void btnTaBortMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTaBortMouseClicked
         String namnAttTaBort = txtNamnAttTaBort.getText();
-        Integer id = db.hämtaAlienIdFrånNamn(namnAttTaBort);
-        if(!namnAttTaBort.isEmpty()){
-            if (validering.valideraAlienId(id)) {
+        if(!namnAttTaBort.isEmpty()){  
+            if(validering.valideraAlienNamnExisterar(namnAttTaBort)){
+                Integer id = db.hämtaAlienIdFrånNamn(namnAttTaBort);
                 db.taBortRas(id);
                 db.taBortAlien(id);
                 JOptionPane.showMessageDialog(null, "Tog bort " + namnAttTaBort + " från systemet");
-            } else {
-                JOptionPane.showMessageDialog(null, namnAttTaBort + " finns inte i systemet eller ogiltigt Alien-ID.");
+                txtNamnAttTaBort.setText("");
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Namnet finns inte i systemet eller stavfel.");
             }
         }
         else{
-            JOptionPane.showMessageDialog(null, "Var vänlig och fyll i ett namn");
+            JOptionPane.showMessageDialog(null, "Var vänlig och skriv in ett namn");
         }
     }//GEN-LAST:event_btnTaBortMouseClicked
 

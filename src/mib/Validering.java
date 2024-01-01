@@ -455,4 +455,17 @@ public class Validering {
 
         return stämmer;
     }
+    
+    //Validera om aliennamn existerar
+    public boolean valideraAlienNamnExisterar(String namn){
+        boolean existerar = false;
+        if(valideraAlienNamn(namn)){
+            for(String namnet : db.getAllaAlienNamn()){
+                if(namn.equals(namnet)){
+                    existerar = true;
+                }
+            }
+        }
+        return existerar;
+    }
 }

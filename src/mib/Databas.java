@@ -1096,6 +1096,19 @@ public void taBortRas(int id) {
             System.out.println(ex.getMessage());
         }
     }
+    
+    //hämta alla alien namn
+    public ArrayList<String> getAllaAlienNamn(){
+        ArrayList<String> namn = new ArrayList<>();
+        try{
+            namn = idb.fetchColumn("SELECT Namn FROM Alien");
+        }
+        catch(InfException ex){
+            System.out.println(ex.getMessage());
+        }
+        return namn;
+    }
+    
    
    
 }
