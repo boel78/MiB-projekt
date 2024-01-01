@@ -1053,4 +1053,37 @@ public void taBortRas(int id) {
         }
         return rader;
     }
+    
+    //Hämta rasinformation om alien, alla raser
+    public HashMap<String, String> getRasInformationAllaRaser(String id){
+        String query =  "SELECT Alien.Alien_ID, Boglodite.Antal_Boogies, Worm.Langd, Squid.Antal_Armar \n" +
+                        "FROM Alien\n" +
+                        "LEFT JOIN Worm ON Alien.Alien_ID = Worm.Alien_ID\n" +
+                        "LEFT JOIN Boglodite ON Alien.Alien_ID = Boglodite.Alien_ID\n" +
+                        "LEFT JOIN Squid ON Alien.Alien_ID = Squid.Alien_ID\n" +
+                        "WHERE Alien.Alien_ID = " + id;
+        HashMap<String, String> info = new HashMap<>();
+        try{
+            info = idb.fetchRow(query);
+        }
+        catch(InfException ex){
+            System.out.println(ex.getMessage());
+        }
+        return info;
+    }
+    
+    //Hämta rasinformation specifik alien
+    public HashMap<String, String> getRasInformationAllaRaser(String id, String ras){
+        String query = "SELECT * FROM " + ras + " where Alien_ID = " + id;
+        HashMap<String, String> info = new HashMap<>();
+        try{
+            info = idb.fetchRow(query);
+        }
+        catch(InfException ex){
+            System.out.println(ex.getMessage());
+        }
+        return info;
+    }
+   
+   
 }

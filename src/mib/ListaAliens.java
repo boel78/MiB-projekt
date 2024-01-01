@@ -6,6 +6,7 @@ package mib;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.HashMap;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -22,6 +23,7 @@ public class ListaAliens extends javax.swing.JFrame {
     private Databas db;
     private DefaultTableModel model;
     private Validering validering;
+    private String kolumnNamn;
     private String frånDatum;
     private String tillDatum;
     private ArrayList<String> idLista;
@@ -83,11 +85,6 @@ public class ListaAliens extends javax.swing.JFrame {
 
         comboBoxPlats.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Örebro", "Västerås", "Vilhelmina", "Borås", "---" }));
         comboBoxPlats.setSelectedIndex(4);
-        comboBoxPlats.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                comboBoxPlatsActionPerformed(evt);
-            }
-        });
 
         txtFörstaDatum.setColumns(10);
 
@@ -130,7 +127,7 @@ public class ListaAliens extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Alien ID", "Namn", "Epost", "Antal Boogies"
+                "Alien ID", "Namn", "Epost", "Info"
             }
         ) {
             Class[] types = new Class [] {
@@ -227,33 +224,6 @@ public class ListaAliens extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    //Plats comboBox
-    private void comboBoxPlatsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxPlatsActionPerformed
-        plats = comboBoxPlats.getSelectedItem().toString();
-        if(plats.equals("---")){
-            visaPlats = false;
-            platsLista.clear();
-        }
-        else{
-            visaPlats = true;
-            String platsID = db.getPlatsIDFrånNamn(plats);
-            platsLista = db.getAlienIDnFrånPlats(platsID);
-        }
-    }//GEN-LAST:event_comboBoxPlatsActionPerformed
-
-    //Ras comboBox
-    private void comboBoxRasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxRasActionPerformed
-        ras = comboBoxRas.getSelectedItem().toString();
-        if(ras.equals("---")){
-            visaRas = false;
-            rasLista.clear();
-        }
-        else{
-            visaRas = true;
-            rasLista = db.getIdnFrånRas(ras);
-        }
-    }//GEN-LAST:event_comboBoxRasActionPerformed
-
     //Datum knappen
     private void btnDatumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDatumActionPerformed
         if(btnDatum.isSelected()){
@@ -283,6 +253,7 @@ public class ListaAliens extends javax.swing.JFrame {
        model.setRowCount(0);
        comboBoxRas();
        comboBoxPlats();
+       int kolumnVidRasVal = 4;
        
         if(visaDatum){
         frånDatum = txtFörstaDatum.getText();
@@ -295,11 +266,46 @@ public class ListaAliens extends javax.swing.JFrame {
             }
         }
         kombineraListor();
+        //Skapar kolumn specifikt för ras och fyller jtable
         for(String id: idLista){
+            String rasInfo = "";
+            HashMap<String, String> rasInfoLista = db.getRasInformationAllaRaser(id);
+                for(String kolumn : rasInfoLista.keySet()){
+                    //Har man valt att se aliens på datum och/eller område
+                    if(!kolumn.equals("Alien_ID") && rasInfoLista.get(kolumn) != null){
+                        rasInfo = rasInfoLista.get(kolumn);
+                        kolumnNamn = kolumn;
+                        switch(kolumn){
+                            case "Antal_Boogies":
+                                ras = "Boglodite";
+                                break;
+                            case "Antal_Armar":
+                                ras = "Squid";
+                                break;
+                            case "Langd":
+                                ras = "Worm";
+                                break;
+                        }
+                    } 
+                    //Ras specifik information
+                    else if(comboBoxRas.getSelectedIndex() == 3 && !kolumn.equals("Alien_ID")){
+                        rasInfo = rasInfoLista.get(kolumn);
+                        kolumnNamn = kolumn;
+                    }
+                }
+                System.out.println(rasInfo);
                 String namn = db.getAlienNamnFrånID(id);
                 String epost = db.getAlienEpostFrånID(id);
-                model.addRow(new Object[]{id, namn, epost});
+                if(comboBoxRas.getSelectedIndex() != 3){
+                    tblInfo.getColumnModel().getColumn(3).setHeaderValue(kolumnNamn);
+                    model.addRow(new Object[]{id, namn, epost, rasInfo});
+                }
+                else{
+                    tblInfo.getColumnModel().getColumn(3).setHeaderValue("Ras");
+                    model.addRow(new Object[]{id, namn, epost, ras});  
+                }
         }
+        tblInfo.getTableHeader().resizeAndRepaint();
         rensaUrListorna();
     }//GEN-LAST:event_btnHämtaActionPerformed
 
@@ -317,7 +323,11 @@ public class ListaAliens extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnTillbakaActionPerformed
 
-    
+    private void comboBoxRasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxRasActionPerformed
+        comboBoxRas();
+    }//GEN-LAST:event_comboBoxRasActionPerformed
+ 
+   
     //Kombinera listor
     private void kombineraListor(){
         if(visaRas && visaPlats && !visaDatum){
@@ -370,7 +380,7 @@ public class ListaAliens extends javax.swing.JFrame {
     
     //Ras comboBox
     public void comboBoxRas(){
-        ras = comboBoxRas.getSelectedItem().toString();
+        ras = comboBoxRas.getSelectedItem().toString(); 
         if(ras.equals("---")){
             visaRas = false;
             rasLista.clear();
@@ -378,7 +388,9 @@ public class ListaAliens extends javax.swing.JFrame {
         else{
             visaRas = true;
             rasLista = db.getIdnFrånRas(ras);
-        }
+            model.setColumnCount(4);
+            tblInfo.getColumnModel().getColumn(3).setHeaderValue("Info");
+            }
     }
     
     //Plats comboBox

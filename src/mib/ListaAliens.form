@@ -123,9 +123,6 @@
         </Property>
         <Property name="selectedIndex" type="int" value="4"/>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="comboBoxPlatsActionPerformed"/>
-      </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
@@ -207,7 +204,7 @@
                 <Column editable="true" title="Alien ID" type="java.lang.String"/>
                 <Column editable="true" title="Namn" type="java.lang.String"/>
                 <Column editable="true" title="Epost" type="java.lang.String"/>
-                <Column editable="true" title="Antal Boogies" type="java.lang.String"/>
+                <Column editable="true" title="Info" type="java.lang.String"/>
               </Table>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
