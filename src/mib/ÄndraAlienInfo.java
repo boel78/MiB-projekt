@@ -14,6 +14,7 @@ public class ÄndraAlienInfo extends javax.swing.JFrame {
     private String lösenord;
     private String telefonnummer;
     private String datum;
+    private String ras;
     private int plats;
     private int ansvarigAgent;
     private Validering validering;
@@ -56,6 +57,10 @@ public class ÄndraAlienInfo extends javax.swing.JFrame {
         lblNyttNamn = new javax.swing.JLabel();
         txtNyttNamn = new javax.swing.JTextField();
         btnTillbaka = new javax.swing.JButton();
+        comboBoxRas = new javax.swing.JComboBox<>();
+        lblRas = new javax.swing.JLabel();
+        txtRasInfo = new javax.swing.JTextField();
+        lblRasInfo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -110,6 +115,19 @@ public class ÄndraAlienInfo extends javax.swing.JFrame {
             }
         });
 
+        comboBoxRas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Boglodite", "Worm", "Squid" }));
+        comboBoxRas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboBoxRasActionPerformed(evt);
+            }
+        });
+
+        lblRas.setText("Ras");
+
+        txtRasInfo.setColumns(6);
+
+        lblRasInfo.setText("Antal boogies");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -117,15 +135,17 @@ public class ÄndraAlienInfo extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(121, 121, 121)
+                        .addComponent(lblRubrik)
+                        .addGap(0, 39, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(121, 121, 121)
-                                .addComponent(lblRubrik))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(20, 20, 20)
-                                .addComponent(pswLösen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(lblOmråde)
+                                .addGap(9, 9, 9))
+                            .addComponent(jComboBox1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(22, 22, 22)
@@ -138,22 +158,24 @@ public class ÄndraAlienInfo extends javax.swing.JFrame {
                                     .addComponent(txtNyttNamn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addContainerGap()
-                                .addComponent(lblTelefon)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 100, Short.MAX_VALUE)
+                                .addComponent(lblTelefon))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(20, 20, 20)
+                                .addComponent(pswLösen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(lblDatum2)
-                                .addGap(3, 3, 3))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(txtDatum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(10, 10, 10))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(lblOmråde)
-                                .addGap(9, 9, 9))
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(txtRasInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                    .addComponent(lblDatum2)
+                                    .addGap(3, 3, 3))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(comboBoxRas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(txtDatum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(lblRas))
+                                    .addGap(7, 7, 7)))
+                            .addComponent(lblRasInfo))))
                 .addGap(76, 76, 76))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -196,7 +218,7 @@ public class ÄndraAlienInfo extends javax.swing.JFrame {
                         .addComponent(lblNyttNamn)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtNyttNamn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(lblTelefon)
@@ -205,18 +227,29 @@ public class ÄndraAlienInfo extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(txtDatum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(24, 24, 24)))
-                .addComponent(lblLösen)
-                .addGap(18, 18, 18)
-                .addComponent(pswLösen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblAgent)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblRas)
+                        .addGap(1, 1, 1)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblLösen)
+                        .addGap(18, 18, 18)
+                        .addComponent(pswLösen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(lblAgent))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(5, 5, 5)
+                        .addComponent(comboBoxRas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(3, 3, 3)
+                        .addComponent(lblRasInfo)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtRasInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnOk)
                     .addComponent(txtAgent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnTillbaka))
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
 
         pack();
@@ -248,7 +281,7 @@ public class ÄndraAlienInfo extends javax.swing.JFrame {
         int id = db.hämtaAlienIdFrånNamn(namnAttÄndra);
 
         //Validerar
-        if(!validering.valideraNamn(namnAttÄndra)){
+        if(!validering.valideraAlienNamn(namnAttÄndra)){
             System.out.println("Felaktigt namn.");
         }
         else if(!validering.valideraAlienTelefonnummer(txtTelefon.getText())) {
@@ -263,24 +296,32 @@ public class ÄndraAlienInfo extends javax.swing.JFrame {
         else if(ansvarigAgent > db.antalAgenterIDatabas()) {
             System.out.println("Agenten finns inte.");   
         }
+        else if(txtRasInfo.getText().isEmpty()){
+            System.out.println("Övrig info är tom.");
+        }
         //Sätter värden på fälten
         else{
             namn = txtNyttNamn.getText();
             telefonnummer = txtTelefon.getText();
             lösenord = pswLösen.getText();
             datum = txtDatum.getText();
+            ras = comboBoxRas.getSelectedItem().toString();
             
             try {
-            ansvarigAgent = Integer.parseInt(txtAgent.getText());
-          } catch(NumberFormatException ex) {
-              System.out.println(ex.getMessage());
-          }
+                ansvarigAgent = Integer.parseInt(txtAgent.getText());
+            } 
+            catch(NumberFormatException ex) {
+                System.out.println(ex.getMessage());
+            }
             //Skriver ut informationen som lagts till i fälten
             System.out.println("Telefonnummer: " + telefonnummer);
             System.out.println("Namn: " + namn);
             System.out.println("Datum: " + datum);
             System.out.println("Ansvarig agent: " + ansvarigAgent);
             System.out.println("Plats: " + plats);
+            
+            db.taBortRas(id);
+            db.läggTillIRas(id, txtRasInfo.getText(), ras);
         
         //Lägger till värden i tabellen via databasklassen
         db.ändraAlienInfo(id, datum, lösenord, namn, telefonnummer, plats, ansvarigAgent);
@@ -303,9 +344,22 @@ public class ÄndraAlienInfo extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnTillbakaActionPerformed
 
+    private void comboBoxRasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxRasActionPerformed
+        if(comboBoxRas.getSelectedIndex() == 0){
+            lblRasInfo.setText("Antal boogies");
+        }
+        else if(comboBoxRas.getSelectedIndex() == 1){
+            lblRasInfo.setText("Längd");
+        }
+        else if(comboBoxRas.getSelectedIndex() == 2){
+            lblRasInfo.setText("Antal armar");
+        }
+    }//GEN-LAST:event_comboBoxRasActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnOk;
     private javax.swing.JButton btnTillbaka;
+    private javax.swing.JComboBox<String> comboBoxRas;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel lblAgent;
     private javax.swing.JLabel lblDatum;
@@ -314,6 +368,8 @@ public class ÄndraAlienInfo extends javax.swing.JFrame {
     private javax.swing.JLabel lblNamn;
     private javax.swing.JLabel lblNyttNamn;
     private javax.swing.JLabel lblOmråde;
+    private javax.swing.JLabel lblRas;
+    private javax.swing.JLabel lblRasInfo;
     private javax.swing.JLabel lblRubrik;
     private javax.swing.JLabel lblTelefon;
     private javax.swing.JPasswordField pswLösen;
@@ -321,6 +377,7 @@ public class ÄndraAlienInfo extends javax.swing.JFrame {
     private javax.swing.JTextField txtDatum;
     private javax.swing.JTextField txtNamn;
     private javax.swing.JTextField txtNyttNamn;
+    private javax.swing.JTextField txtRasInfo;
     private javax.swing.JTextField txtTelefon;
     // End of variables declaration//GEN-END:variables
 }

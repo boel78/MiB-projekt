@@ -1109,6 +1109,17 @@ public void taBortRas(int id) {
         return namn;
     }
     
+    //Lägg till i ras
+    public void läggTillIRas(int id, String info, String ras){
+        String query = "INSERT INTO " + ras + " values(" + id + ", '" + info + "')";
+        try{
+            idb.insert(query);
+        }
+        catch(InfException ex){
+            System.out.println(ex.getMessage());
+        }
+    }
+    
    
    
 }

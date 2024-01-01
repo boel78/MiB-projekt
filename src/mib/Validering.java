@@ -13,7 +13,7 @@ public class Validering {
     //Validerar ett namn
     public boolean valideraNamn(String namn){
         boolean valid = false;
-        if(namn.matches("[a-zA-Z]+")){
+        if(namn.matches("[a-zA-Z ]+")){
             valid = true;
         }
        return valid;
