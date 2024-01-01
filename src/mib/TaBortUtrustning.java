@@ -39,6 +39,7 @@ public class TaBortUtrustning extends javax.swing.JFrame {
                 comboBox.setVisible(true);
                 btnTaBort.setVisible(true);
             }
+        setDataITabell();
     }
 
 
@@ -49,10 +50,6 @@ public class TaBortUtrustning extends javax.swing.JFrame {
         comboBox = new javax.swing.JComboBox<>();
         btnTaBort = new javax.swing.JButton();
         jTable1 = new javax.swing.JTable();
-        txtAgentNamn = new javax.swing.JTextField();
-        txtAdmin = new javax.swing.JTextField();
-        lblAgent = new javax.swing.JLabel();
-        lblAdmin = new javax.swing.JLabel();
         lblTaBort = new javax.swing.JLabel();
         comboBoxValAvTyp = new javax.swing.JComboBox<>();
         txtBenämning = new javax.swing.JTextField();
@@ -61,8 +58,8 @@ public class TaBortUtrustning extends javax.swing.JFrame {
         lblBenämning = new javax.swing.JLabel();
         lblKategoriTyp = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        btnHämta = new javax.swing.JButton();
         btnTillbaka = new javax.swing.JButton();
+        lblRubrik = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -87,24 +84,6 @@ public class TaBortUtrustning extends javax.swing.JFrame {
             }
         ));
 
-        txtAgentNamn.setColumns(6);
-        txtAgentNamn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtAgentNamnActionPerformed(evt);
-            }
-        });
-
-        txtAdmin.setColumns(3);
-        txtAdmin.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtAdminActionPerformed(evt);
-            }
-        });
-
-        lblAgent.setText("Agent");
-
-        lblAdmin.setText("Admin");
-
         lblTaBort.setText("Ta bort");
 
         comboBoxValAvTyp.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Kommunikation", "Vapen", "Teknik" }));
@@ -124,14 +103,7 @@ public class TaBortUtrustning extends javax.swing.JFrame {
 
         lblKategoriTyp.setText("Överföringsteknik");
 
-        jLabel1.setText("Dina kvitterade grejer");
-
-        btnHämta.setText("Hämta");
-        btnHämta.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnHämtaActionPerformed(evt);
-            }
-        });
+        jLabel1.setText("Din kvitterade utrustning");
 
         btnTillbaka.setText("Tillbaka");
         btnTillbaka.addActionListener(new java.awt.event.ActionListener() {
@@ -140,44 +112,21 @@ public class TaBortUtrustning extends javax.swing.JFrame {
             }
         });
 
+        lblRubrik.setText("Utrustning");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(20, 20, 20)
-                                .addComponent(txtAgentNamn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(29, 29, 29)
-                                .addComponent(lblAgent)))
-                        .addGap(26, 26, 26)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblAdmin)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(txtAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(lblTaBort)
-                                .addGap(20, 20, 20))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(12, 12, 12)
-                                .addComponent(jLabel1)
-                                .addGap(23, 23, 23)
-                                .addComponent(btnHämta))
-                            .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jTable1, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 124, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnTaBort, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(comboBox, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTable1, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 124, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnTaBort, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(comboBox, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(32, 32, 32))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -196,54 +145,49 @@ public class TaBortUtrustning extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnTillbaka)
                         .addGap(43, 43, 43)
-                        .addComponent(btnLäggTill)))
-                .addGap(72, 72, 72))
+                        .addComponent(btnLäggTill))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(224, 224, 224)
+                        .addComponent(lblRubrik)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(lblTaBort)
+                .addGap(50, 50, 50))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblAgent)
-                    .addComponent(lblAdmin))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(3, 3, 3)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtAgentNamn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(comboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel1))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
-                                .addComponent(btnTaBort)
-                                .addGap(93, 93, 93))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(23, 23, 23)
-                                .addComponent(btnHämta)
-                                .addGap(18, 18, 18)
-                                .addComponent(jTable1, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addComponent(comboBoxValAvTyp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblBenämning)
-                            .addComponent(lblKategoriTyp))
-                        .addGap(8, 8, 8)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtBenämning, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtÖvrigInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(11, 11, 11)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnLäggTill)
-                            .addComponent(btnTillbaka)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addContainerGap(36, Short.MAX_VALUE)
                         .addComponent(lblTaBort)
-                        .addContainerGap())))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(comboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                        .addComponent(btnTaBort)
+                        .addGap(93, 93, 93))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(lblRubrik)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTable1, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addComponent(comboBoxValAvTyp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblBenämning)
+                    .addComponent(lblKategoriTyp))
+                .addGap(8, 8, 8)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtBenämning, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtÖvrigInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(11, 11, 11)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnLäggTill)
+                    .addComponent(btnTillbaka)))
         );
 
         pack();
@@ -273,14 +217,6 @@ public class TaBortUtrustning extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnTaBortActionPerformed
 
-    private void txtAgentNamnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAgentNamnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtAgentNamnActionPerformed
-
-    private void txtAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAdminActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtAdminActionPerformed
-
     //Combobox val utav typ
     private void comboBoxValAvTypActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxValAvTypActionPerformed
         valdTyp = comboBoxValAvTyp.getSelectedItem().toString();
@@ -295,11 +231,6 @@ public class TaBortUtrustning extends javax.swing.JFrame {
         }
         lblKategoriTyp.setText(kategoriText);
     }//GEN-LAST:event_comboBoxValAvTypActionPerformed
-
-    //Hämta knappen
-    private void btnHämtaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHämtaActionPerformed
-        setDataITabell();           
-    }//GEN-LAST:event_btnHämtaActionPerformed
 
     //Tillbaka till hemsidan
     private void btnTillbakaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakaActionPerformed
@@ -376,9 +307,8 @@ public class TaBortUtrustning extends javax.swing.JFrame {
     //Metod för att ladda in i listan efter ditt ID
     public void setDataITabell(){
         DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
-        String ID = db.getAgentIDFrånNamn(txtAgentNamn.getText());
         //HashMap<String, String> rader = db.getInneharUtrustningFrånID(ID);
-        ArrayList<HashMap<String, String>> listaMedMaps = db.getInneharUtrustningFrånID(ID);
+        ArrayList<HashMap<String, String>> listaMedMaps = db.getInneharUtrustningFrånID(anvID);
         for(int index = 0; index < listaMedMaps.size(); index++){
             HashMap<String, String> rader = listaMedMaps.get(index);
             if(rader.containsKey("Agent_ID")){
@@ -404,7 +334,6 @@ public class TaBortUtrustning extends javax.swing.JFrame {
     } 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnHämta;
     private javax.swing.JButton btnLäggTill;
     private javax.swing.JButton btnTaBort;
     private javax.swing.JButton btnTillbaka;
@@ -412,13 +341,10 @@ public class TaBortUtrustning extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> comboBoxValAvTyp;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JLabel lblAdmin;
-    private javax.swing.JLabel lblAgent;
     private javax.swing.JLabel lblBenämning;
     private javax.swing.JLabel lblKategoriTyp;
+    private javax.swing.JLabel lblRubrik;
     private javax.swing.JLabel lblTaBort;
-    private javax.swing.JTextField txtAdmin;
-    private javax.swing.JTextField txtAgentNamn;
     private javax.swing.JTextField txtBenämning;
     private javax.swing.JTextField txtÖvrigInfo;
     // End of variables declaration//GEN-END:variables

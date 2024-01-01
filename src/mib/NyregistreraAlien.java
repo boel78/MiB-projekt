@@ -2,6 +2,7 @@
 package mib;
 
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -206,33 +207,51 @@ public class NyregistreraAlien extends javax.swing.JFrame {
         alienId = (db.antalAliensIDatabas() + 1);
         
         //Validerar och sätter epost
-        if(validering.valideraAlienEpostTypo(txtEpost.getText())){
+        if(!txtEpost.getText().isEmpty() && validering.valideraAlienEpostTypo(txtEpost.getText())){
             epost = txtEpost.getText();
             System.out.println("Epost: " + epost);
         }
+        else{
+            JOptionPane.showMessageDialog(null, "Var vänlig och fyll i en epost.");
+        }
         //Validerar och sätter namnet
-        if(validering.valideraAlienNamn(txtNamn.getText())) {
+        if(!txtNamn.getText().isEmpty() && validering.valideraAlienNamn(txtNamn.getText())) {
             namn = txtNamn.getText();
             System.out.println("Namn: " + namn);
         }
+        else{
+            JOptionPane.showMessageDialog(null, "Var vänlig och fyll i ett namn.");
+        }
         //Validerar och sätter telefonnummer
-        if(validering.valideraAlienTelefonnummer(txtTelefon.getText())){
+        if(!txtTelefon.getText().isEmpty() && validering.valideraAlienTelefonnummer(txtTelefon.getText())){
             telefonnummer = txtTelefon.getText();
             System.out.println("Telefonnummer: " + telefonnummer);
         }
+        else{
+            JOptionPane.showMessageDialog(null, "Var vänlig och fyll i ett telefonnummer.");
+        }
         //Validerar och sätter lösenord
-        if(validering.valideraLösenord(pswLösenord.getText())){
+        if(!pswLösenord.getText().isEmpty() && validering.valideraLösenord(pswLösenord.getText())){
             lösenord = pswLösenord.getText();
         }
+        else{
+            JOptionPane.showMessageDialog(null, "Var vänlig och fyll i ett lösenord.");
+        }
         //Validerar och sätter datum
-        if(validering.valideraAgentAnställningsDatum(txtDatum.getText())){
+        if(!txtDatum.getText().isEmpty() && validering.valideraAgentAnställningsDatum(txtDatum.getText())){
             datum = txtDatum.getText();
             System.out.println("Datum: " + datum);
         }
+        else{
+            JOptionPane.showMessageDialog(null, "Var vänlig och fyll i ett lösenord.");
+        }
         //Validerar och sätter ansvarig agent
-        if(ansvarigAgent <= db.antalAgenterIDatabas()){
+        if(!txtAgent.getText().isEmpty() && ansvarigAgent <= db.antalAgenterIDatabas()){
             ansvarigAgent = Integer.parseInt(txtAgent.getText());
             System.out.println("Ansvarig agent: " + ansvarigAgent);
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Var vänlig och fyll i ett datum.");
         }
         //Skapar alien i tabellen via databasklassen om eposten inte finns
         if(!validering.valideraAlienEpostExisterar(txtEpost.getText(), true) && !fältÄrNull()){    

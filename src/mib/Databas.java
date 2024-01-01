@@ -641,7 +641,7 @@ public void taBortRas(int id) {
             String query = "INSERT INTO Alien (Alien_ID, Registreringsdatum, Epost, Losenord, Namn, Telefon, Plats, Ansvarig_Agent)" +
             "VALUES (" + id + ", '" + datum + "', '" + epost + "', '" + lösenord + "', '" + namn + "', '" + telefon + "', '" + plats + "', '" + ansvarigAgent + "')";
         idb.insert(query);
-            System.out.println("Ny alien har registrerats.");
+            JOptionPane.showMessageDialog(null, "Ny alien har registrerats.");
 
         } catch(InfException ex){
             System.out.println(ex.getMessage());
