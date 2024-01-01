@@ -124,17 +124,17 @@ public class ListaAliens extends javax.swing.JFrame {
 
         tblInfo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Alien ID", "Namn", "Epost"
+                "Alien ID", "Namn", "Epost", "Antal Boogies"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -272,6 +272,7 @@ public class ListaAliens extends javax.swing.JFrame {
             lblTill.setVisible(false);
             txtFörstaDatum.setText("");
             txtAndraDatum.setText("");
+            visaDatum = false;
         }
     }//GEN-LAST:event_btnDatumActionPerformed
 
@@ -280,6 +281,8 @@ public class ListaAliens extends javax.swing.JFrame {
       
        //Tar bort raderna när man klickar hämta
        model.setRowCount(0);
+       comboBoxRas();
+       comboBoxPlats();
        
         if(visaDatum){
         frånDatum = txtFörstaDatum.getText();
@@ -351,20 +354,46 @@ public class ListaAliens extends javax.swing.JFrame {
     
     //Tömmer listorna
     private void rensaUrListorna(){
-        if(!rasLista.isEmpty()){
+        if(!rasLista.isEmpty() && comboBoxRas.getSelectedItem().toString().equals(ras)){
             rasLista.clear();
         }
         if(!datumLista.isEmpty()){
             datumLista.clear();
         }
-        if(!platsLista.isEmpty()){
+        if(!platsLista.isEmpty() && comboBoxPlats.getSelectedItem().toString().equals(plats)){
             platsLista.clear();
         }
         if(!idLista.isEmpty()){
             idLista.clear();
         }
     }
-
+    
+    //Ras comboBox
+    public void comboBoxRas(){
+        ras = comboBoxRas.getSelectedItem().toString();
+        if(ras.equals("---")){
+            visaRas = false;
+            rasLista.clear();
+        }
+        else{
+            visaRas = true;
+            rasLista = db.getIdnFrånRas(ras);
+        }
+    }
+    
+    //Plats comboBox
+    public void comboBoxPlats(){
+        plats = comboBoxPlats.getSelectedItem().toString();
+        if(plats.equals("---")){
+            visaPlats = false;
+            platsLista.clear();
+        }
+        else{
+            visaPlats = true;
+            String platsID = db.getPlatsIDFrånNamn(plats);
+            platsLista = db.getAlienIDnFrånPlats(platsID);
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton btnDatum;
