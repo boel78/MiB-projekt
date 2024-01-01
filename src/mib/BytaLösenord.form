@@ -23,26 +23,6 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="1" attributes="0">
-              <EmptySpace pref="125" max="32767" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="1" attributes="0">
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="lblNyttLösenord" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblNuvarandeLösenord" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblEpost" min="-2" max="-2" attributes="0"/>
-                          <Component id="pwNyttLösenord" max="32767" attributes="0"/>
-                          <Component id="txtEpost" max="32767" attributes="0"/>
-                          <Component id="pwNuvarandeLösenord" alignment="0" pref="0" max="32767" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="120" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="1" attributes="0">
-                      <Component id="btnBytLösenord" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="198" max="-2" attributes="0"/>
-                  </Group>
-              </Group>
-          </Group>
           <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
@@ -56,6 +36,24 @@
               </Group>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace pref="127" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
+                      <Component id="btnBytLösenord" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="198" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="lblNyttLösenord" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblNuvarandeLösenord" min="-2" max="-2" attributes="0"/>
+                          <Component id="pwNyttLösenord" max="32767" attributes="0"/>
+                          <Component id="pwNuvarandeLösenord" alignment="0" min="-2" pref="238" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="118" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+          </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -63,11 +61,7 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
               <Component id="lblBytLösenord" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
-              <Component id="lblEpost" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="txtEpost" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
               <Component id="lblNuvarandeLösenord" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="pwNuvarandeLösenord" min="-2" max="-2" attributes="0"/>
@@ -75,21 +69,16 @@
               <Component id="lblNyttLösenord" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
               <Component id="pwNyttLösenord" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
               <Component id="btnBytLösenord" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="btnTillbaka" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="7" max="32767" attributes="0"/>
+              <EmptySpace pref="35" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JTextField" name="txtEpost">
-      <Properties>
-        <Property name="columns" type="int" value="20"/>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JPasswordField" name="pwNuvarandeL&#xf6;senord">
       <Properties>
         <Property name="columns" type="int" value="25"/>
@@ -103,11 +92,6 @@
     <Component class="javax.swing.JLabel" name="lblBytL&#xf6;senord">
       <Properties>
         <Property name="text" type="java.lang.String" value="Byt L&#xf6;senord"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lblEpost">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Epost"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblNuvarandeL&#xf6;senord">

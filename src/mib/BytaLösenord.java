@@ -14,9 +14,9 @@ public class BytaLösenord extends javax.swing.JFrame {
 
     private Validering validering;
     private Databas db;
-    private String nyttLösenord;
     private String anvID;
     private String anvTyp;
+    private String epost;
     /**
      * Creates new form BytaLösenord
      */
@@ -37,11 +37,9 @@ public class BytaLösenord extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        txtEpost = new javax.swing.JTextField();
         pwNuvarandeLösenord = new javax.swing.JPasswordField();
         pwNyttLösenord = new javax.swing.JPasswordField();
         lblBytLösenord = new javax.swing.JLabel();
-        lblEpost = new javax.swing.JLabel();
         lblNuvarandeLösenord = new javax.swing.JLabel();
         lblNyttLösenord = new javax.swing.JLabel();
         btnBytLösenord = new javax.swing.JButton();
@@ -49,15 +47,11 @@ public class BytaLösenord extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        txtEpost.setColumns(20);
-
         pwNuvarandeLösenord.setColumns(25);
 
         pwNyttLösenord.setColumns(20);
 
         lblBytLösenord.setText("Byt Lösenord");
-
-        lblEpost.setText("Epost");
 
         lblNuvarandeLösenord.setText("Nuvarande Lösenord");
 
@@ -81,21 +75,6 @@ public class BytaLösenord extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(125, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(lblNyttLösenord)
-                            .addComponent(lblNuvarandeLösenord)
-                            .addComponent(lblEpost)
-                            .addComponent(pwNyttLösenord)
-                            .addComponent(txtEpost)
-                            .addComponent(pwNuvarandeLösenord, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                        .addGap(120, 120, 120))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnBytLösenord)
-                        .addGap(198, 198, 198))))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -105,17 +84,26 @@ public class BytaLösenord extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(btnTillbaka)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(127, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btnBytLösenord)
+                        .addGap(198, 198, 198))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(lblNyttLösenord)
+                            .addComponent(lblNuvarandeLösenord)
+                            .addComponent(pwNyttLösenord)
+                            .addComponent(pwNuvarandeLösenord, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(118, 118, 118))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addComponent(lblBytLösenord)
-                .addGap(61, 61, 61)
-                .addComponent(lblEpost)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtEpost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(9, 9, 9)
+                .addGap(58, 58, 58)
                 .addComponent(lblNuvarandeLösenord)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pwNuvarandeLösenord, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -123,39 +111,38 @@ public class BytaLösenord extends javax.swing.JFrame {
                 .addComponent(lblNyttLösenord)
                 .addGap(3, 3, 3)
                 .addComponent(pwNyttLösenord, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(52, 52, 52)
                 .addComponent(btnBytLösenord)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnTillbaka)
-                .addContainerGap(7, Short.MAX_VALUE))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBytLösenordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBytLösenordActionPerformed
-        String epost = txtEpost.getText();
-        valideraNyalösenordet();
-        String nuvarandeLösenord = pwNuvarandeLösenord.getText(); 
-        //Agent lösenord
-        if(validering.getÄrEpostAgent(epost)){
-            if(validering.valideraAgentLösenord(nuvarandeLösenord, epost)){
+        hämtaEpost();
+        String nuvarandeLösenord = pwNuvarandeLösenord.getText();
+        String nyttLösenord = pwNyttLösenord.getText();
+        if(!nuvarandeLösenord.isEmpty() && !nyttLösenord.isEmpty() && validering.valideraLösenord(nyttLösenord) && validering.valideraLösenord(nuvarandeLösenord)){
+            //Agent lösenord
+            if(anvTyp.equals("Agent") ||anvTyp.equals("Admin")){
+                if(validering.valideraAgentLösenord(nuvarandeLösenord, epost)){
                     db.setAgentLösenordFrånEpost(epost, nyttLösenord);
                     JOptionPane.showMessageDialog(null, "Bytte lösenord.");
+                }
             }
+            //Alien lösenord
             else{
-                JOptionPane.showMessageDialog(null, "Felskrivet lösenord.");
+                if(validering.valideraAlienLösenord(nuvarandeLösenord, epost)){
+                    db.setAlienLösenordFrånEpost(epost, nyttLösenord);
+                    JOptionPane.showMessageDialog(null, "Bytte lösenord.");
+                }
             }
         }
-        //Alien lösenord
-        else{
-            if(validering.valideraAlienEpostExisterar(epost, false)){
-                db.setAlienLösenordFrånEpost(epost, nyttLösenord);
-                JOptionPane.showMessageDialog(null, "Bytte lösenord.");
-            }
-            else{
-                JOptionPane.showMessageDialog(null, "Felskrivet lösenord.");
-            }
+        else if(nuvarandeLösenord.isEmpty()||nyttLösenord.isEmpty()){
+            JOptionPane.showMessageDialog(null, "Var vänlig och fyll i båda fälten.");
         }
     }//GEN-LAST:event_btnBytLösenordActionPerformed
 
@@ -171,14 +158,19 @@ public class BytaLösenord extends javax.swing.JFrame {
             adminsida.show();
             dispose();
         }
-    }//GEN-LAST:event_btnTillbakaActionPerformed
-   
-    private void valideraNyalösenordet(){
-        if(validering.valideraLösenord(pwNyttLösenord.getText())){
-            nyttLösenord = pwNyttLösenord.getText();
+        else if(anvTyp.equals("Alien")){
+            AlienHemsida aliensida = new AlienHemsida(anvID, anvTyp);
+            aliensida.show();
+            dispose();
         }
-        else{
-            JOptionPane.showMessageDialog(null, "Nya lösenordet är felskrivet.");
+    }//GEN-LAST:event_btnTillbakaActionPerformed
+  
+    private void hämtaEpost(){
+        if(anvTyp.equals("Alien")){
+            epost = db.getAlienEpostFrånID(anvID);
+        }
+        else if(anvTyp.equals("Agent") ||anvTyp.equals("Admin")){
+            epost = db.getAgentsEpost(anvID);
         }
     }
 
@@ -186,11 +178,9 @@ public class BytaLösenord extends javax.swing.JFrame {
     private javax.swing.JButton btnBytLösenord;
     private javax.swing.JButton btnTillbaka;
     private javax.swing.JLabel lblBytLösenord;
-    private javax.swing.JLabel lblEpost;
     private javax.swing.JLabel lblNuvarandeLösenord;
     private javax.swing.JLabel lblNyttLösenord;
     private javax.swing.JPasswordField pwNuvarandeLösenord;
     private javax.swing.JPasswordField pwNyttLösenord;
-    private javax.swing.JTextField txtEpost;
     // End of variables declaration//GEN-END:variables
 }

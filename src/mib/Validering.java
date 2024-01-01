@@ -293,17 +293,6 @@ public class Validering {
             }
             return finns;
     }
-
-      //Är Agent Epost
-      public boolean getÄrEpostAgent(String epost){
-          boolean ärAgent = false;
-          String[] epostArray = epost.split("@");
-          if(epostArray[1].equals("mib.net")){
-              ärAgent = true;
-          }
-          return ärAgent;
-      }
-
       //Validera om agentens lösenord stämmer
       public boolean valideraAgentLösenord(String lösenord, String epost){
           boolean rättLösenord = false;
