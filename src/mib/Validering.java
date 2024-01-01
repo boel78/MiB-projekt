@@ -129,10 +129,12 @@ public class Validering {
     //validerar utrustning
     public boolean valideraUtrustning(String utrustning){
         boolean valid = false;
-        if(utrustning.matches("^[A-Z]{1}[a-z]*+(\\s[A-Z]{1}[a-z]*)?")){
+        if(utrustning.matches("^[A-Z]{1}[a-z]*+(\\s[a-zA-Z]*)?")){
             valid = true;
         }
-        System.out.println(valid);
+        else{
+            JOptionPane.showMessageDialog(null, "Var vänlig och fyll i ett acceptabelt namn");
+        }
         return valid;
     }
 

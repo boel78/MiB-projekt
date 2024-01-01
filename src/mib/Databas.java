@@ -1084,6 +1084,18 @@ public void taBortRas(int id) {
         }
         return info;
     }
+    
+    //Nyregistrera utrustning
+    public void nyregistreraUtrustning(String benämning, String typ, String kategoritext){
+        int nyttID = getUtrustningBenämning().size() + 1;
+        try{
+            idb.insert("INSERT INTO Utrustning VALUES(" + nyttID + ", '" + benämning + "')");
+            idb.insert("INSERT INTO " + typ + " VALUES(" + nyttID + ", '" + kategoritext + "')");
+        }
+        catch(InfException ex){
+            System.out.println(ex.getMessage());
+        }
+    }
    
    
 }

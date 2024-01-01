@@ -98,6 +98,11 @@ public class TaBortUtrustning extends javax.swing.JFrame {
         txtÖvrigInfo.setColumns(12);
 
         btnLäggTill.setText("Lägg till");
+        btnLäggTill.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLäggTillActionPerformed(evt);
+            }
+        });
 
         lblBenämning.setText("Benämning");
 
@@ -246,6 +251,19 @@ public class TaBortUtrustning extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnTillbakaActionPerformed
 
+    //Lägg till knappen
+    private void btnLäggTillActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLäggTillActionPerformed
+        if(!txtBenämning.getText().isEmpty() && !txtÖvrigInfo.getText().isEmpty()){
+            if(validering.valideraUtrustning(txtBenämning.getText())){
+                db.nyregistreraUtrustning(txtBenämning.getText(),valdTyp ,txtÖvrigInfo.getText());
+                JOptionPane.showMessageDialog(null, "Utrustningen har lagts till.");
+            }
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Var vänlig och fyll i fälten med det du vill lägga till.");
+        }
+    }//GEN-LAST:event_btnLäggTillActionPerformed
+
 
     
     //Ta bort utrustning metod
@@ -279,28 +297,28 @@ public class TaBortUtrustning extends javax.swing.JFrame {
     private void tabortVapen(){
     if(validering.valideraVapenExisterar(valdID)){
             db.taBortVapen(valdID);
-            System.out.println("Tog bort vapen " + valdID);
+            JOptionPane.showMessageDialog(null, "Tog bort vapen " + valdID);
         }
     }
     
     private void tabortInneharUtrustning(){
     if(validering.valideraOmUtrustningInnehas(valdID)){
             db.taBortInneharUtrustning(valdID);
-            System.out.println("Tog bort inneharUtrustning " + valdID);
+            JOptionPane.showMessageDialog(null, "Tog bort inneharUtrustning " + valdID);
         }
     }
     
     private void tabortKommunikation(){
         if(validering.valideraKommunikationUtrustningsID(valdID)){
             db.taBortKommunikation(valdID);
-            System.out.println("Tog bort Kommunikation " + valdID);
+            JOptionPane.showMessageDialog(null, "Tog bort Kommunikation " + valdID);
         }
     }
     
     private void tabortTeknik(){
         if(validering.valideraTeknikUtrustningsID(valdID)){
             db.taBortTeknik(valdID);
-            System.out.println("Tog bort Teknik " + valdID);
+            JOptionPane.showMessageDialog(null, "Tog bort Teknik " + valdID);
         }
     }
     
