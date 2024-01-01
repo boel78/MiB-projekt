@@ -74,7 +74,7 @@ public class Validering {
     public boolean valideraAgentEpostTypo(String epost){
         boolean valid = false;
         if(!epost.isEmpty()){
-            String emailRegex = "^[a][a-z]{1}+\\@mib.net";
+            String emailRegex = "^[a][a-z]{1}\\d?\\@mib.net";
             if(epost.matches(emailRegex)){
                 valid = true;
             }

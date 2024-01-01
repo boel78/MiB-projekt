@@ -588,33 +588,38 @@ public class EnskildAgentInfo extends javax.swing.JFrame {
     }
     
     private void taBortAgent(){
-        ArrayList<String> tillhörandeAliens = db.getAlienListaFrånAgentID(id);
-        //Ifall agenten inte har något alienansvar
-        if(tillhörandeAliens.isEmpty()){
-            db.taBortInneharUtrustningVidAgentID(id);
-            db.taBortFältAgentVidAgentID(id);
-            if(validering.valideraOmrådeschefExisterar(id)){
-                db.taBortOmrådesChef(id);
+        if(!id.equals(anvID)){
+            ArrayList<String> tillhörandeAliens = db.getAlienListaFrånAgentID(id);
+            //Ifall agenten inte har något alienansvar
+            if(tillhörandeAliens.isEmpty()){
+                db.taBortInneharUtrustningVidAgentID(id);
+                db.taBortFältAgentVidAgentID(id);
+                if(validering.valideraOmrådeschefExisterar(id)){
+                    db.taBortOmrådesChef(id);
+                }
+                if(validering.valideraKontorschefExisterar(id)){
+                    db.taBortKontorsChef(id);
+                }
+                db.taBortAgent(id);
+                JOptionPane.showMessageDialog(null, "Agenten är borttagen.");
             }
-            if(validering.valideraKontorschefExisterar(id)){
-                db.taBortKontorsChef(id);
+            //Ifall agenten har alienansvar
+            else{
+                db.taBortInneharUtrustningVidAgentID(id);
+                db.taBortFältAgentVidAgentID(id);
+                if(validering.valideraOmrådeschefExisterar(id)){
+                    db.taBortOmrådesChef(id);
+                }
+                if(validering.valideraKontorschefExisterar(id)){
+                    db.taBortKontorsChef(id);
+                }
+                uppdateraAliensKontaktperson(id);
+                db.taBortAgent(id);
+                JOptionPane.showMessageDialog(null, "Agenten är borttagen.");
             }
-            db.taBortAgent(id);
-            JOptionPane.showMessageDialog(null, "Agenten är borttagen.");
         }
-        //Ifall agenten har alienansvar
         else{
-            db.taBortInneharUtrustningVidAgentID(id);
-            db.taBortFältAgentVidAgentID(id);
-            if(validering.valideraOmrådeschefExisterar(id)){
-                db.taBortOmrådesChef(id);
-            }
-            if(validering.valideraKontorschefExisterar(id)){
-                db.taBortKontorsChef(id);
-            }
-            uppdateraAliensKontaktperson(id);
-            db.taBortAgent(id);
-            JOptionPane.showMessageDialog(null, "Agenten är borttagen.");
+            JOptionPane.showMessageDialog(null, "Du kan inte ta bort dig själv.");
         }
     }
 
