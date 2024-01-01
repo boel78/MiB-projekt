@@ -261,11 +261,11 @@ public class ÄndraAlienInfo extends javax.swing.JFrame {
             System.out.println("Felaktigt datum.");
         }
         else if(ansvarigAgent > db.antalAgenterIDatabas()) {
-            System.out.println("Agenten finns inte.");
-            
-            
-            //Sätter värden på fälten
-        } else {   namn = txtNyttNamn.getText();
+            System.out.println("Agenten finns inte.");   
+        }
+        //Sätter värden på fälten
+        else{
+            namn = txtNyttNamn.getText();
             telefonnummer = txtTelefon.getText();
             lösenord = pswLösen.getText();
             datum = txtDatum.getText();

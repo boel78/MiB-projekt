@@ -149,7 +149,7 @@ public class BytaLösenord extends javax.swing.JFrame {
         }
         //Alien lösenord
         else{
-            if(validering.valideraAlienEpostExisterar(epost)){
+            if(validering.valideraAlienEpostExisterar(epost, false)){
                 db.setAlienLösenordFrånEpost(epost, nyttLösenord);
                 JOptionPane.showMessageDialog(null, "Bytte lösenord.");
             }

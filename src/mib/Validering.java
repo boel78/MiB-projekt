@@ -21,27 +21,29 @@ public class Validering {
 
     //Validerar en Alienemail
     public boolean valideraAlienEpostTypo(String epost){
+        System.out.println(epost);
         boolean valid = false;
-        String emailRegex = "^[a-zA-ZåäöÅÄÖ0-9._%+-]+@[a-zåäöA-ZÅÄÖ0-9.-]+\\.[a-zåäöA-ZÅÄÖ]{2,6}$";
+        String emailRegex = "^[a-zA-ZåäöÅÄÖ0-9._%+-]+@[a-zA-ZåäöÅÄÖ0-9-]+\\.[a-zA-ZåäöÅÄÖ]{2,6}$";
 
         if(epost.matches(emailRegex)){
             valid = true;
         }
         else{
-            System.out.println("epost typo");
+            JOptionPane.showMessageDialog(null, "Stavfel på epost");
         }
-        System.out.println("Alien epost: " + valid);
         return valid;
     }
 
     //Validera om Alienepost finns
-    public boolean valideraAlienEpostExisterar(String epost){
+    public boolean valideraAlienEpostExisterar(String epost, boolean skrivUt){
         boolean finns = false;
         if(valideraAlienEpostTypo(epost)){
             for(String email : db.getAllaAlienEpost()){
                 if(email.equals(epost)){
-                  finns = true;
-                    System.out.println("Epost finns redan");
+                    finns = true;
+                    if(skrivUt){
+                        JOptionPane.showMessageDialog(null, "Eposten finns redan.");
+                    }
                 }
             }
         }

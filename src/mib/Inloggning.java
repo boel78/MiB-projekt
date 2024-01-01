@@ -149,15 +149,14 @@ public class Inloggning extends javax.swing.JFrame {
         if(!txtEpost.getText().isEmpty() || !pwField.getText().isEmpty()){
             String user = txtEpost.getText();
             String pass = pwField.getText();
-            if(validering.valideraAgentEpostTypo(user) && validering.valideraAlienEpostTypo(user) && validering.valideraLösenord(pass)){
-                typ = ÄrInloggTyp(user);
-                if(typ.equals("Alien")){
+            if(validering.valideraLösenord(pass) && ärInloggTyp(user)){
+                if(typ.equals("Alien") && validering.valideraAlienEpostExisterar(user, false)){
                     if(validering.valideraAlienLösenord(pass, user)){
                         id = idb.getAlienIDFrånEpost(user);
                         valid = true; 
                     }
                 }
-                else if(typ.equals("Agent") ||typ.equals("Admin")){                
+                else if((typ.equals("Agent") ||typ.equals("Admin"))&& validering.valideraAgentEpostTypo(user)){                
                     if(validering.valideraAgentLösenord(pass, user)){
                         id = idb.getAgentIDFrånEpost(user);
                         valid = true;
@@ -172,17 +171,24 @@ public class Inloggning extends javax.swing.JFrame {
         return valid;
     }
     
-    public String ÄrInloggTyp(String email){
-        typ = "Alien";
-        String[] emailTyper = email.split("@");
-            if(emailTyper[1].equals("mib.net")){
-                boolean ärAdmin = idb.getAdminStatus(email);
-                typ = "Agent";
-                if(ärAdmin){
-                    typ = "Admin";
+    public boolean ärInloggTyp(String email){
+        boolean ärEpost = false;
+        if(email.contains("@")){
+            ärEpost = true;
+            typ = "Alien";
+            String[] emailTyper = email.split("@");
+                if(emailTyper[1].equals("mib.net")){
+                    boolean ärAdmin = idb.getAdminStatus(email);
+                    typ = "Agent";
+                    if(ärAdmin){
+                        typ = "Admin";
+                    }
                 }
-            }
-        return typ;
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Var vänlig och skriv in en giltig epost adress.");
+        }
+        return ärEpost;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

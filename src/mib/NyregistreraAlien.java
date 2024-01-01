@@ -235,7 +235,7 @@ public class NyregistreraAlien extends javax.swing.JFrame {
             System.out.println("Ansvarig agent: " + ansvarigAgent);
         }
         //Skapar alien i tabellen via databasklassen om eposten inte finns
-        if(!validering.valideraAlienEpostExisterar(txtEpost.getText()) && !fältÄrNull()){    
+        if(!validering.valideraAlienEpostExisterar(txtEpost.getText(), true) && !fältÄrNull()){    
         db.registreraNyAlien(alienId, datum, epost, lösenord, namn, telefonnummer, plats, ansvarigAgent);}
         else{
             System.out.println("Validering misslyckades, något fält är null");
