@@ -245,7 +245,7 @@ public class NyregistreraAlien extends javax.swing.JFrame {
 
     private void btnLäggTillActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLäggTillActionPerformed
         //Sätter alienId
-        alienId = (db.antalAliensIDatabas() + 1);
+        alienId = (db.getNyttAlienID());
         
         //Validerar och sätter epost
         if(!txtEpost.getText().isEmpty() && validering.valideraAlienEpostTypo(txtEpost.getText())){

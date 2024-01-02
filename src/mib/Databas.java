@@ -1120,6 +1120,31 @@ public void taBortRas(int id) {
         }
     }
     
-   
+    //Hämta vilket alienID som blir nytt
+    public int getNyttAlienID(){
+        int nyttID = 0;
+        ArrayList<String> alienIDn = getAllaAlienIDn();
+        for(Integer i = 1; i <= alienIDn.size(); i++){
+            if(!alienIDn.contains(i.toString())){
+                nyttID = i;
+            }
+        }
+        if(nyttID == 0){
+            nyttID = antalAliensIDatabas() + 1;
+        }
+        return nyttID;
+    }
+    
+    //Hämtar alla alien IDn
+    public ArrayList<String> getAllaAlienIDn(){
+        ArrayList<String> idn = new ArrayList<>();
+        try{
+            idn = idb.fetchColumn("SELECT Alien_ID FROM Alien");
+        }
+        catch(InfException ex){
+            System.out.println(ex.getMessage());
+        }
+        return idn;
+    }
    
 }
