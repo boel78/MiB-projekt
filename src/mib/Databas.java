@@ -1,6 +1,5 @@
 package mib;
 
-
 import oru.inf.InfDB;
 import oru.inf.InfException;
 import java.util.logging.Level;
@@ -12,8 +11,7 @@ import javax.swing.JOptionPane;
 
 public class Databas {
     private InfDB idb;
-
-
+    
     //Skapa db
     public Databas(){
         try {
@@ -23,17 +21,6 @@ public class Databas {
         catch (InfException ex) {
             Logger.getLogger(Databas.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
-
-    //Test för att se så databas funkar
-    public String getAgentTest(){
-       String namn = "";
-       try {
-       namn =  idb.fetchSingle("SELECT Namn FROM agent WHERE agent_id=1");
-       } catch(InfException ex){
-           System.out.println("Det blev fel");
-       }
-       return namn;
     }
 
     //Hämtar alla agentEmail
@@ -73,12 +60,10 @@ public class Databas {
 
     //Hämtar AlienLösenord från epost
     public String getAlienLösenordPåEpost(String email, String typ){
-        System.out.println(typ);
         if(typ.equals("Admin")){
             typ = "Agent";
         }
         String query = "SELECT Losenord FROM " + typ + " where Epost= '" + email + "'";
-
         String alienLösen = "";
         try {
             alienLösen = idb.fetchSingle(query);
@@ -108,12 +93,12 @@ public class Databas {
 //Hämtar alla utrustningsbenämningar
     public ArrayList<String> getUtrustningBenämning(){
         ArrayList<String> utrustning = new ArrayList<>();
-          try{
-              utrustning = idb.fetchColumn("SELECT Benamning FROM Utrustning");
-              }
-                catch(InfException ex){
-                    System.out.println(ex.getMessage());
-                }
+        try{
+            utrustning = idb.fetchColumn("SELECT Benamning FROM Utrustning");
+        }
+        catch(InfException ex){
+            System.out.println(ex.getMessage());
+        }
         return utrustning;
     }
 
@@ -146,130 +131,128 @@ public class Databas {
         try{
             idb.delete(query);
             System.out.println("Borttaget");
-          }
-          catch(InfException ex){
-              System.out.println(ex.getMessage());
-          }
-      }
+        }
+        catch(InfException ex){
+            System.out.println(ex.getMessage());
+        }
+    }
 
-      //Ta bort vapen
-      public void taBortVapen(String ID){
-          String query = "DELETE FROM Vapen where Utrustnings_ID = " + ID;
-          try{
-              idb.delete(query);
-              System.out.println("Borttaget");
-          }
-          catch(InfException ex){
-              System.out.println(ex.getMessage());
-          }
-      }
+    //Ta bort vapen
+    public void taBortVapen(String ID){
+        String query = "DELETE FROM Vapen where Utrustnings_ID = " + ID;
+        try{
+            idb.delete(query);
+            System.out.println("Borttaget");
+        }
+        catch(InfException ex){
+            System.out.println(ex.getMessage());
+        }
+    }
 
-      //Hämta vapen från ID
-      public String getVapenBenämning(String ID){
-          String namn = "";
-          String query = "SELECT Benamning FROM Vapen where Utrustnings_ID = " + ID;
-          try{
-              namn = idb.fetchSingle(query);
-          }
-          catch(InfException ex){
-              System.out.println(ex.getMessage());
-          }
-          return namn;
-      }
+    //Hämta vapen från ID
+    public String getVapenBenämning(String ID){
+        String namn = "";
+        String query = "SELECT Benamning FROM Vapen where Utrustnings_ID = " + ID;
+        try{
+            namn = idb.fetchSingle(query);
+        }
+        catch(InfException ex){
+            System.out.println(ex.getMessage());
+        }
+        return namn;
+    }
 
-      //Hämta Alla Vapen från ID
-      public ArrayList<String> getVapenID(){
-          ArrayList<String> vapen = new ArrayList<>();
-          try{
-              vapen = idb.fetchColumn("SELECT Utrustnings_ID FROM Vapen");
-          }
-          catch(InfException ex){
-              System.out.println(ex.getMessage());
-          }
-          return vapen;
-      }
+    //Hämta Alla Vapen från ID
+    public ArrayList<String> getVapenID(){
+        ArrayList<String> vapen = new ArrayList<>();
+        try{
+            vapen = idb.fetchColumn("SELECT Utrustnings_ID FROM Vapen");
+        }
+        catch(InfException ex){
+            System.out.println(ex.getMessage());
+        }
+        return vapen;
+    }
 
-      //Ta bort rad innehar utrustning från utrustningsID
-      public void taBortInneharUtrustning(String utrustningsID){
-          String query= "DELETE FROM Innehar_Utrustning where Utrustnings_ID = " + utrustningsID;
-          try{
-              idb.delete(query);
-          }
-          catch(InfException ex){
-              System.out.println(ex.getMessage());
-          }
-      }
+    //Ta bort rad innehar utrustning från utrustningsID
+    public void taBortInneharUtrustning(String utrustningsID){
+        String query= "DELETE FROM Innehar_Utrustning where Utrustnings_ID = " + utrustningsID;
+        try{
+            idb.delete(query);
+        }
+        catch(InfException ex){
+            System.out.println(ex.getMessage());
+        }
+    }
 
-      //Hämta UtrustningsID från innehar_Utrustning
-      public ArrayList<String> getUtrustningSomInnehas(){
-          ArrayList<String> utrustningsID = new ArrayList<>();
-          try{
-              utrustningsID = idb.fetchColumn("SELECT Utrustnings_ID FROM Innehar_Utrustning");
-          }
-          catch(InfException ex){
-              System.out.println(ex.getMessage());
-          }
-          return utrustningsID;
-      }
+    //Hämta UtrustningsID från innehar_Utrustning
+    public ArrayList<String> getUtrustningSomInnehas(){
+        ArrayList<String> utrustningsID = new ArrayList<>();
+        try{
+            utrustningsID = idb.fetchColumn("SELECT Utrustnings_ID FROM Innehar_Utrustning");
+        }
+        catch(InfException ex){
+            System.out.println(ex.getMessage());
+        }
+        return utrustningsID;
+    }
 
-      //Hämta UtrustningsID från Teknik
-      public ArrayList<String> getTeknikID(){
-          ArrayList<String> teknik = new ArrayList<>();
-          try{
-              teknik = idb.fetchColumn("SELECT Utrustnings_ID FROM Teknik");
-          }
-          catch(InfException ex){
-              System.out.println(ex.getMessage());
-          }
-          return teknik;
-      }
+    //Hämta UtrustningsID från Teknik
+    public ArrayList<String> getTeknikID(){
+        ArrayList<String> teknik = new ArrayList<>();
+        try{
+            teknik = idb.fetchColumn("SELECT Utrustnings_ID FROM Teknik");
+        }
+        catch(InfException ex){
+            System.out.println(ex.getMessage());
+        }
+        return teknik;
+    }
 
-      //Hämta UtrustningsID från Kommunikation
-      public ArrayList<String> getKommunikationID(){
-          ArrayList<String> kommunikation = new ArrayList<>();
-          try{
-              kommunikation = idb.fetchColumn("SELECT Utrustnings_ID FROM Kommunikation");
-          }
-          catch(InfException ex){
-              System.out.println(ex.getMessage());
-          }
-          return kommunikation;
-      }
+    //Hämta UtrustningsID från Kommunikation
+    public ArrayList<String> getKommunikationID(){
+        ArrayList<String> kommunikation = new ArrayList<>();
+        try{
+            kommunikation = idb.fetchColumn("SELECT Utrustnings_ID FROM Kommunikation");
+        }
+        catch(InfException ex){
+            System.out.println(ex.getMessage());
+        }
+        return kommunikation;
+    }
 
-      //Ta bort Teknik utifrån ID
-      public void taBortTeknik(String utrustningsID){
-          String query= "DELETE FROM Teknik where Utrustnings_ID = " + utrustningsID;
-          try{
-              idb.delete(query);
-          }
-          catch(InfException ex){
-              System.out.println(ex.getMessage());
-          }
-      }
+    //Ta bort Teknik utifrån ID
+    public void taBortTeknik(String utrustningsID){
+        String query= "DELETE FROM Teknik where Utrustnings_ID = " + utrustningsID;
+        try{
+            idb.delete(query);
+        }
+        catch(InfException ex){
+            System.out.println(ex.getMessage());
+        }
+    }
 
-      //Ta bort Kommunikation utifrån ID
-      public void taBortKommunikation(String utrustningsID){
-          String query= "DELETE FROM Kommunikation where Utrustnings_ID =" + utrustningsID;
-          try{
-              idb.delete(query);
-              System.out.println("Tog bort kommunikation");
-          }
-          catch(InfException ex){
-              System.out.println(ex.getMessage());
-          }
-      }
-
-
+    //Ta bort Kommunikation utifrån ID
+    public void taBortKommunikation(String utrustningsID){
+        String query= "DELETE FROM Kommunikation where Utrustnings_ID =" + utrustningsID;
+        try{
+            idb.delete(query);
+            System.out.println("Tog bort kommunikation");
+        }
+        catch(InfException ex){
+            System.out.println(ex.getMessage());
+        }
+    }
 
     //Hämtar alla agentNamn
     public ArrayList<String> getAgentNamn(){
         ArrayList<String> agentNamn = new ArrayList<>();
         try{
             agentNamn = idb.fetchColumn("SELECT Namn FROM Agent");
-          }
-          catch(InfException ex){
-              System.out.println(ex.getMessage());
-          }
+        }
+        catch(InfException ex){
+            System.out.println(ex.getMessage());
+        }
         return agentNamn;
     }
 
@@ -280,7 +263,7 @@ public class Databas {
         System.out.println(query);
         try{
             idb.insert(query);
-            System.out.println("DET funka");
+            JOptionPane.showMessageDialog(null, "Registreringen lyckades.");
         }
         catch(InfException ex){
             System.out.println(ex.getMessage());
@@ -395,12 +378,13 @@ public class Databas {
         String query = "UPDATE Alien SET Losenord= '"+ losenord + "' where Epost = '" + epost + "'";
         try{
             idb.update(query);
-          }
-          catch(InfException ex){
-              System.out.println(ex.getMessage());
-          }
-      }
-      // hämta all info om en alien utifrån ID.
+        }
+        catch(InfException ex){
+            System.out.println(ex.getMessage());
+        }
+    }
+    
+    // hämta all info om en alien utifrån ID.
     public HashMap<String,String> hämtaAlienInfo(int ID) {
         String query = "SELECT * FROM alien WHERE alien_id=" + ID;
         HashMap<String,String> alien = new HashMap<>();
@@ -411,46 +395,45 @@ public class Databas {
             System.out.println(ex.getMessage());
         }
         return alien;
-}
-// ta bort alien utifrån ID.
-public void taBortAlien(int ID) {
-   String query = "DELETE FROM alien WHERE alien_id=" + ID;
-   try {
-       idb.delete(query);
-   } catch (InfException ex) {
-     System.out.println(ex.getMessage());
-   }
-}
+    }
+    // ta bort alien utifrån ID.
+    public void taBortAlien(int ID) {
+        String query = "DELETE FROM alien WHERE alien_id=" + ID;
+        try {
+           idb.delete(query);
+        } 
+        catch (InfException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
 
-   // hämta en aliens id utifrån namnet.
-public int hämtaAlienIdFrånNamn(String namn) {
-   String query = "SELECT alien_id FROM Alien WHERE namn= '" + namn + "'";
-   int id = 0;
-   try {
-   String strängId = idb.fetchSingle(query);
+    // hämta en aliens id utifrån namnet.
+    public int hämtaAlienIdFrånNamn(String namn) {
+        String query = "SELECT alien_id FROM Alien WHERE namn= '" + namn + "'";
+        int id = 0;
+        try {
+            String strängId = idb.fetchSingle(query);
+            if (strängId != null && !strängId.isEmpty()) {
+                id = Integer.parseInt(strängId);
+            }
+        } 
+        catch (InfException ex) {
+            System.out.println(ex.getMessage());
+        }
+       return id;
+    }
 
-   if (strängId != null && !strängId.isEmpty()) {
-       id = Integer.parseInt(strängId);
-   }
-   } catch (InfException ex) {
-   System.out.println(ex.getMessage());
-   }
-   return id;
-}
-
-
-//ta bort ras på alien utifrån id.
-public void taBortRas(int id) {
-   try{
-   idb.delete("DELETE FROM Boglodite WHERE Alien_ID=" + id);
-   idb.delete("DELETE FROM Squid WHERE Alien_ID=" + id);
-   idb.delete("DELETE FROM Worm WHERE Alien_ID=" + id);
- }
- catch(InfException ex){
-     System.out.println(ex.getMessage());
- }
-}
-
+    //ta bort ras på alien utifrån id.
+    public void taBortRas(int id) {
+        try{
+            idb.delete("DELETE FROM Boglodite WHERE Alien_ID=" + id);
+            idb.delete("DELETE FROM Squid WHERE Alien_ID=" + id);
+            idb.delete("DELETE FROM Worm WHERE Alien_ID=" + id);
+        }
+        catch(InfException ex){
+            System.out.println(ex.getMessage());
+        }
+    }
 
     //Hämta platsID från alien id
     public String getPlatsIDFrånAlienID(String alienID){
@@ -459,9 +442,9 @@ public void taBortRas(int id) {
         try{
             platsID = idb.fetchSingle(query);
         }
-          catch(InfException ex){
-              System.out.println(ex.getMessage());
-          }
+        catch(InfException ex){
+            System.out.println(ex.getMessage());
+        }
         return platsID;
     }
 
@@ -543,18 +526,18 @@ public void taBortRas(int id) {
         return namn;
     }
 
-        //Hämta idn från Ras
-        public ArrayList<String> getIdnFrånRas(String ras){
-            ArrayList<String> IDn = new ArrayList<>();
-            String query = "SELECT Alien_ID FROM " + ras;
-            try{
-                IDn = idb.fetchColumn(query);
-            }
-            catch(InfException ex){
-                System.out.println(ex.getMessage());
-            }
-            return IDn;
+    //Hämta idn från Ras
+    public ArrayList<String> getIdnFrånRas(String ras){
+        ArrayList<String> IDn = new ArrayList<>();
+        String query = "SELECT Alien_ID FROM " + ras;
+        try{
+            IDn = idb.fetchColumn(query);
         }
+        catch(InfException ex){
+            System.out.println(ex.getMessage());
+        }
+        return IDn;
+    }
 
     //Hämta Alien namn från ID
     public String getAlienNamnFrånID(String ID){
@@ -635,19 +618,20 @@ public void taBortRas(int id) {
         }
         return idLista;
     }
+    
     //Lägg till ny alien.
     public void registreraNyAlien(int id, String datum, String epost, String lösenord, String namn, String telefon, int plats, int ansvarigAgent){
         try {
             String query = "INSERT INTO Alien (Alien_ID, Registreringsdatum, Epost, Losenord, Namn, Telefon, Plats, Ansvarig_Agent)" +
             "VALUES (" + id + ", '" + datum + "', '" + epost + "', '" + lösenord + "', '" + namn + "', '" + telefon + "', '" + plats + "', '" + ansvarigAgent + "')";
-        idb.insert(query);
+            idb.insert(query);
             JOptionPane.showMessageDialog(null, "Ny alien har registrerats.");
-
-        } catch(InfException ex){
+        } 
+        catch(InfException ex){
             System.out.println(ex.getMessage());
         }
-
     }
+    
     //Hämta antal aliens.
     public int antalAliensIDatabas(){
         int antal = 0;
@@ -656,12 +640,12 @@ public void taBortRas(int id) {
             antal++;
         }
         return antal;
-        }
+    }
 
 
     public void ändraAlienInfo(int id, String datum, String lösenord, String namn, String telefon, int plats, int ansvarigAgent){
         try {
-        String query = "UPDATE Alien SET "
+                String query = "UPDATE Alien SET "
                 + "Registreringsdatum = '" + datum + "', "
                 + "Losenord = '" + lösenord + "', "
                 + "Namn = '" + namn + "', "
@@ -671,7 +655,8 @@ public void taBortRas(int id) {
                 + " WHERE Alien_ID = " + id;
         idb.update(query);
         System.out.println("Informationen har uppdaterats.");
-        } catch(InfException ex){
+        } 
+        catch(InfException ex){
             System.out.println(ex.getMessage());
         }
     }
@@ -848,14 +833,14 @@ public void taBortRas(int id) {
     public void bytUtAgentFrånAlienTillChef(String agentID, String områdesChef){
         boolean ändrad = false;
         String chefNamn = "";
-            String query = "UPDATE Alien SET Ansvarig_Agent = " + områdesChef + " where Ansvarig_Agent = " + agentID;
-            try{
-                idb.update(query);
-                ändrad = true;
-            }
-            catch(InfException ex){
-                System.out.println(ex.getMessage());
-            }
+        String query = "UPDATE Alien SET Ansvarig_Agent = " + områdesChef + " where Ansvarig_Agent = " + agentID;
+        try{
+            idb.update(query);
+            ändrad = true;
+        }
+        catch(InfException ex){
+            System.out.println(ex.getMessage());
+        }
     }
 
     //hämta alien id från agent id
@@ -1161,6 +1146,5 @@ public void taBortRas(int id) {
         }
         return nyttID;
         
-    }
-   
+    } 
 }

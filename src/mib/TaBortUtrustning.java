@@ -5,7 +5,6 @@ import java.util.HashMap;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-
 public class TaBortUtrustning extends javax.swing.JFrame {
     private Databas db;
     private Validering validering;
@@ -15,7 +14,6 @@ public class TaBortUtrustning extends javax.swing.JFrame {
     private String kategoriText;
     private String anvID;
     private String anvTyp;
-
 
     public TaBortUtrustning(String anvID, String anvTyp) {
         initComponents();
@@ -30,15 +28,15 @@ public class TaBortUtrustning extends javax.swing.JFrame {
         this.anvTyp = anvTyp;
         System.out.println(anvTyp);
         if(anvTyp.equals("Agent")){
-                lblTaBort.setVisible(false);
-                comboBox.setVisible(false);
-                btnTaBort.setVisible(false);
-            }
-            else{
-                lblTaBort.setVisible(true);
-                comboBox.setVisible(true);
-                btnTaBort.setVisible(true);
-            }
+            lblTaBort.setVisible(false);
+            comboBox.setVisible(false);
+            btnTaBort.setVisible(false);
+        }
+        else{
+            lblTaBort.setVisible(true);
+            comboBox.setVisible(true);
+            btnTaBort.setVisible(true);
+        }
         setDataITabell();
     }
 
@@ -214,8 +212,7 @@ public class TaBortUtrustning extends javax.swing.JFrame {
             db.taBortUtrustning(valdID);
             System.out.println("Tog bort utrustning " + valdID);
             comboBox.removeItem(valdSträng);
-            valideraCombo();
-            
+            valideraCombo();           
         }
         else{
             JOptionPane.showMessageDialog(null, "Det finns ingen utrustning att ta bort");
@@ -263,9 +260,7 @@ public class TaBortUtrustning extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Var vänlig och fyll i fälten med det du vill lägga till.");
         }
     }//GEN-LAST:event_btnLäggTillActionPerformed
-
-
-    
+  
     //Ta bort utrustning metod
     public void taBortUtrustning(String namn){
         for(String namnet : db.getUtrustningBenämning()){
@@ -278,9 +273,9 @@ public class TaBortUtrustning extends javax.swing.JFrame {
     
     //Fyll Combolistan med benämningar
     public void fyllCombo(){
-         for(String benämning : db.getUtrustningBenämning()){
-             comboBox.addItem(benämning);
-         }
+        for(String benämning : db.getUtrustningBenämning()){
+            comboBox.addItem(benämning);
+        }
     }
     
     //Kollar om comboItem redan finns annars lägger den till
@@ -295,14 +290,14 @@ public class TaBortUtrustning extends javax.swing.JFrame {
     
     //metoder för alla fall utav foreign keys och dylikt
     private void tabortVapen(){
-    if(validering.valideraVapenExisterar(valdID)){
+        if(validering.valideraVapenExisterar(valdID)){
             db.taBortVapen(valdID);
             JOptionPane.showMessageDialog(null, "Tog bort vapen " + valdID);
         }
     }
     
     private void tabortInneharUtrustning(){
-    if(validering.valideraOmUtrustningInnehas(valdID)){
+        if(validering.valideraOmUtrustningInnehas(valdID)){
             db.taBortInneharUtrustning(valdID);
             JOptionPane.showMessageDialog(null, "Tog bort inneharUtrustning " + valdID);
         }

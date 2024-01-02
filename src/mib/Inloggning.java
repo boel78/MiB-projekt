@@ -2,7 +2,6 @@ package mib;
 
 import javax.swing.JOptionPane;
 
-
 public class Inloggning extends javax.swing.JFrame {
 
     private Databas idb;
@@ -15,7 +14,6 @@ public class Inloggning extends javax.swing.JFrame {
         idb = new Databas();
         validering = new Validering();
     }
-
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -109,9 +107,6 @@ public class Inloggning extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnLoginActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

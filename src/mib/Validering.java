@@ -21,10 +21,8 @@ public class Validering {
 
     //Validerar en Alienemail
     public boolean valideraAlienEpostTypo(String epost){
-        System.out.println(epost);
         boolean valid = false;
         String emailRegex = "^[a-zA-ZåäöÅÄÖ0-9._%+-]+@[a-zA-ZåäöÅÄÖ0-9-]+\\.[a-zA-ZåäöÅÄÖ]{2,6}$";
-
         if(epost.matches(emailRegex)){
             valid = true;
         }
@@ -57,7 +55,6 @@ public class Validering {
         if(valideraAgentEpostTypo(epost)){
             for(String email : db.getAllaAgentEpost()){
                 if(email.equals(epost)){
-                    System.out.println("Email finns redan.");
                     valid = true;
                     existerar = true;
                 }
@@ -66,7 +63,6 @@ public class Validering {
                 JOptionPane.showMessageDialog(null, "Den här eposten verkar inte finnas.");
             }
         }
-        System.out.println("Agent Epost: " + valid);
         return valid;
     }
 
@@ -74,7 +70,7 @@ public class Validering {
     public boolean valideraAgentEpostTypo(String epost){
         boolean valid = false;
         if(!epost.isEmpty()){
-            String emailRegex = "^[a][a-z]{1}\\d?\\@mib.net";
+            String emailRegex = "^[a][a-zåäö]{1}\\d?\\@mib.net";
             if(epost.matches(emailRegex)){
                 valid = true;
             }
@@ -92,7 +88,7 @@ public class Validering {
     public boolean valideraLösenord(String lösen){
         boolean valid = false;
         if(!lösen.isEmpty()){
-            if(lösen.matches("^[a-zA-Z0-9][a-zA-Z0-9]*") && lösen.length() <= 6){
+            if(lösen.matches("^[a-zA-ZåäöÅÄÖ0-9][a-zA-ZåäöÅÄÖ0-9]*") && lösen.length() <= 6){
                 valid = true;
             }
             else{
@@ -102,34 +98,13 @@ public class Validering {
         else{
             JOptionPane.showMessageDialog(null, "Var vänlig och fyll i ett lösenord.");
         }
-        System.out.println("Lösenordet är " + valid);
-        return valid;
-    }
-
-    //Validerar ett område
-    public boolean valideraOmråde(String område){
-        boolean valid = false;
-        if(område.matches("^[A-Z]{1}[a-z]*")){
-            valid = true;
-        }
-        System.out.println(valid);
-        return valid;
-    }
-
-    //validerar en plats
-    public boolean valideraPlats(String plats){
-        boolean valid = false;
-        if(plats.matches("[A-Z]{1}[a-z]*")){
-            valid = true;
-        }
-        System.out.println(valid);
         return valid;
     }
 
     //validerar utrustning
     public boolean valideraUtrustning(String utrustning){
         boolean valid = false;
-        if(utrustning.matches("^[A-Z]{1}[a-z]*+(\\s[a-zA-Z]*)?")){
+        if(utrustning.matches("^[A-ZÅÄÖ]{1}[a-zåäö]*+(\\s[a-zA-ZåäöÅÄÖ]*)?")){
             valid = true;
         }
         else{
@@ -144,7 +119,6 @@ public class Validering {
         if(namn.matches("^[A-ZÅÄÖ]{1}[a-zåäö]+(\\s[A-ZÅÄÖ]{1}[a-zåäö]*)?")){
             valid = true;
         }
-        System.out.println("Namnet är " + valid);
         return valid;
     }
 
@@ -154,7 +128,6 @@ public class Validering {
         if(nummer.matches("^555-\\d[0-9]{1,4}")){
             valid = true;
         }
-        System.out.println(valid);
         return valid;
     }
 
@@ -189,7 +162,6 @@ public class Validering {
         else{
             JOptionPane.showMessageDialog(null, "Var vänlig och fyll i ett datum.");
         }
-        System.out.println(valid);
         return valid;
     }
 
@@ -207,7 +179,6 @@ public class Validering {
         else{
             JOptionPane.showMessageDialog(null, "Var vänlig och fyll i ett telefonnummer.");
         }
-        System.out.println(valid);
         return valid;
     }
 
@@ -215,9 +186,9 @@ public class Validering {
     public boolean valideraUtrustningBenämningExisterar(String benämning){
         boolean hittad = false;
             for(String namn : db.getUtrustningBenämning()){
-            if(benämning.equals(namn)){
-                hittad = true;
-            }
+                if(benämning.equals(namn)){
+                    hittad = true;
+                }
             }
         return hittad;
     }
@@ -252,7 +223,6 @@ public class Validering {
                 finns = true;
             }
         }
-         System.out.println(finns);
         return finns;
     }
 
@@ -265,7 +235,7 @@ public class Validering {
             }
         }
         return finns;
-      }
+    }
 
 
 
@@ -280,7 +250,7 @@ public class Validering {
             }
             if(!finns && skrivUt){
                 JOptionPane.showMessageDialog(null, "Namnet finns inte.");
-        }
+            }
         }
         return finns;
     }
@@ -288,51 +258,50 @@ public class Validering {
        //Validera om AlienID finns.
     public boolean valideraAlienId(int id){
         boolean finns=false;
-            HashMap<String, String> alienInfo = db.hämtaAlienInfo(id);
-            int alienId = Integer.parseInt(alienInfo.get("Alien_ID"));
-            if(alienId == id){
-                finns = true;
-            }
-            return finns;
-    }
-      //Validera om agentens lösenord stämmer
-      public boolean valideraAgentLösenord(String lösenord, String epost){
-          boolean rättLösenord = false;
-            if(valideraLösenord(lösenord) && db.getAgentLösenordFrånEpost(epost).equals(lösenord)){
-                rättLösenord = true;
-            }
-            else{
-              JOptionPane.showMessageDialog(null, "Fel lösenord.");
-            }
-            return rättLösenord;
+        HashMap<String, String> alienInfo = db.hämtaAlienInfo(id);
+        int alienId = Integer.parseInt(alienInfo.get("Alien_ID"));
+        if(alienId == id){
+            finns = true;
         }
-      
-      //Validera om aliens lösenord stämmer
-      public boolean valideraAlienLösenord(String lösenord, String epost){
-          boolean rättLösenord = false;
-          if(valideraLösenord(lösenord) && db.getAlienLösenordFrånEpost(epost).equals(lösenord)){
-              rättLösenord = true;
-          }
-          else{
-              JOptionPane.showMessageDialog(null, "Fel lösenord.");
-          }
-          return rättLösenord;
+        return finns;
+    }
+    
+    //Validera om agentens lösenord stämmer
+    public boolean valideraAgentLösenord(String lösenord, String epost){
+        boolean rättLösenord = false;
+        if(valideraLösenord(lösenord) && db.getAgentLösenordFrånEpost(epost).equals(lösenord)){
+            rättLösenord = true;
+        }
+        else{
+          JOptionPane.showMessageDialog(null, "Fel lösenord.");
+        }
+        return rättLösenord;
       }
+      
+    //Validera om aliens lösenord stämmer
+    public boolean valideraAlienLösenord(String lösenord, String epost){
+        boolean rättLösenord = false;
+        if(valideraLösenord(lösenord) && db.getAlienLösenordFrånEpost(epost).equals(lösenord)){
+            rättLösenord = true;
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Fel lösenord.");
+        }
+        return rättLösenord;
+    }
 
     //Validera om agentID är en siffra
     public boolean valideraAgentIDTypo(String id){
         boolean isNumber = false;
         try {
             Integer.parseInt(id);
-            System.out.println(id + " is a valid integer");
             isNumber = true;
 	}
 	catch (NumberFormatException e){
-            System.out.println(id + " is not a valid integer");
             JOptionPane.showMessageDialog(null, "Det här är ingen siffra.");
 	}
         return isNumber;
-      }
+    }
 
     //Validera om agentID Existerar
     public boolean valideraAgentIDExisterar(String id){
@@ -415,11 +384,8 @@ public class Validering {
     public boolean valideraKontorschefPåSpecifik(String id, String kontor){
         boolean stämmer = false;
         for(HashMap<String, String> mapar : db.getAllaRaderKontorschef()){
-                System.out.println(mapar.get("Agent_ID"));
-                System.out.println(mapar.get("Kontorsbeteckning"));
-                if(mapar.get("Agent_ID").equals(id) && mapar.get("Kontorsbeteckning").equals(kontor)){
-                    stämmer = true;
-
+            if(mapar.get("Agent_ID").equals(id) && mapar.get("Kontorsbeteckning").equals(kontor)){
+                stämmer = true;
             }
         }
         return stämmer;
@@ -448,11 +414,10 @@ public class Validering {
         boolean stämmer = false;
         Integer områdesID = db.getOmrådeId(område);
         for(HashMap<String, String> mapar : db.getAllaRaderOmrådeschef()){
-                if(mapar.get("Agent_ID").equals(id) && mapar.get("Omrade").equals(områdesID.toString())){
-                    stämmer = true;
+            if(mapar.get("Agent_ID").equals(id) && mapar.get("Omrade").equals(områdesID.toString())){
+                stämmer = true;
             }
         }
-
         return stämmer;
     }
     
@@ -467,6 +432,5 @@ public class Validering {
             }
         }
         return existerar;
-    }
-    
+    }   
 }

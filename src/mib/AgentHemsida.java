@@ -1,13 +1,5 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package mib;
 
-/**
- *
- * @author joakimfockstedt
- */
 public class AgentHemsida extends javax.swing.JFrame {
 
     private String anvID;
@@ -207,9 +199,6 @@ public class AgentHemsida extends javax.swing.JFrame {
         v3a.show();
         dispose();
     }//GEN-LAST:event_btnVisaTop3ActionPerformed
-
-
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBytLösen;
