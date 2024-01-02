@@ -1,6 +1,7 @@
 package mib;
 
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -279,55 +280,58 @@ public class ÄndraAlienInfo extends javax.swing.JFrame {
             
         String namnAttÄndra = txtNamn.getText();
         int id = db.hämtaAlienIdFrånNamn(namnAttÄndra);
-
-        //Validerar
-        if(!validering.valideraAlienNamn(namnAttÄndra)){
-            System.out.println("Felaktigt namn.");
-        }
-        else if(!validering.valideraAlienTelefonnummer(txtTelefon.getText())) {
-            System.out.println("Felaktigt telefonnummer.");
-        }
-        else if(!validering.valideraLösenord(pswLösen.getText())) {
-            System.out.println("Felaktigt lösenord.");
-        }
-        else if(!validering.valideraAgentAnställningsDatum(txtDatum.getText())){
-            System.out.println("Felaktigt datum.");
-        }
-        else if(ansvarigAgent > db.antalAgenterIDatabas()) {
-            System.out.println("Agenten finns inte.");   
-        }
-        else if(txtRasInfo.getText().isEmpty()){
-            System.out.println("Övrig info är tom.");
-        }
-        //Sätter värden på fälten
-        else{
-            namn = txtNyttNamn.getText();
-            telefonnummer = txtTelefon.getText();
-            lösenord = pswLösen.getText();
-            datum = txtDatum.getText();
-            ras = comboBoxRas.getSelectedItem().toString();
-            
-            try {
-                ansvarigAgent = Integer.parseInt(txtAgent.getText());
-            } 
-            catch(NumberFormatException ex) {
-                System.out.println(ex.getMessage());
+        
+        if(validering.valideraAlienNamnExisterar(txtNamn.getText())){
+            //Validerar
+            if(!validering.valideraAlienNamn(namnAttÄndra)){
+                JOptionPane.showMessageDialog(null, "Felaktigt namn.");
             }
-            //Skriver ut informationen som lagts till i fälten
-            System.out.println("Telefonnummer: " + telefonnummer);
-            System.out.println("Namn: " + namn);
-            System.out.println("Datum: " + datum);
-            System.out.println("Ansvarig agent: " + ansvarigAgent);
-            System.out.println("Plats: " + plats);
-            
-            db.taBortRas(id);
-            db.läggTillIRas(id, txtRasInfo.getText(), ras);
-        
-        //Lägger till värden i tabellen via databasklassen
-        db.ändraAlienInfo(id, datum, lösenord, namn, telefonnummer, plats, ansvarigAgent);
+            else if(!validering.valideraAlienTelefonnummer(txtTelefon.getText())) {
+                JOptionPane.showMessageDialog(null, "Felaktigt telefonnummer.");
+            }
+            else if(!validering.valideraLösenord(pswLösen.getText())) {
+                JOptionPane.showMessageDialog(null, "Felaktigt lösenord.");
+            }
+            else if(!validering.valideraAgentAnställningsDatum(txtDatum.getText())){
+                JOptionPane.showMessageDialog(null, "Felaktigt datum.");
+            }
+            else if(ansvarigAgent > db.antalAgenterIDatabas()) {
+                JOptionPane.showMessageDialog(null, "Agenten finns inte.");   
+            }
+            else if(txtRasInfo.getText().isEmpty()){
+                JOptionPane.showMessageDialog(null, "Övrig info är tom.");
+            }
+            //Sätter värden på fälten
+            else{
+                namn = txtNyttNamn.getText();
+                telefonnummer = txtTelefon.getText();
+                lösenord = pswLösen.getText();
+                datum = txtDatum.getText();
+                ras = comboBoxRas.getSelectedItem().toString();
+
+                try {
+                    ansvarigAgent = Integer.parseInt(txtAgent.getText());
+                } 
+                catch(NumberFormatException ex) {
+                    System.out.println(ex.getMessage());
+                }
+                //Skriver ut informationen som lagts till i fälten
+                System.out.println("Telefonnummer: " + telefonnummer);
+                System.out.println("Namn: " + namn);
+                System.out.println("Datum: " + datum);
+                System.out.println("Ansvarig agent: " + ansvarigAgent);
+                System.out.println("Plats: " + plats);
+
+                db.taBortRas(id);
+                db.läggTillIRas(id, txtRasInfo.getText(), ras);
+
+            //Lägger till värden i tabellen via databasklassen
+            db.ändraAlienInfo(id, datum, lösenord, namn, telefonnummer, plats, ansvarigAgent);
+            }   
         }
-            
-        
+        else{
+            JOptionPane.showMessageDialog(null, "Det finns ingen registrerad alien med det namnet.");
+        }
     }//GEN-LAST:event_btnOkMouseClicked
 
     //Tillbaka till hemsidan

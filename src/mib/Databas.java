@@ -1111,7 +1111,7 @@ public void taBortRas(int id) {
     
     //Lägg till i ras
     public void läggTillIRas(int id, String info, String ras){
-        String query = "INSERT INTO " + ras + " values(" + id + ", '" + info + "')";
+        String query = "INSERT INTO " + ras + " values(" + id + ", " + info + ")";
         try{
             idb.insert(query);
         }
