@@ -221,34 +221,19 @@ public class NyregistreraAgent extends javax.swing.JFrame {
 
     //Skapa konto knappen
     private void btnSkapaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSkapaActionPerformed
-     agentNamn = txtAgentNamn.getText();
-     
-     //Skapar mail och validerar
-     if(validering.valideraAgentNamn(agentNamn)){
-         epost = skapaEpost(agentNamn);
-         System.out.println("Det givk att skapa mail");
-     }
-     
-     //validerar och sätter datumet
-     if(validering.valideraAgentAnställningsDatum(txtDatum.getText())){
-         datum = txtDatum.getText();
-     }
-     
-     //Validerar och sätter telefonnummer
-     if(validering.valideraAgentTelefonnummer(txtTelefonnummer.getText())){
+        agentNamn = txtAgentNamn.getText();
+        datum = txtDatum.getText();
         telefonnummer = txtTelefonnummer.getText();  
-     }
-     
-     //Validera lösenord
-     if(validering.valideraLösenord(pwField.getText())){
-        lösenord = pwField.getText();     
-     }
-     
+        lösenord = pwField.getText();      
      //Skapar agenten via databasklassen
-     Integer nyttID = (db.antalAgenterIDatabas() + 1);
-     if(nyttID != 0 && !agentNamn.isEmpty() && !telefonnummer.isEmpty() && !datum.isEmpty() && !typ.isEmpty() && !epost.isEmpty() && !lösenord.isEmpty() && !område.isEmpty()){
+     Integer nyttID = (db.getNyttAgentID());
+     if(validering.valideraLösenord(pwField.getText()) && validering.valideraAgentTelefonnummer(txtTelefonnummer.getText()) && validering.valideraAgentAnställningsDatum(txtDatum.getText()) && validering.valideraAgentNamn(agentNamn)){
+        epost = skapaEpost(agentNamn);
         db.nyRegistreraAgent(nyttID, agentNamn, telefonnummer, datum, typ, epost, lösenord, område);
         JOptionPane.showMessageDialog(null, "Agenten har registrerats.");
+     }
+     else{
+         JOptionPane.showMessageDialog(null, "Något blev fel. Se till att det inte finns några stavfel och att alla fält är fyllda.");
      }
 
      

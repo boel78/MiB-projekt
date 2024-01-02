@@ -1146,5 +1146,21 @@ public void taBortRas(int id) {
         }
         return idn;
     }
+    
+    //Skapa nytt agentID
+    public int getNyttAgentID(){
+        int nyttID = 0;
+        ArrayList<String> alienIDn = getAgentIDn();
+        for(Integer i = 1; i <= alienIDn.size(); i++){
+            if(!alienIDn.contains(i.toString())){
+                nyttID = i;
+            }
+        }
+        if(nyttID == 0){
+            nyttID = antalAgenterIDatabas() + 1;
+        }
+        return nyttID;
+        
+    }
    
 }
