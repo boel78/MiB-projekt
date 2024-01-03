@@ -24,6 +24,7 @@ public class AgentHemsida extends javax.swing.JFrame {
         btnÄndraAlienInfo = new javax.swing.JButton();
         lblRubrik = new javax.swing.JLabel();
         btnLoggaUt = new javax.swing.JButton();
+        btnSökEnskildAlien = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -85,6 +86,13 @@ public class AgentHemsida extends javax.swing.JFrame {
             }
         });
 
+        btnSökEnskildAlien.setText("Sök enskild alien");
+        btnSökEnskildAlien.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSökEnskildAlienActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -92,6 +100,9 @@ public class AgentHemsida extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnSökEnskildAlien)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(lblRubrik)
@@ -130,7 +141,9 @@ public class AgentHemsida extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnRegUtrustning)
                     .addComponent(btnÄndraAlienInfo))
-                .addGap(53, 53, 53)
+                .addGap(14, 14, 14)
+                .addComponent(btnSökEnskildAlien)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnVisaTop3)
                     .addComponent(btnNyregistreraAliens))
@@ -200,12 +213,19 @@ public class AgentHemsida extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_btnVisaTop3ActionPerformed
 
+    private void btnSökEnskildAlienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSökEnskildAlienActionPerformed
+        SökEnskildAlien sea = new SökEnskildAlien(anvID, anvTyp);
+        sea.show();
+        dispose();
+    }//GEN-LAST:event_btnSökEnskildAlienActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBytLösen;
     private javax.swing.JButton btnListaAliens;
     private javax.swing.JButton btnLoggaUt;
     private javax.swing.JButton btnNyregistreraAliens;
     private javax.swing.JButton btnRegUtrustning;
+    private javax.swing.JButton btnSökEnskildAlien;
     private javax.swing.JButton btnVisaOmrådeschef;
     private javax.swing.JButton btnVisaTop3;
     private javax.swing.JButton btnÄndraAlienInfo;

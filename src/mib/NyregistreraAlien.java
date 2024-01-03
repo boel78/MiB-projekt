@@ -237,15 +237,13 @@ public class NyregistreraAlien extends javax.swing.JFrame {
         //Validerar och sätter epost
         if(!txtEpost.getText().isEmpty() && validering.valideraAlienEpostTypo(txtEpost.getText())){
             epost = txtEpost.getText();
-            System.out.println("Epost: " + epost);
         }
         else{
             JOptionPane.showMessageDialog(null, "Var vänlig och fyll i en epost.");
         }
         //Validerar och sätter namnet
-        if(!txtNamn.getText().isEmpty() && validering.valideraAlienNamn(txtNamn.getText())) {
+        if(!txtNamn.getText().isEmpty() && validering.valideraAlienNamn(txtNamn.getText(), true)) {
             namn = txtNamn.getText();
-            System.out.println("Namn: " + namn);
         }
         else{
             JOptionPane.showMessageDialog(null, "Var vänlig och fyll i ett namn.");
@@ -253,7 +251,6 @@ public class NyregistreraAlien extends javax.swing.JFrame {
         //Validerar och sätter telefonnummer
         if(!txtTelefon.getText().isEmpty() && validering.valideraAlienTelefonnummer(txtTelefon.getText())){
             telefonnummer = txtTelefon.getText();
-            System.out.println("Telefonnummer: " + telefonnummer);
         }
         else{
             JOptionPane.showMessageDialog(null, "Var vänlig och fyll i ett telefonnummer.");
@@ -268,7 +265,6 @@ public class NyregistreraAlien extends javax.swing.JFrame {
         //Validerar och sätter datum
         if(!txtDatum.getText().isEmpty() && validering.valideraAgentAnställningsDatum(txtDatum.getText())){
             datum = txtDatum.getText();
-            System.out.println("Datum: " + datum);
         }
         else{
             JOptionPane.showMessageDialog(null, "Var vänlig och fyll i ett lösenord.");
@@ -276,7 +272,6 @@ public class NyregistreraAlien extends javax.swing.JFrame {
         //Validerar och sätter ansvarig agent
         if(!txtAgent.getText().isEmpty() && ansvarigAgent <= db.antalAgenterIDatabas()){
             ansvarigAgent = Integer.parseInt(txtAgent.getText());
-            System.out.println("Ansvarig agent: " + ansvarigAgent);
         }
         else{
             JOptionPane.showMessageDialog(null, "Var vänlig och fyll i ett datum.");
@@ -285,7 +280,7 @@ public class NyregistreraAlien extends javax.swing.JFrame {
         if(!validering.valideraAlienEpostExisterar(txtEpost.getText(), true) && !fältÄrNull()){    
             db.registreraNyAlien(alienId, datum, epost, lösenord, namn, telefonnummer, plats, ansvarigAgent);}
         else{
-            System.out.println("Validering misslyckades, något fält är null");
+            JOptionPane.showMessageDialog(null, "Validering misslyckades, något fält är null");
         }
         
         //Sätter in alien i en ras tabell
@@ -301,19 +296,15 @@ public class NyregistreraAlien extends javax.swing.JFrame {
         Object selected = comboBox.getSelectedItem();
         if(selected.toString().equals("Örebro")) {
             plats = 1;
-            System.out.println(plats);
         } 
         else if(selected.toString().equals("Västerås")) {
             plats = 2;
-            System.out.println(plats);
         } 
         else if(selected.toString().equals("Vilhelmina")) {
             plats = 3;
-            System.out.println(plats);
         } 
         else if(selected.toString().equals("Borås")) {
           plats = 4;
-          System.out.println(plats);
         }
     }//GEN-LAST:event_comboBoxActionPerformed
 

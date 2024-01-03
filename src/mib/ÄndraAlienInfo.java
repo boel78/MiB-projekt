@@ -273,8 +273,7 @@ public class ÄndraAlienInfo extends javax.swing.JFrame {
         int id = db.hämtaAlienIdFrånNamn(namnAttÄndra);      
         if(validering.valideraAlienNamnExisterar(txtNamn.getText())){
             //Validerar
-            if(!validering.valideraAlienNamn(namnAttÄndra)){
-                JOptionPane.showMessageDialog(null, "Felaktigt namn.");
+            if(!validering.valideraAlienNamn(txtNyttNamn.getText(), true)){
             }
             else if(!validering.valideraAlienTelefonnummer(txtTelefon.getText())) {
                 JOptionPane.showMessageDialog(null, "Felaktigt telefonnummer.");

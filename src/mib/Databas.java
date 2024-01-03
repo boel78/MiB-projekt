@@ -384,18 +384,6 @@ public class Databas {
         }
     }
     
-    // hämta all info om en alien utifrån ID.
-    public HashMap<String,String> hämtaAlienInfo(int ID) {
-        String query = "SELECT * FROM alien WHERE alien_id=" + ID;
-        HashMap<String,String> alien = new HashMap<>();
-        try {
-            alien = idb.fetchRow(query);
-        } 
-        catch (InfException ex) {
-            System.out.println(ex.getMessage());
-        }
-        return alien;
-    }
     // ta bort alien utifrån ID.
     public void taBortAlien(int ID) {
         String query = "DELETE FROM alien WHERE alien_id=" + ID;
@@ -1144,7 +1132,32 @@ public class Databas {
         if(nyttID == 0){
             nyttID = antalAgenterIDatabas() + 1;
         }
-        return nyttID;
-        
+        return nyttID;     
     } 
+    
+    //Hämta alien reg.datum från id
+    public String getAlienDatumFrånID(String id){
+        String datum = "";
+        String query = "SELECT Registreringsdatum FROM Alien where Alien_ID = " + id;
+        try{
+            datum = idb.fetchSingle(query);
+        }
+        catch(InfException ex){
+            System.out.println(ex.getMessage());
+        }
+        return datum;
+    }
+    
+    //Hämta aliens ansvarig agent
+    public String getAliensAnsvarigAgent(String id){
+        String agent = "";
+        String query = "SELECT Ansvarig_Agent FROM ALien where Alien_ID = " + id;
+        try{
+            agent = idb.fetchSingle(query);
+        }
+        catch(InfException ex){
+            System.out.println(ex.getMessage());
+        }
+        return agent;
+    }
 }

@@ -28,6 +28,7 @@ public class AdminHemsida extends javax.swing.JFrame {
         btnÄndraTabort = new javax.swing.JButton();
         btnNyRegAgent = new javax.swing.JButton();
         btnTaBortAlien = new javax.swing.JButton();
+        btnEnskildAlien = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -110,6 +111,13 @@ public class AdminHemsida extends javax.swing.JFrame {
             }
         });
 
+        btnEnskildAlien.setText("Sök enskild alien");
+        btnEnskildAlien.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEnskildAlienActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -138,7 +146,9 @@ public class AdminHemsida extends javax.swing.JFrame {
                                 .addComponent(btnBytLösen)))
                         .addGap(35, 35, 35))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnTaBortAlien)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnTaBortAlien)
+                            .addComponent(btnEnskildAlien))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnVisaOmrådeschef)
@@ -154,13 +164,15 @@ public class AdminHemsida extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblRubrik)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(49, 49, 49)
                         .addComponent(btnListaAliens)
                         .addGap(40, 40, 40)
                         .addComponent(btnTaBortAlien)
-                        .addGap(51, 51, 51))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                        .addComponent(btnEnskildAlien)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(33, 33, 33)
                         .addComponent(btnÄndraTabort)
@@ -260,9 +272,16 @@ public class AdminHemsida extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_btnTaBortAlienActionPerformed
 
+    private void btnEnskildAlienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnskildAlienActionPerformed
+        SökEnskildAlien sea = new SökEnskildAlien(anvID, anvTyp);
+        sea.show();
+        dispose();
+    }//GEN-LAST:event_btnEnskildAlienActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBytLösen;
+    private javax.swing.JButton btnEnskildAlien;
     private javax.swing.JButton btnListaAliens;
     private javax.swing.JButton btnLoggaUt;
     private javax.swing.JButton btnNyRegAgent;

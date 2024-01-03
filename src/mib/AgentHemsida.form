@@ -26,6 +26,10 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Component id="btnSökEnskildAlien" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       <Component id="lblRubrik" min="-2" max="-2" attributes="0"/>
@@ -76,7 +80,9 @@
                   <Component id="btnRegUtrustning" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnÄndraAlienInfo" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
+              <Component id="btnSökEnskildAlien" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btnVisaTop3" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnNyregistreraAliens" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -159,6 +165,14 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLoggaUtActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnS&#xf6;kEnskildAlien">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="S&#xf6;k enskild alien"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnS&#xf6;kEnskildAlienActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

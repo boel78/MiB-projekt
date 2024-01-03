@@ -114,11 +114,16 @@ public class Validering {
     }
 
     //validerar alienNamn
-    public boolean valideraAlienNamn(String namn){
+    public boolean valideraAlienNamn(String namn, boolean skrivUt){
         boolean valid = false;
         if(namn.matches("^[A-ZÅÄÖ]{1}[a-zåäö]+(\\s[A-ZÅÄÖ]{1}[a-zåäö]*)?")){
             valid = true;
         }
+        else{
+            if(skrivUt){
+                JOptionPane.showMessageDialog(null, "Stavfel på namn, se till att det börjar med stor bokstav.");
+            }
+        }            
         return valid;
     }
 
@@ -255,13 +260,13 @@ public class Validering {
         return finns;
     }
 
-       //Validera om AlienID finns.
-    public boolean valideraAlienId(int id){
+    //Validera om AlienID finns.
+    public boolean valideraAlienId(Integer id){
         boolean finns=false;
-        HashMap<String, String> alienInfo = db.hämtaAlienInfo(id);
-        int alienId = Integer.parseInt(alienInfo.get("Alien_ID"));
-        if(alienId == id){
-            finns = true;
+        for(String ID : db.getAllaAlienIDn()){
+            if(id.toString().equals(ID)){
+                finns = true;
+            }
         }
         return finns;
     }
@@ -424,7 +429,7 @@ public class Validering {
     //Validera om aliennamn existerar
     public boolean valideraAlienNamnExisterar(String namn){
         boolean existerar = false;
-        if(valideraAlienNamn(namn)){
+        if(valideraAlienNamn(namn, true)){
             for(String namnet : db.getAllaAlienNamn()){
                 if(namn.equals(namnet)){
                     existerar = true;
