@@ -890,7 +890,7 @@ public class Databas {
     }
 
     //lägg till områdeschef
-    public void läggTillOmrådeschef(String agent_ID, String områdesID){
+    public void läggTillOmrådeschef(String agent_ID, int områdesID){
         String query = "INSERT INTO Omradeschef VALUES(" + agent_ID + ", " + områdesID + ")";
         try{
             idb.insert(query);

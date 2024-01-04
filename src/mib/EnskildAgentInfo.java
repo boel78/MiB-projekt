@@ -565,17 +565,17 @@ public class EnskildAgentInfo extends javax.swing.JFrame {
             }
         }
         //kollar om områdeschef är användaren
+        int områdesID = db.getOmrådeId(txtOmrådesAnsvar.getText());
         if(comboBoxChef.getSelectedIndex() == 1 && validering.valideraOmrådeExisterar(område, true) && validering.valideraOmrådeschefPåSpecifik(id, txtOmrådesAnsvar.getText())){
             JOptionPane.showMessageDialog(null, "Du är redan chef här.");
         }       
         //Ändrar användare till områdeschef
-        else if(comboBoxChef.getSelectedIndex() == 1 && validering.valideraOmrådeExisterar(txtOmrådesAnsvar.getText(), false) && !validering.valideraOmrådesChefExisterarPåOmråde(txtOmrådesAnsvar.getText())){
-            Integer nyttChefOmrådesID = db.getOmrådeId(txtOmrådesAnsvar.getText());
-            db.läggTillOmrådeschef(id, nyttChefOmrådesID.toString());
+        else if(comboBoxChef.getSelectedIndex() == 1 && validering.valideraOmrådeExisterar(txtOmrådesAnsvar.getText(), false) && !validering.valideraOmrådesChefExisterarPåOmråde(områdesID)){
+            db.läggTillOmrådeschef(id, områdesID);
             ändrad = true;
         }      
         //Kollar om det redan finns en områdeschef på område.
-        else if(comboBoxChef.getSelectedIndex() == 1 && validering.valideraOmrådeExisterar(txtOmrådesAnsvar.getText(), false) && validering.valideraOmrådesChefExisterarPåOmråde(txtOmrådesAnsvar.getText())){
+        else if(comboBoxChef.getSelectedIndex() == 1 && validering.valideraOmrådeExisterar(txtOmrådesAnsvar.getText(), false) && validering.valideraOmrådesChefExisterarPåOmråde(områdesID)){
             JOptionPane.showMessageDialog(null, "En chef finns redan på den här positionen.");
         }
         
