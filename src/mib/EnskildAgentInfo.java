@@ -20,6 +20,7 @@ public class EnskildAgentInfo extends javax.swing.JFrame {
     private String kontorsChefBeteckning;
     private String chef;
     private String admin;
+    String områdesID;
     private String anvID;
     private String anvTyp;
     
@@ -533,7 +534,7 @@ public class EnskildAgentInfo extends javax.swing.JFrame {
             ändrad = true;
         }
         if(!område.equals("---")){
-            String områdesID = "";
+            områdesID = "";
             switch(område){
                 case "Svealand" :
                     områdesID = "1";

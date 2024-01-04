@@ -142,24 +142,24 @@ public class Inloggning extends javax.swing.JFrame {
     public boolean inlogKontroll(){
         boolean valid = false;
         if(!txtEpost.getText().isEmpty() || !pwField.getText().isEmpty()){
-            String user = txtEpost.getText();
-            String pass = pwField.getText();
-            if(validering.valideraLösenord(pass) && ärInloggTyp(user)){
-                if(typ.equals("Alien") && validering.valideraAlienEpostExisterar(user, false)){
-                    if(validering.valideraAlienLösenord(pass, user)){
-                        id = idb.getAlienIDFrånEpost(user);
-                        valid = true; 
+                String user = txtEpost.getText();
+                String pass = pwField.getText();
+                if(validering.valideraLösenord(pass) && ärInloggTyp(user)){
+                    if(typ.equals("Alien") && validering.valideraAlienEpostExisterar(user, false)){
+                        if(validering.valideraAlienLösenord(pass, user)){
+                            id = idb.getAlienIDFrånEpost(user);
+                            valid = true; 
+                        }
+                    }
+                    else if((typ.equals("Agent") ||typ.equals("Admin"))&& validering.valideraAgentEpostTypo(user)){                
+                        if(validering.valideraAgentLösenord(pass, user)){
+                            id = idb.getAgentIDFrånEpost(user);
+                            valid = true;
+                        } 
+                    System.out.println(valid);
                     }
                 }
-                else if((typ.equals("Agent") ||typ.equals("Admin"))&& validering.valideraAgentEpostTypo(user)){                
-                    if(validering.valideraAgentLösenord(pass, user)){
-                        id = idb.getAgentIDFrånEpost(user);
-                        valid = true;
-                    } 
-                System.out.println(valid);
-                }
-            }
-        }
+            }                 
         else{
             JOptionPane.showMessageDialog(null, "Fyll i epost och lösenord.");
         }
@@ -172,7 +172,7 @@ public class Inloggning extends javax.swing.JFrame {
             ärEpost = true;
             typ = "Alien";
             String[] emailTyper = email.split("@");
-                if(emailTyper[1].equals("mib.net")){
+                if(emailTyper[1].equals("mib.net") && validering.valideraAgentEpostFinns(email)){
                     boolean ärAdmin = idb.getAdminStatus(email);
                     typ = "Agent";
                     if(ärAdmin){

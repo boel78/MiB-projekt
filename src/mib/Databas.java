@@ -263,7 +263,6 @@ public class Databas {
         System.out.println(query);
         try{
             idb.insert(query);
-            JOptionPane.showMessageDialog(null, "Registreringen lyckades.");
         }
         catch(InfException ex){
             System.out.println(ex.getMessage());
@@ -642,7 +641,7 @@ public class Databas {
                 + "Ansvarig_Agent = " + ansvarigAgent
                 + " WHERE Alien_ID = " + id;
         idb.update(query);
-        System.out.println("Informationen har uppdaterats.");
+        JOptionPane.showMessageDialog(null, "Informationen har uppdaterats.");
         } 
         catch(InfException ex){
             System.out.println(ex.getMessage());

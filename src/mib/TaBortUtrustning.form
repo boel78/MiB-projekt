@@ -26,8 +26,8 @@
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jTable1" min="-2" pref="294" max="-2" attributes="0"/>
-                  <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="table" min="-2" pref="294" max="-2" attributes="0"/>
+                  <Component id="lblDinUtrustning" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="124" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -35,6 +35,11 @@
                   <Component id="comboBox" alignment="1" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+              <Component id="lblTaBort" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
           </Group>
           <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
@@ -64,13 +69,12 @@
                       <EmptySpace min="-2" pref="224" max="-2" attributes="0"/>
                       <Component id="lblRubrik" min="-2" max="-2" attributes="0"/>
                   </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="88" max="-2" attributes="0"/>
+                      <Component id="lblRegistreraNyUtrustning" min="-2" max="-2" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
-          </Group>
-          <Group type="102" alignment="1" attributes="0">
-              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-              <Component id="lblTaBort" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -79,22 +83,24 @@
           <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace pref="36" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                       <Component id="lblTaBort" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="comboBox" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="16" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                       <Component id="btnTaBort" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="93" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="lblRubrik" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="26" max="32767" attributes="0"/>
+                      <Component id="lblDinUtrustning" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jTable1" min="-2" pref="84" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="table" min="-2" pref="84" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" pref="20" max="32767" attributes="0"/>
+                      <Component id="lblRegistreraNyUtrustning" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <Component id="comboBoxValAvTyp" min="-2" max="-2" attributes="0"/>
@@ -139,7 +145,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTaBortActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JTable" name="jTable1">
+    <Component class="javax.swing.JTable" name="table">
       <Properties>
         <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
           <Connection code="new javax.swing.table.DefaultTableModel(&#xa;    new Object [][] {&#xa;    },&#xa;    new String [] {&#xa;        &quot;Datum&quot;, &quot;UtrustningsID&quot;, &quot;Ben&#xe4;mning&quot;&#xa;    }&#xa;)" type="code"/>
@@ -196,7 +202,7 @@
         <Property name="text" type="java.lang.String" value="&#xd6;verf&#xf6;ringsteknik"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel1">
+    <Component class="javax.swing.JLabel" name="lblDinUtrustning">
       <Properties>
         <Property name="text" type="java.lang.String" value="Din kvitterade utrustning"/>
       </Properties>
@@ -212,6 +218,11 @@
     <Component class="javax.swing.JLabel" name="lblRubrik">
       <Properties>
         <Property name="text" type="java.lang.String" value="Utrustning"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblRegistreraNyUtrustning">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Registrera ny utrustning"/>
       </Properties>
     </Component>
   </SubComponents>

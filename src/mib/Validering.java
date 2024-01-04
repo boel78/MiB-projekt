@@ -327,7 +327,7 @@ public class Validering {
     //validera om områdeschef finns utifrån områdesID
     public boolean valideraOmrådesChefExisterarPåOmråde(String områdesID){
         boolean finns = false;
-        if(db.getOmrådesChef(områdesID) != null){
+        if(!db.getOmrådesChef(områdesID).isEmpty()){
             finns = true;
         }
         return finns;

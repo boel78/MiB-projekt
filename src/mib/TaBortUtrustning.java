@@ -47,7 +47,7 @@ public class TaBortUtrustning extends javax.swing.JFrame {
 
         comboBox = new javax.swing.JComboBox<>();
         btnTaBort = new javax.swing.JButton();
-        jTable1 = new javax.swing.JTable();
+        table = new javax.swing.JTable();
         lblTaBort = new javax.swing.JLabel();
         comboBoxValAvTyp = new javax.swing.JComboBox<>();
         txtBenämning = new javax.swing.JTextField();
@@ -55,9 +55,10 @@ public class TaBortUtrustning extends javax.swing.JFrame {
         btnLäggTill = new javax.swing.JButton();
         lblBenämning = new javax.swing.JLabel();
         lblKategoriTyp = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        lblDinUtrustning = new javax.swing.JLabel();
         btnTillbaka = new javax.swing.JButton();
         lblRubrik = new javax.swing.JLabel();
+        lblRegistreraNyUtrustning = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -74,7 +75,7 @@ public class TaBortUtrustning extends javax.swing.JFrame {
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
             },
             new String [] {
@@ -106,7 +107,7 @@ public class TaBortUtrustning extends javax.swing.JFrame {
 
         lblKategoriTyp.setText("Överföringsteknik");
 
-        jLabel1.setText("Din kvitterade utrustning");
+        lblDinUtrustning.setText("Din kvitterade utrustning");
 
         btnTillbaka.setText("Tillbaka");
         btnTillbaka.addActionListener(new java.awt.event.ActionListener() {
@@ -117,6 +118,8 @@ public class TaBortUtrustning extends javax.swing.JFrame {
 
         lblRubrik.setText("Utrustning");
 
+        lblRegistreraNyUtrustning.setText("Registrera ny utrustning");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -124,13 +127,17 @@ public class TaBortUtrustning extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTable1, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
+                    .addComponent(table, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblDinUtrustning))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 124, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnTaBort, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(comboBox, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(32, 32, 32))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(lblTaBort)
+                .addGap(50, 50, 50))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -151,33 +158,34 @@ public class TaBortUtrustning extends javax.swing.JFrame {
                         .addComponent(btnLäggTill))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(224, 224, 224)
-                        .addComponent(lblRubrik)))
+                        .addComponent(lblRubrik))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(88, 88, 88)
+                        .addComponent(lblRegistreraNyUtrustning)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(lblTaBort)
-                .addGap(50, 50, 50))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(36, Short.MAX_VALUE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(lblTaBort)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(comboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnTaBort)
                         .addGap(93, 93, 93))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(lblRubrik)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                        .addComponent(lblDinUtrustning)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTable1, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(table, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 20, Short.MAX_VALUE)
+                        .addComponent(lblRegistreraNyUtrustning)
+                        .addGap(18, 18, 18)))
                 .addComponent(comboBoxValAvTyp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -319,7 +327,7 @@ public class TaBortUtrustning extends javax.swing.JFrame {
     
     //Metod för att ladda in i listan efter ditt ID
     public void setDataITabell(){
-        DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
+        DefaultTableModel model = (DefaultTableModel)table.getModel();
         //HashMap<String, String> rader = db.getInneharUtrustningFrånID(ID);
         ArrayList<HashMap<String, String>> listaMedMaps = db.getInneharUtrustningFrånID(anvID);
         for(int index = 0; index < listaMedMaps.size(); index++){
@@ -342,7 +350,7 @@ public class TaBortUtrustning extends javax.swing.JFrame {
     
     public void setKolumnITabell(){
         Object[] row = {"Benämning", "Datum",};
-        DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
+        DefaultTableModel model = (DefaultTableModel)table.getModel();
         model.addRow(row);
     } 
 
@@ -352,12 +360,13 @@ public class TaBortUtrustning extends javax.swing.JFrame {
     private javax.swing.JButton btnTillbaka;
     private javax.swing.JComboBox<String> comboBox;
     private javax.swing.JComboBox<String> comboBoxValAvTyp;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblBenämning;
+    private javax.swing.JLabel lblDinUtrustning;
     private javax.swing.JLabel lblKategoriTyp;
+    private javax.swing.JLabel lblRegistreraNyUtrustning;
     private javax.swing.JLabel lblRubrik;
     private javax.swing.JLabel lblTaBort;
+    private javax.swing.JTable table;
     private javax.swing.JTextField txtBenämning;
     private javax.swing.JTextField txtÖvrigInfo;
     // End of variables declaration//GEN-END:variables
