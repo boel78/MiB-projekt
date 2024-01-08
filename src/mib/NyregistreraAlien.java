@@ -236,7 +236,7 @@ public class NyregistreraAlien extends javax.swing.JFrame {
         alienId = (db.getNyttAlienID());
         
         //Validerar och sätter epost
-        if(!txtEpost.getText().isEmpty() && !validering.valideraAlienEpostExisterar(txtEpost.getText(), true)){
+        if(validering.valideraAgentEpostTypo(txtEpost.getText()) && !validering.valideraAlienEpostExisterar(txtEpost.getText(), true)){
             epost = txtEpost.getText();
         }
         //Validerar och sätter namnet
@@ -248,7 +248,7 @@ public class NyregistreraAlien extends javax.swing.JFrame {
             telefonnummer = txtTelefon.getText();
         }
         //Validerar och sätter lösenord
-        if(!pswLösenord.getText().isEmpty() && validering.valideraLösenord(pswLösenord.getText())){
+        if(validering.valideraLösenord(pswLösenord.getText())){
             lösenord = pswLösenord.getText();
         }
         //Validerar och sätter datum
