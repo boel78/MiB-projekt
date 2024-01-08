@@ -107,6 +107,7 @@
                       </Group>
                   </Group>
                   <Component id="lblinformation" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblFörklaring" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="75" max="32767" attributes="0"/>
           </Group>
@@ -117,7 +118,9 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
               <Component id="lblinformation" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
+              <Component id="lblFörklaring" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                       <Component id="lblNamn" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -340,6 +343,11 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTillbakaActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblF&#xf6;rklaring">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Fyll sedan i informationen du vill &#xe4;ndra"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>

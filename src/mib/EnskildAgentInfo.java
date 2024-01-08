@@ -66,6 +66,7 @@ public class EnskildAgentInfo extends javax.swing.JFrame {
         txtOmrådesAnsvar = new javax.swing.JTextField();
         lblOmrådesAnsvar = new javax.swing.JLabel();
         btnTillbaka = new javax.swing.JButton();
+        lblFörklaring = new javax.swing.JLabel();
 
         jLabel2.setText("jLabel2");
 
@@ -147,6 +148,8 @@ public class EnskildAgentInfo extends javax.swing.JFrame {
             }
         });
 
+        lblFörklaring.setText("Fyll sedan i informationen du vill ändra");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -205,7 +208,8 @@ public class EnskildAgentInfo extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblTelefon)
                             .addComponent(txtTelefonnummer, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(lblinformation))
+                    .addComponent(lblinformation)
+                    .addComponent(lblFörklaring))
                 .addContainerGap(75, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -213,7 +217,9 @@ public class EnskildAgentInfo extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addComponent(lblinformation)
-                .addGap(42, 42, 42)
+                .addGap(7, 7, 7)
+                .addComponent(lblFörklaring)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(lblNamn)
@@ -513,24 +519,24 @@ public class EnskildAgentInfo extends javax.swing.JFrame {
     
     private boolean ändraAgentInfo(String typ){
         boolean ändrad = false;
-        if(!datum.isEmpty() && validering.valideraDatum(datum)){
+        if(!validering.valideraSträngTom(datum) && validering.valideraDatum(datum)){
                 db.uppdateraAgentAnställningsdatum(id, datum);
                 ändrad = true;
             }            
-        if(!lösenord.isEmpty() && validering.valideraLösenord(lösenord)){
+        if(!validering.valideraSträngTom(lösenord) && validering.valideraLösenord(lösenord)){
             db.uppdateraAgentLösenord(id, lösenord);
             ändrad = true;
         }
-        if(!namn.isEmpty() && validering.valideraAgentNamn(namn) && (typ.equals("epost") ||typ.equals("id"))){
+        if(!validering.valideraSträngTom(namn) && validering.valideraAgentNamn(namn) && (typ.equals("epost") ||typ.equals("id"))){
             System.out.println(namn);
             db.uppdateraAgentNamn(id, namn); 
             ändrad = true;
         }
-        if(!epost.isEmpty() && validering.valideraAgentEpostTypo(epost) && (typ.equals("namn") ||typ.equals("id"))){
+        if(!validering.valideraSträngTom(epost) && validering.valideraAgentEpostTypo(epost) && (typ.equals("namn") ||typ.equals("id"))){
             db.uppdateraAgentEpost(id, epost); 
             ändrad = true;
         }
-        if(!telefon.isEmpty() && validering.valideraAgentTelefonnummer(telefon)){
+        if(!validering.valideraSträngTom(telefon) && validering.valideraAgentTelefonnummer(telefon)){
             db.uppdateraAgentTelefonnummer(id, telefon);
             ändrad = true;
         }
@@ -550,7 +556,7 @@ public class EnskildAgentInfo extends javax.swing.JFrame {
             db.uppdateraAgentOmråde(id, områdesID); 
             ändrad = true;  
         }
-        if(!admin.isEmpty() && validering.valideraAdminInput(admin)){
+        if(!validering.valideraSträngTom(admin) && validering.valideraAdminInput(admin)){
             if(!id.equals(anvID)){
                 if(admin.equals("ja")){
                     admin = "J";
@@ -565,33 +571,47 @@ public class EnskildAgentInfo extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Du kan inte byta din egna administratör status.");
             }
         }
-        //kollar om områdeschef är användaren
-        int områdesID = db.getOmrådeId(txtOmrådesAnsvar.getText());
-        if(comboBoxChef.getSelectedIndex() == 1 && validering.valideraOmrådeExisterar(område, true) && validering.valideraOmrådeschefPåSpecifik(id, txtOmrådesAnsvar.getText())){
-            JOptionPane.showMessageDialog(null, "Du är redan chef här.");
-        }       
-        //Ändrar användare till områdeschef
-        else if(comboBoxChef.getSelectedIndex() == 1 && validering.valideraOmrådeExisterar(txtOmrådesAnsvar.getText(), false) && !validering.valideraOmrådesChefExisterarPåOmråde(områdesID)){
-            db.läggTillOmrådeschef(id, områdesID);
-            ändrad = true;
-        }      
-        //Kollar om det redan finns en områdeschef på område.
-        else if(comboBoxChef.getSelectedIndex() == 1 && validering.valideraOmrådeExisterar(txtOmrådesAnsvar.getText(), false) && validering.valideraOmrådesChefExisterarPåOmråde(områdesID)){
-            JOptionPane.showMessageDialog(null, "En chef finns redan på den här positionen.");
+        if(comboBoxChef.getSelectedIndex() == 1 && !validering.valideraSträngTom(txtOmrådesAnsvar.getText())){
+            //kollar om områdeschef är användaren
+            int områdesID = db.getOmrådeId(txtOmrådesAnsvar.getText());
+            if(validering.valideraOmrådeExisterar(txtOmrådesAnsvar.getText(), true) && validering.valideraOmrådeschefPåSpecifik(id, txtOmrådesAnsvar.getText())){
+                JOptionPane.showMessageDialog(null, "Du är redan chef här.");
+            }       
+            //Ändrar användare till områdeschef
+            else if(validering.valideraOmrådeExisterar(txtOmrådesAnsvar.getText(), false) && !validering.valideraOmrådesChefExisterarPåOmråde(områdesID)){
+                db.taBortOmrådesChef(id);
+                db.taBortKontorsChef(id);
+                db.läggTillOmrådeschef(id, områdesID);
+                ändrad = true;               
+            }      
+            //Kollar om det redan finns en områdeschef på område.
+            else if(validering.valideraOmrådeExisterar(txtOmrådesAnsvar.getText(), false) && validering.valideraOmrådesChefExisterarPåOmråde(områdesID)){
+                JOptionPane.showMessageDialog(null, "En chef finns redan på den här positionen.");
+            }
+        }
+        else if(comboBoxChef.getSelectedIndex() == 1 && validering.valideraSträngTom(txtOmrådesAnsvar.getText())){
+            JOptionPane.showMessageDialog(null, "Var vänlig och fyll i ett områdesansvar");
         }
         
-        //kollar kontorschef
-        if(comboBoxChef.getSelectedIndex() == 0 && validering.valideraKontorschefPåSpecifik(id, txtOmrådesAnsvar.getText())){
-            JOptionPane.showMessageDialog(null, "Du är redan chef här.");
+        if(comboBoxChef.getSelectedIndex() == 0 && !validering.valideraSträngTom(txtOmrådesAnsvar.getText())){
+            //kollar kontorschef
+            if(validering.valideraKontorschefPåSpecifik(id, txtOmrådesAnsvar.getText())){
+                JOptionPane.showMessageDialog(null, "Du är redan chef här.");
+            }
+            //lägger till användaren som kontorschef
+            else if(!validering.valideraKontorsBeteckningExisterar(txtOmrådesAnsvar.getText())){
+                db.taBortOmrådesChef(id);
+                db.taBortKontorsChef(id);
+                db.läggTillKontorschef(id, txtOmrådesAnsvar.getText());
+                ändrad = true;
+            }
+            //kollar om det redan finns en kontorschef
+            else if(validering.valideraKontorsBeteckningExisterar(txtOmrådesAnsvar.getText()) && !txtOmrådesAnsvar.getText().equals(db.kontrolleraKontorschef(id))){
+                JOptionPane.showMessageDialog(null, "En chef finns redan på den här positionen.");
+            }
         }
-        //lägger till användaren som kontorschef
-        else if(comboBoxChef.getSelectedIndex() == 0 && !validering.valideraKontorsBeteckningExisterar(txtOmrådesAnsvar.getText())){
-            db.läggTillKontorschef(id, txtOmrådesAnsvar.getText());
-            ändrad = true;
-        }
-        //kollar om det redan finns en kontorschef
-        else if(comboBoxChef.getSelectedIndex() == 0 && validering.valideraKontorsBeteckningExisterar(txtOmrådesAnsvar.getText()) && !txtOmrådesAnsvar.getText().equals(db.kontrolleraKontorschef(id))){
-            JOptionPane.showMessageDialog(null, "En chef finns redan på den här positionen.");
+        else if(comboBoxChef.getSelectedIndex() == 0 && validering.valideraSträngTom(txtOmrådesAnsvar.getText())){
+            JOptionPane.showMessageDialog(null, "Var vänlig och fyll i en kontorsbeteckning.");
         }
         return ändrad;
     }
@@ -649,6 +669,7 @@ public class EnskildAgentInfo extends javax.swing.JFrame {
     private javax.swing.JLabel lblChef;
     private javax.swing.JLabel lblDatumHjälp;
     private javax.swing.JLabel lblEpost;
+    private javax.swing.JLabel lblFörklaring;
     private javax.swing.JLabel lblLösenord;
     private javax.swing.JLabel lblNamn;
     private javax.swing.JLabel lblOmråde;

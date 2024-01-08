@@ -475,4 +475,13 @@ public class Validering {
         }
         return valid;
     }
+    
+    //Validera om en sträng är tom
+    public boolean valideraSträngTom(String sträng){
+        boolean tom = false;
+        if(sträng.isEmpty()){
+            tom = true;
+        }
+        return tom;
+    }
 }
