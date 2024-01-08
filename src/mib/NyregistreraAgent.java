@@ -214,7 +214,7 @@ public class NyregistreraAgent extends javax.swing.JFrame {
         lösenord = pwField.getText();      
         //Skapar agenten via databasklassen
         Integer nyttID = (db.getNyttAgentID());
-        if(validering.valideraLösenord(pwField.getText()) && validering.valideraAgentTelefonnummer(txtTelefonnummer.getText()) && validering.valideraAgentAnställningsDatum(txtDatum.getText()) && validering.valideraAgentNamn(agentNamn)){
+        if(validering.valideraLösenord(pwField.getText()) && validering.valideraAgentTelefonnummer(txtTelefonnummer.getText()) && validering.valideraDatum(txtDatum.getText()) && validering.valideraAgentNamn(agentNamn)){
             epost = skapaEpost(agentNamn);
             db.nyRegistreraAgent(nyttID, agentNamn, telefonnummer, datum, typ, epost, lösenord, område);
             JOptionPane.showMessageDialog(null, "Agenten har registrerats.");

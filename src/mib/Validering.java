@@ -116,22 +116,35 @@ public class Validering {
     //validerar alienNamn
     public boolean valideraAlienNamn(String namn, boolean skrivUt){
         boolean valid = false;
-        if(namn.matches("^[A-ZÅÄÖ]{1}[a-zåäö]+(\\s[A-ZÅÄÖ]{1}[a-zåäö]*)?")){
-            valid = true;
+        if(!namn.isEmpty()){
+            if(namn.matches("^[A-ZÅÄÖ]{1}[a-zåäö]+(\\s[A-ZÅÄÖ]{1}[a-zåäö]*)?")){
+                valid = true;
+            }
+            else{
+                if(skrivUt){
+                    JOptionPane.showMessageDialog(null, "Stavfel på namn, se till att det börjar med stor bokstav.");
+                }
+            }
         }
         else{
-            if(skrivUt){
-                JOptionPane.showMessageDialog(null, "Stavfel på namn, se till att det börjar med stor bokstav.");
-            }
-        }            
+            JOptionPane.showMessageDialog(null, "Var vänlig och fyll i ett/flera namn.");
+        }
         return valid;
     }
 
     //validerar AlienTelefon
     public boolean valideraAlienTelefonnummer(String nummer){
         boolean valid = false;
-        if(nummer.matches("^555-\\d[0-9]{1,4}")){
-            valid = true;
+        if(!nummer.isEmpty()){
+            if(nummer.matches("^555-\\d[0-9]{1,25}")){
+                valid = true;
+            }
+            if(!valid){
+                JOptionPane.showMessageDialog(null, "Stavfel på telefonnummer, var vänlig och se till att numret börjar med 555-");
+            }
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Var vänlig och fyll i ett telefonnummer.");
         }
         return valid;
     }
@@ -154,14 +167,14 @@ public class Validering {
     }
 
     //validera agentAnställningsDatum
-    public boolean valideraAgentAnställningsDatum(String datum){
+    public boolean valideraDatum(String datum){
         boolean valid = false;
         if(!datum.isEmpty()){
             if(datum.matches("\\d{4}-(0?[1-9]|1[012])-(0?[1-9]|1?[0-9]|2?[0-9]|3[01])")){
                 valid = true;
             }
             else{
-                JOptionPane.showMessageDialog(null, "Stavfel på Anställnigsdatum.");
+                JOptionPane.showMessageDialog(null, "Stavfel på Anställningsdatum.");
             }
         }
         else{
@@ -174,7 +187,7 @@ public class Validering {
     public boolean valideraAgentTelefonnummer(String nummer){
         boolean valid = false;
         if(!nummer.isEmpty()){
-            if(nummer.matches("^555-\\d[0-9]{1,5}")){
+            if(nummer.matches("^555-\\d[0-9]{1,25}")){
                 valid = true;
             }
             else{
@@ -298,28 +311,38 @@ public class Validering {
     //Validera om agentID är en siffra
     public boolean valideraAgentIDTypo(String id){
         boolean isNumber = false;
-        try {
-            Integer.parseInt(id);
-            isNumber = true;
-	}
-	catch (NumberFormatException e){
-            JOptionPane.showMessageDialog(null, "Det här är ingen siffra.");
-	}
+        if(!id.isEmpty()){
+            try {
+                Integer.parseInt(id);
+                isNumber = true;
+            }
+            catch (NumberFormatException e){
+                JOptionPane.showMessageDialog(null, "Det här är ingen siffra.");
+            }
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Var vänlig och fyll i ett agent ID");
+        }
         return isNumber;
     }
 
     //Validera om agentID Existerar
     public boolean valideraAgentIDExisterar(String id){
         boolean existerar = false;
-        if(valideraAgentIDTypo(id)){
-            for(String idILista : db.getAgentIDn()){
-                if(idILista.equals(id)){
-                    existerar = true;
+        if(!id.isEmpty()){
+            if(valideraAgentIDTypo(id)){
+                for(String idILista : db.getAgentIDn()){
+                    if(idILista.equals(id)){
+                        existerar = true;
+                    }
+                }
+                if(!existerar){
+                    JOptionPane.showMessageDialog(null, "Detta ID existerar inte.");
                 }
             }
-            if(!existerar){
-                JOptionPane.showMessageDialog(null, "Detta ID existerar inte.");
-            }
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Var vänlig och fyll i ett ID");
         }
         return existerar;
     }
@@ -438,4 +461,18 @@ public class Validering {
         }
         return existerar;
     }   
+    
+    //Validera rasinfo
+    public boolean valideraRasInfo(String info){
+        boolean valid = false;
+        try{
+            Integer infoInt = Integer.parseInt(info);
+            Double infoDouble = Double.parseDouble(info);
+            valid = true;
+        }
+        catch(NumberFormatException ex){
+            JOptionPane.showMessageDialog(null, "Rasinfon du fyllde i var inte en siffra.");
+        }
+        return valid;
+    }
 }

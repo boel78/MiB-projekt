@@ -263,7 +263,7 @@ public class NyregistreraAlien extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Var vänlig och fyll i ett lösenord.");
         }
         //Validerar och sätter datum
-        if(!txtDatum.getText().isEmpty() && validering.valideraAgentAnställningsDatum(txtDatum.getText())){
+        if(!txtDatum.getText().isEmpty() && validering.valideraDatum(txtDatum.getText())){
             datum = txtDatum.getText();
         }
         else{

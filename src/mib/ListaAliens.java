@@ -239,7 +239,7 @@ public class ListaAliens extends javax.swing.JFrame {
         if(visaDatum){
         frånDatum = txtFörstaDatum.getText();
         tillDatum = txtAndraDatum.getText();
-            if(validering.valideraAgentAnställningsDatum(tillDatum) && validering.valideraAgentAnställningsDatum(frånDatum)){
+            if(validering.valideraDatum(tillDatum) && validering.valideraDatum(frånDatum)){
                 datumLista = db.getAlienIDMellanDatum(frånDatum, tillDatum);
             }
             else{

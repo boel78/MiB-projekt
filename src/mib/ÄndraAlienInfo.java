@@ -13,7 +13,7 @@ public class ÄndraAlienInfo extends javax.swing.JFrame {
     private String datum;
     private String ras;
     private int plats;
-    private int ansvarigAgent;
+    private Integer ansvarigAgent;
     private Validering validering;
     private String anvID;
     private String anvTyp;
@@ -24,6 +24,7 @@ public class ÄndraAlienInfo extends javax.swing.JFrame {
         validering = new Validering();
         this.anvID = anvID;
         this.anvTyp = anvTyp;
+        plats = 1;
     }
 
     @SuppressWarnings("unchecked")
@@ -89,9 +90,9 @@ public class ÄndraAlienInfo extends javax.swing.JFrame {
         lblDatum2.setText("(ÅÅÅÅ-MM-DD)");
 
         btnOk.setText("Ok");
-        btnOk.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnOkMouseClicked(evt);
+        btnOk.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnOkActionPerformed(evt);
             }
         });
 
@@ -268,7 +269,33 @@ public class ÄndraAlienInfo extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
-    private void btnOkMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnOkMouseClicked
+    //Tillbaka till hemsidan
+    private void btnTillbakaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakaActionPerformed
+        if(anvTyp.equals("Agent")){
+            AgentHemsida agentHemsida = new AgentHemsida(anvID, anvTyp);
+            agentHemsida.show();
+            dispose();
+        }
+        else if(anvTyp.equals("Admin")){
+            AdminHemsida adminsida = new AdminHemsida(anvID, anvTyp);
+            adminsida.show();
+            dispose();
+        }
+    }//GEN-LAST:event_btnTillbakaActionPerformed
+
+    private void comboBoxRasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxRasActionPerformed
+        if(comboBoxRas.getSelectedIndex() == 0){
+            lblRasInfo.setText("Antal boogies");
+        }
+        else if(comboBoxRas.getSelectedIndex() == 1){
+            lblRasInfo.setText("Längd");
+        }
+        else if(comboBoxRas.getSelectedIndex() == 2){
+            lblRasInfo.setText("Antal armar");
+        }
+    }//GEN-LAST:event_comboBoxRasActionPerformed
+
+    private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
         String namnAttÄndra = txtNamn.getText();
         int id = db.hämtaAlienIdFrånNamn(namnAttÄndra);      
         if(validering.valideraAlienNamnExisterar(txtNamn.getText())){
@@ -276,19 +303,19 @@ public class ÄndraAlienInfo extends javax.swing.JFrame {
             if(!validering.valideraAlienNamn(txtNyttNamn.getText(), true)){
             }
             else if(!validering.valideraAlienTelefonnummer(txtTelefon.getText())) {
-                JOptionPane.showMessageDialog(null, "Felaktigt telefonnummer.");
+
             }
             else if(!validering.valideraLösenord(pswLösen.getText())) {
-                JOptionPane.showMessageDialog(null, "Felaktigt lösenord.");
+
             }
-            else if(!validering.valideraAgentAnställningsDatum(txtDatum.getText())){
-                JOptionPane.showMessageDialog(null, "Felaktigt datum.");
+            else if(!validering.valideraDatum(txtDatum.getText())){
+
             }
-            else if(ansvarigAgent > db.antalAgenterIDatabas()) {
-                JOptionPane.showMessageDialog(null, "Agenten finns inte.");   
+            else if(!validering.valideraAgentIDExisterar(txtAgent.getText())) {
+  
             }
-            else if(txtRasInfo.getText().isEmpty()){
-                JOptionPane.showMessageDialog(null, "Övrig info är tom.");
+            else if(!validering.valideraRasInfo(txtRasInfo.getText())){
+            
             }
             //Sätter värden på fälten
             else{
@@ -316,33 +343,7 @@ public class ÄndraAlienInfo extends javax.swing.JFrame {
         else{
             JOptionPane.showMessageDialog(null, "Det finns ingen registrerad alien med det namnet.");
         }
-    }//GEN-LAST:event_btnOkMouseClicked
-
-    //Tillbaka till hemsidan
-    private void btnTillbakaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTillbakaActionPerformed
-        if(anvTyp.equals("Agent")){
-            AgentHemsida agentHemsida = new AgentHemsida(anvID, anvTyp);
-            agentHemsida.show();
-            dispose();
-        }
-        else if(anvTyp.equals("Admin")){
-            AdminHemsida adminsida = new AdminHemsida(anvID, anvTyp);
-            adminsida.show();
-            dispose();
-        }
-    }//GEN-LAST:event_btnTillbakaActionPerformed
-
-    private void comboBoxRasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxRasActionPerformed
-        if(comboBoxRas.getSelectedIndex() == 0){
-            lblRasInfo.setText("Antal boogies");
-        }
-        else if(comboBoxRas.getSelectedIndex() == 1){
-            lblRasInfo.setText("Längd");
-        }
-        else if(comboBoxRas.getSelectedIndex() == 2){
-            lblRasInfo.setText("Antal armar");
-        }
-    }//GEN-LAST:event_comboBoxRasActionPerformed
+    }//GEN-LAST:event_btnOkActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnOk;

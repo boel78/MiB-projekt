@@ -513,7 +513,7 @@ public class EnskildAgentInfo extends javax.swing.JFrame {
     
     private boolean ändraAgentInfo(String typ){
         boolean ändrad = false;
-        if(!datum.isEmpty() && validering.valideraAgentAnställningsDatum(datum)){
+        if(!datum.isEmpty() && validering.valideraDatum(datum)){
                 db.uppdateraAgentAnställningsdatum(id, datum);
                 ändrad = true;
             }            
