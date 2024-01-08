@@ -231,62 +231,52 @@ public class NyregistreraAlien extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLäggTillActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLäggTillActionPerformed
+        boolean skapad = false;
         //Sätter alienId
         alienId = (db.getNyttAlienID());
         
         //Validerar och sätter epost
-        if(!txtEpost.getText().isEmpty() && validering.valideraAlienEpostTypo(txtEpost.getText())){
+        if(!txtEpost.getText().isEmpty() && !validering.valideraAlienEpostExisterar(txtEpost.getText(), true)){
             epost = txtEpost.getText();
-        }
-        else{
-            JOptionPane.showMessageDialog(null, "Var vänlig och fyll i en epost.");
         }
         //Validerar och sätter namnet
         if(!txtNamn.getText().isEmpty() && validering.valideraAlienNamn(txtNamn.getText(), true)) {
             namn = txtNamn.getText();
         }
-        else{
-            JOptionPane.showMessageDialog(null, "Var vänlig och fyll i ett namn.");
-        }
         //Validerar och sätter telefonnummer
         if(!txtTelefon.getText().isEmpty() && validering.valideraAlienTelefonnummer(txtTelefon.getText())){
             telefonnummer = txtTelefon.getText();
-        }
-        else{
-            JOptionPane.showMessageDialog(null, "Var vänlig och fyll i ett telefonnummer.");
         }
         //Validerar och sätter lösenord
         if(!pswLösenord.getText().isEmpty() && validering.valideraLösenord(pswLösenord.getText())){
             lösenord = pswLösenord.getText();
         }
-        else{
-            JOptionPane.showMessageDialog(null, "Var vänlig och fyll i ett lösenord.");
-        }
         //Validerar och sätter datum
         if(!txtDatum.getText().isEmpty() && validering.valideraDatum(txtDatum.getText())){
             datum = txtDatum.getText();
-        }
-        else{
-            JOptionPane.showMessageDialog(null, "Var vänlig och fyll i ett lösenord.");
         }
         //Validerar och sätter ansvarig agent
         if(!txtAgent.getText().isEmpty() && ansvarigAgent <= db.antalAgenterIDatabas()){
             ansvarigAgent = Integer.parseInt(txtAgent.getText());
         }
-        else{
-            JOptionPane.showMessageDialog(null, "Var vänlig och fyll i ett datum.");
-        }
-        //Skapar alien i tabellen via databasklassen om eposten inte finns
-        if(!validering.valideraAlienEpostExisterar(txtEpost.getText(), true) && !fältÄrNull()){    
-            db.registreraNyAlien(alienId, datum, epost, lösenord, namn, telefonnummer, plats, ansvarigAgent);}
-        else{
-            JOptionPane.showMessageDialog(null, "Validering misslyckades, något fält är null");
+        //Validerar rasinput
+        if(validering.valideraRasInfo(txtRasInfo.getText())){
+            rasInfo = txtRasInfo.getText();
         }
         
-        //Sätter in alien i en ras tabell
-        if(!lblRasInfo.getText().isEmpty()){
-            db.läggTillIRas(alienId, txtRasInfo.getText(), ras);
+        //Skapar alien i tabellen
+        if(!fältÄrNull()){    
+            db.registreraNyAlien(alienId, datum, epost, lösenord, namn, telefonnummer, plats, ansvarigAgent);
+            skapad = true;            
+            //Sätter in alien i en ras tabell
+            if(skapad){
+                db.läggTillIRas(alienId, rasInfo, ras);
+            }
+        }         
+        else{
+            JOptionPane.showMessageDialog(null, "Alien kunde inte skapas.");
         }
+
                                   
     }//GEN-LAST:event_btnLäggTillActionPerformed
 
@@ -341,7 +331,7 @@ public class NyregistreraAlien extends javax.swing.JFrame {
     //Kolla om fälten är null
     private boolean fältÄrNull(){
         boolean ärNull = false;
-        if(epost == null || namn == null || lösenord == null || telefonnummer == null || datum == null){
+        if(epost == null || namn == null || lösenord == null || telefonnummer == null || datum == null || rasInfo == null || ras == null){
             ärNull = true;
         }  
         return ärNull;

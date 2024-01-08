@@ -39,10 +39,10 @@ public class Validering {
             for(String email : db.getAllaAlienEpost()){
                 if(email.equals(epost)){
                     finns = true;
-                    if(skrivUt){
-                        JOptionPane.showMessageDialog(null, "Eposten finns redan.");
-                    }
                 }
+            }
+            if(skrivUt && finns){
+                JOptionPane.showMessageDialog(null, "Eposten finns redan.");
             }
         }
         return finns;
@@ -471,7 +471,9 @@ public class Validering {
             valid = true;
         }
         catch(NumberFormatException ex){
-            JOptionPane.showMessageDialog(null, "Rasinfon du fyllde i var inte en siffra.");
+        }
+        if(!valid){
+           JOptionPane.showMessageDialog(null, "Rasinfon du fyllde i var inte en siffra.");
         }
         return valid;
     }
