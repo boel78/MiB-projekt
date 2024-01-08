@@ -352,6 +352,7 @@ public class EnskildAgentInfo extends javax.swing.JFrame {
         //Ifall man skriver i namn
         else if(!txtNamn.getText().isEmpty() && validering.valideraAgentNamnFinns(txtNamn.getText(), true)){
             id = db.getAgentIDFrånNamn(txtNamn.getText());
+            System.out.println(id);
             taBortAgent();
         }
         //Ifall alla fälten är tomma
@@ -478,20 +479,20 @@ public class EnskildAgentInfo extends javax.swing.JFrame {
     private void uppdateraAliensKontaktperson(String agentID){     
         ArrayList<String> alienIDn = db.getAlienListaFrånAgentID(agentID);
         boolean ändrad = false;
-        String nyOmrådesChef = "";
+        String områdesChef = "";
         for(String alienID : alienIDn){
             String områdesID = db.getOmrådesIDFrånPlatsID(db.getPlatsIDFrånAlienID(alienID));
-            String områdeschef = db.getOmrådesChef(områdesID);
-            if(områdeschef == null){
+            områdesChef = db.getOmrådesChef(områdesID);
+            if(områdesChef == null){
                 Random random = new Random();
                 ArrayList<String> områdeschefer = db.getOmrådeschefer();
-                nyOmrådesChef = områdeschefer.get(random.nextInt(områdeschefer.size()));
+                områdesChef = områdeschefer.get(random.nextInt(områdeschefer.size()));
             }
             ändrad = true;
-            db.bytUtAgentFrånAlienTillChef(agentID, nyOmrådesChef);  
+            db.bytUtAgentFrånAlienTillChef(agentID, områdesChef);  
         }
         if(ändrad){
-            JOptionPane.showMessageDialog(null, "Agenten är borttagen och ansvaret har gått över till Områdeschefen " + db.getAgentNamnFrånID(Integer.parseInt(nyOmrådesChef)));
+            JOptionPane.showMessageDialog(null, "Agenten är borttagen och ansvaret har gått över till Områdeschefen " + db.getAgentNamnFrånID(Integer.parseInt(områdesChef)));
         }
         else{
            JOptionPane.showMessageDialog(null, "Det verkar inte finnas en områdeschef på den valda agentens område. Var vänlig och lägg till en ny områdeschef först.");    
@@ -630,6 +631,7 @@ public class EnskildAgentInfo extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Du kan inte ta bort dig själv.");
         }
     }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnHämta;

@@ -242,7 +242,7 @@ public class AdminHemsida extends javax.swing.JFrame {
 
     //Utrustningssida
     private void btnRegUtrustningActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegUtrustningActionPerformed
-        TaBortUtrustning utrustningsida = new TaBortUtrustning(anvID, anvTyp);
+        Utrustning utrustningsida = new Utrustning(anvID, anvTyp);
         utrustningsida.show();
         dispose();
     }//GEN-LAST:event_btnRegUtrustningActionPerformed

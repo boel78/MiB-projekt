@@ -5,7 +5,7 @@ import java.util.HashMap;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-public class TaBortUtrustning extends javax.swing.JFrame {
+public class Utrustning extends javax.swing.JFrame {
     private Databas db;
     private Validering validering;
     private String valdID;
@@ -15,7 +15,7 @@ public class TaBortUtrustning extends javax.swing.JFrame {
     private String anvID;
     private String anvTyp;
 
-    public TaBortUtrustning(String anvID, String anvTyp) {
+    public Utrustning(String anvID, String anvTyp) {
         initComponents();
         db = new Databas();
         validering = new Validering();
