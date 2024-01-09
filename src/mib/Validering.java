@@ -23,11 +23,21 @@ public class Validering {
     public boolean valideraAlienEpostTypo(String epost){
         boolean valid = false;
         String emailRegex = "^[a-zA-ZåäöÅÄÖ0-9._%+-]+@[a-zA-ZåäöÅÄÖ0-9-]+\\.[a-zA-ZåäöÅÄÖ]{2,6}$";
-        if(epost.matches(emailRegex)){
-            valid = true;
+        if(!epost.isEmpty()){
+            if(epost.length() <= 20){
+                if(epost.matches(emailRegex)){
+                    valid = true;
+                }
+                else{
+                    JOptionPane.showMessageDialog(null, "Stavfel på epost");
+                }
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Eposten får inte vara länge än 20 tecken.");
+            }
         }
         else{
-            JOptionPane.showMessageDialog(null, "Stavfel på epost");
+            JOptionPane.showMessageDialog(null, "Var vänlig och fyll i en epost.");
         }
         return valid;
     }

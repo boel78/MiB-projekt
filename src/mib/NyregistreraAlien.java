@@ -236,15 +236,15 @@ public class NyregistreraAlien extends javax.swing.JFrame {
         alienId = (db.getNyttAlienID());
         
         //Validerar och sätter epost
-        if(validering.valideraAgentEpostTypo(txtEpost.getText()) && !validering.valideraAlienEpostExisterar(txtEpost.getText(), true)){
+        if(validering.valideraAlienEpostTypo(txtEpost.getText()) && !validering.valideraAlienEpostExisterar(txtEpost.getText(), true)){
             epost = txtEpost.getText();
         }
         //Validerar och sätter namnet
-        if(!txtNamn.getText().isEmpty() && validering.valideraAlienNamn(txtNamn.getText(), true)) {
+        if(validering.valideraAlienNamn(txtNamn.getText(), true)) {
             namn = txtNamn.getText();
         }
         //Validerar och sätter telefonnummer
-        if(!txtTelefon.getText().isEmpty() && validering.valideraAlienTelefonnummer(txtTelefon.getText())){
+        if(validering.valideraAlienTelefonnummer(txtTelefon.getText())){
             telefonnummer = txtTelefon.getText();
         }
         //Validerar och sätter lösenord
@@ -252,11 +252,11 @@ public class NyregistreraAlien extends javax.swing.JFrame {
             lösenord = pswLösenord.getText();
         }
         //Validerar och sätter datum
-        if(!txtDatum.getText().isEmpty() && validering.valideraDatum(txtDatum.getText())){
+        if(validering.valideraDatum(txtDatum.getText())){
             datum = txtDatum.getText();
         }
         //Validerar och sätter ansvarig agent
-        if(!txtAgent.getText().isEmpty() && ansvarigAgent <= db.antalAgenterIDatabas()){
+        if(validering.valideraAgentIDExisterar(txtAgent.getText())){
             ansvarigAgent = Integer.parseInt(txtAgent.getText());
         }
         //Validerar rasinput
