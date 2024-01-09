@@ -23,6 +23,7 @@ public class EnskildAgentInfo extends javax.swing.JFrame {
     String områdesID;
     private String anvID;
     private String anvTyp;
+    private boolean skrivUtNamn;
     
     public EnskildAgentInfo(String anvID, String anvTyp){
         db = new Databas();
@@ -279,25 +280,29 @@ public class EnskildAgentInfo extends javax.swing.JFrame {
     private void btnHämtaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHämtaActionPerformed
         txtOmrådesAnsvar.setVisible(false);
         lblOmrådesAnsvar.setVisible(false);
+        skrivUtNamn = true;
+        if(validering.valideraSträngTom(txtNamn.getText()) && validering.valideraSträngTom(txtEpost.getText()) && validering.valideraSträngTom(txtID.getText())){
+            JOptionPane.showMessageDialog(null, "Var vänlig och fyll i Namn, Epost eller ett ID");
+            skrivUtNamn = false;
+        }
         //Ifall man skriver i epost
-        if(validering.valideraAgentEpostFinns(txtEpost.getText())){
+        else if(validering.valideraAgentEpostFinns(txtEpost.getText(), false) && validering.valideraSträngTom(txtNamn.getText()) && validering.valideraSträngTom(txtID.getText())){
             epost = txtEpost.getText();
             id = db.getAgentIDFrånEpost(epost);
             hämtaAgentInfo();   
+            skrivUtNamn = false;
         }
         //ifall man skriver i ID
-        else if(validering.valideraIDTypo(txtID.getText()) && validering.valideraAgentIDExisterar(txtID.getText())){
+        else if(validering.valideraIDTypo(txtID.getText(), false) && validering.valideraAgentIDExisterar(txtID.getText(), true) && validering.valideraSträngTom(txtNamn.getText()) && validering.valideraSträngTom(txtEpost.getText())){
             id = txtID.getText();
             hämtaAgentInfo();
+            skrivUtNamn = false;
         }
         //Ifall man skriver i namn
-        else if(validering.valideraAgentNamnFinns(txtNamn.getText(), true)){
+        else if(validering.valideraAgentNamnFinns(txtNamn.getText(), skrivUtNamn) && validering.valideraSträngTom(txtEpost.getText()) && validering.valideraSträngTom(txtID.getText())){
             namn = txtNamn.getText();
             id = db.getAgentIDFrånNamn(namn);
             hämtaAgentInfo();
-        }
-        else if(validering.valideraSträngTom(txtNamn.getText()) && validering.valideraSträngTom(txtEpost.getText()) && validering.valideraSträngTom(txtID.getText())){
-            JOptionPane.showMessageDialog(null, "Var vänlig och fyll i Namn, Epost eller ett ID");
         }
     }//GEN-LAST:event_btnHämtaActionPerformed
 
@@ -316,7 +321,7 @@ public class EnskildAgentInfo extends javax.swing.JFrame {
         lblOmrådesAnsvar.setVisible(false);
         
         //Om man skriver i epost
-        if(validering.valideraAgentEpostFinns(epost)){
+        if(validering.valideraAgentEpostFinns(epost, false)){
             id = db.getAgentIDFrånEpost(epost);
             ändrad = ändraAgentInfo("epost");
         }
@@ -328,7 +333,7 @@ public class EnskildAgentInfo extends javax.swing.JFrame {
         }
         
         //Ifall man skriver in ID
-        else if(validering.valideraAgentIDExisterar(id)){
+        else if(validering.valideraAgentIDExisterar(id, true)){
             id = txtID.getText();
             ändrad = ändraAgentInfo("id");
         }
@@ -346,12 +351,12 @@ public class EnskildAgentInfo extends javax.swing.JFrame {
     //Ta bort knappen
     private void btnTaBortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaBortActionPerformed
         //Ifall man skriver i epost
-        if(validering.valideraAgentEpostFinns(txtEpost.getText())){
+        if(validering.valideraAgentEpostFinns(txtEpost.getText(), false)){
             id = db.getAgentIDFrånEpost(txtEpost.getText());
             taBortAgent();
         }
         //ifall man skriver i ID
-        else if(validering.valideraIDTypo(txtID.getText()) && validering.valideraAgentIDExisterar(txtID.getText())){
+        else if(validering.valideraIDTypo(txtID.getText(), false) && validering.valideraAgentIDExisterar(txtID.getText(), true)){
             id = txtID.getText();
             taBortAgent();
         }
@@ -532,7 +537,7 @@ public class EnskildAgentInfo extends javax.swing.JFrame {
             db.uppdateraAgentNamn(id, namn); 
             ändrad = true;
         }
-        if(!validering.valideraSträngTom(epost) && validering.valideraAgentEpostTypo(epost) && (typ.equals("namn") ||typ.equals("id"))){
+        if(!validering.valideraSträngTom(epost) && validering.valideraAgentEpostTypo(epost, true) && (typ.equals("namn") ||typ.equals("id"))){
             db.uppdateraAgentEpost(id, epost); 
             ändrad = true;
         }

@@ -256,7 +256,7 @@ public class NyregistreraAlien extends javax.swing.JFrame {
             
         }
         //Validerar och sätter ansvarig agent
-        else if(!validering.valideraAgentIDExisterar(txtAgent.getText())){
+        else if(!validering.valideraAgentIDExisterar(txtAgent.getText(), true)){
             
         }
         //Validerar rasinput

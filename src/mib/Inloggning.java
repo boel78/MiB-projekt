@@ -151,7 +151,7 @@ public class Inloggning extends javax.swing.JFrame {
                             valid = true; 
                         }
                     }
-                    else if((typ.equals("Agent") ||typ.equals("Admin"))&& validering.valideraAgentEpostTypo(user)){                
+                    else if((typ.equals("Agent") ||typ.equals("Admin"))&& validering.valideraAgentEpostTypo(user, true)){                
                         if(validering.valideraAgentLösenord(pass, user)){
                             id = idb.getAgentIDFrånEpost(user);
                             valid = true;
@@ -171,7 +171,7 @@ public class Inloggning extends javax.swing.JFrame {
             ärEpost = true;
             typ = "Alien";
             String[] emailTyper = email.split("@");
-                if(emailTyper[1].equals("mib.net") && validering.valideraAgentEpostFinns(email)){
+                if(emailTyper[1].equals("mib.net") && validering.valideraAgentEpostFinns(email, true)){
                     boolean ärAdmin = idb.getAdminStatus(email);
                     typ = "Agent";
                     if(ärAdmin){

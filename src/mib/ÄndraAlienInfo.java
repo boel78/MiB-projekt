@@ -311,7 +311,7 @@ public class ÄndraAlienInfo extends javax.swing.JFrame {
             else if(!validering.valideraDatum(txtDatum.getText())){
 
             }
-            else if(!validering.valideraAgentIDExisterar(txtAgent.getText())) {
+            else if(!validering.valideraAgentIDExisterar(txtAgent.getText(), true)) {
   
             }
             else if(!validering.valideraRasInfo(txtRasInfo.getText())){
