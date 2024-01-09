@@ -110,7 +110,7 @@ public class BytaLösenord extends javax.swing.JFrame {
         hämtaEpost();
         String nuvarandeLösenord = pwNuvarandeLösenord.getText();
         String nyttLösenord = pwNyttLösenord.getText();
-        if(!nuvarandeLösenord.isEmpty() && !nyttLösenord.isEmpty() && validering.valideraLösenord(nyttLösenord) && validering.valideraLösenord(nuvarandeLösenord)){
+        if(validering.valideraLösenord(nyttLösenord) && validering.valideraLösenord(nuvarandeLösenord)){
             //Agent lösenord
             if(anvTyp.equals("Agent") ||anvTyp.equals("Admin")){
                 if(validering.valideraAgentLösenord(nuvarandeLösenord, epost)){
@@ -125,9 +125,6 @@ public class BytaLösenord extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "Bytte lösenord.");
                 }
             }
-        }
-        else if(nuvarandeLösenord.isEmpty()||nyttLösenord.isEmpty()){
-            JOptionPane.showMessageDialog(null, "Var vänlig och fyll i båda fälten.");
         }
     }//GEN-LAST:event_btnBytLösenordActionPerformed
 
