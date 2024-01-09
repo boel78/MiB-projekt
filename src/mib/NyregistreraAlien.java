@@ -236,36 +236,44 @@ public class NyregistreraAlien extends javax.swing.JFrame {
         alienId = (db.getNyttAlienID());
         
         //Validerar och sätter epost
-        if(validering.valideraAlienEpostTypo(txtEpost.getText()) && !validering.valideraAlienEpostExisterar(txtEpost.getText(), true)){
-            epost = txtEpost.getText();
+        if(validering.valideraAlienEpostExisterar(txtEpost.getText(), true) || !validering.valideraAlienEpostTypo(txtEpost.getText(), false)){
+            
         }
         //Validerar och sätter namnet
-        if(validering.valideraAlienNamn(txtNamn.getText(), true)) {
-            namn = txtNamn.getText();
+        else if(!validering.valideraAlienNamn(txtNamn.getText(), true)) {
+            
         }
         //Validerar och sätter telefonnummer
-        if(validering.valideraAlienTelefonnummer(txtTelefon.getText())){
-            telefonnummer = txtTelefon.getText();
+        else if(!validering.valideraAlienTelefonnummer(txtTelefon.getText())){
+            
         }
         //Validerar och sätter lösenord
-        if(validering.valideraLösenord(pswLösenord.getText())){
-            lösenord = pswLösenord.getText();
+        else if(!validering.valideraLösenord(pswLösenord.getText())){
+            
         }
         //Validerar och sätter datum
-        if(validering.valideraDatum(txtDatum.getText())){
-            datum = txtDatum.getText();
+        else if(!validering.valideraDatum(txtDatum.getText())){
+            
         }
         //Validerar och sätter ansvarig agent
-        if(validering.valideraAgentIDExisterar(txtAgent.getText())){
-            ansvarigAgent = Integer.parseInt(txtAgent.getText());
+        else if(!validering.valideraAgentIDExisterar(txtAgent.getText())){
+            
         }
         //Validerar rasinput
-        if(validering.valideraRasInfo(txtRasInfo.getText())){
-            rasInfo = txtRasInfo.getText();
+        else if(!validering.valideraRasInfo(txtRasInfo.getText())){
+            
         }
         
         //Skapar alien i tabellen
-        if(!fältÄrNull()){    
+        else {    
+            epost = txtEpost.getText();
+            namn = txtNamn.getText();
+            telefonnummer = txtTelefon.getText();
+            lösenord = pswLösenord.getText();
+            datum = txtDatum.getText();
+            ansvarigAgent = Integer.parseInt(txtAgent.getText());
+            rasInfo = txtRasInfo.getText();
+
             db.registreraNyAlien(alienId, datum, epost, lösenord, namn, telefonnummer, plats, ansvarigAgent);
             skapad = true;            
             //Sätter in alien i en ras tabell
@@ -273,9 +281,7 @@ public class NyregistreraAlien extends javax.swing.JFrame {
                 db.läggTillIRas(alienId, rasInfo, ras);
             }
         }         
-        else{
-            JOptionPane.showMessageDialog(null, "Alien kunde inte skapas.");
-        }
+
 
                                   
     }//GEN-LAST:event_btnLäggTillActionPerformed

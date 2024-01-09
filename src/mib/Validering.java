@@ -20,7 +20,7 @@ public class Validering {
     }
 
     //Validerar en Alienemail
-    public boolean valideraAlienEpostTypo(String epost){
+    public boolean valideraAlienEpostTypo(String epost, boolean skrivUt){
         boolean valid = false;
         String emailRegex = "^[a-zA-ZåäöÅÄÖ0-9._%+-]+@[a-zA-ZåäöÅÄÖ0-9-]+\\.[a-zA-ZåäöÅÄÖ]{2,6}$";
         if(!epost.isEmpty()){
@@ -29,7 +29,9 @@ public class Validering {
                     valid = true;
                 }
                 else{
-                    JOptionPane.showMessageDialog(null, "Stavfel på epost");
+                    if(skrivUt){
+                        JOptionPane.showMessageDialog(null, "Stavfel på epost");
+                    }
                 }
             }
             else{
@@ -37,7 +39,9 @@ public class Validering {
             }
         }
         else{
-            JOptionPane.showMessageDialog(null, "Var vänlig och fyll i en epost.");
+            if(skrivUt){
+                JOptionPane.showMessageDialog(null, "Var vänlig och fyll i en epost.");
+            }
         }
         return valid;
     }
@@ -45,7 +49,7 @@ public class Validering {
     //Validera om Alienepost finns
     public boolean valideraAlienEpostExisterar(String epost, boolean skrivUt){
         boolean finns = false;
-        if(valideraAlienEpostTypo(epost)){
+        if(valideraAlienEpostTypo(epost, true)){
             for(String email : db.getAllaAlienEpost()){
                 if(email.equals(epost)){
                     finns = true;
@@ -184,7 +188,7 @@ public class Validering {
                 valid = true;
             }
             else{
-                JOptionPane.showMessageDialog(null, "Stavfel på Anställningsdatum.");
+                JOptionPane.showMessageDialog(null, "Stavfel på datum.");
             }
         }
         else{
