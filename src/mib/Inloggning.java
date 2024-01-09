@@ -141,7 +141,7 @@ public class Inloggning extends javax.swing.JFrame {
     
     public boolean inlogKontroll(){
         boolean valid = false;
-        if(!txtEpost.getText().isEmpty() || !pwField.getText().isEmpty()){
+        if(!validering.valideraSträngTom(txtEpost.getText()) || !validering.valideraSträngTom(pwField.getText())){
                 String user = txtEpost.getText();
                 String pass = pwField.getText();
                 if(validering.valideraLösenord(pass) && ärInloggTyp(user)){
@@ -156,7 +156,6 @@ public class Inloggning extends javax.swing.JFrame {
                             id = idb.getAgentIDFrånEpost(user);
                             valid = true;
                         } 
-                    System.out.println(valid);
                     }
                 }
             }                 
