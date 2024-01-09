@@ -32,7 +32,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="145" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="txtNamnAttTaBort" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtIDAttTaBort" min="-2" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
                               <Component id="btnTaBort" min="-2" max="-2" attributes="0"/>
@@ -44,7 +44,7 @@
                       <Component id="btnTillbaka" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="120" max="32767" attributes="0"/>
+              <EmptySpace pref="140" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -54,7 +54,7 @@
               <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
               <Component id="lblRubrik" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="22" max="32767" attributes="0"/>
-              <Component id="txtNamnAttTaBort" min="-2" max="-2" attributes="0"/>
+              <Component id="txtIDAttTaBort" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
               <Component id="btnTaBort" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
@@ -73,14 +73,14 @@
         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnTaBortMouseClicked"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtNamnAttTaBort">
+    <Component class="javax.swing.JTextField" name="txtIDAttTaBort">
       <Properties>
         <Property name="columns" type="int" value="8"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblRubrik">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Ange namn p&#xe5; alien att ta bort"/>
+        <Property name="text" type="java.lang.String" value="Ange ID p&#xe5; alien att ta bort"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="btnTillbaka">

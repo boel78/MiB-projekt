@@ -286,10 +286,15 @@ public class Validering {
     //Validera om AlienID finns.
     public boolean valideraAlienId(Integer id){
         boolean finns=false;
-        for(String ID : db.getAllaAlienIDn()){
-            if(id.toString().equals(ID)){
-                finns = true;
+        if(valideraIDTypo(id.toString())){
+            for(String ID : db.getAllaAlienIDn()){
+                if(id.toString().equals(ID)){
+                    finns = true;
+                }
             }
+        }
+        if(!finns){
+            JOptionPane.showMessageDialog(null, "ID existerar inte.");
         }
         return finns;
     }
@@ -318,8 +323,8 @@ public class Validering {
         return rättLösenord;
     }
 
-    //Validera om agentID är en siffra
-    public boolean valideraAgentIDTypo(String id){
+    //Validera om ID är en siffra
+    public boolean valideraIDTypo(String id){
         boolean isNumber = false;
         if(!id.isEmpty()){
             try {
@@ -331,7 +336,7 @@ public class Validering {
             }
         }
         else{
-            JOptionPane.showMessageDialog(null, "Var vänlig och fyll i ett agent ID");
+            JOptionPane.showMessageDialog(null, "Var vänlig och fyll i ett ID");
         }
         return isNumber;
     }
@@ -340,7 +345,7 @@ public class Validering {
     public boolean valideraAgentIDExisterar(String id){
         boolean existerar = false;
         if(!id.isEmpty()){
-            if(valideraAgentIDTypo(id)){
+            if(valideraIDTypo(id)){
                 for(String idILista : db.getAgentIDn()){
                     if(idILista.equals(id)){
                         existerar = true;

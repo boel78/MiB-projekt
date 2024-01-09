@@ -217,7 +217,7 @@ public class SökEnskildAlien extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnHämtaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHämtaActionPerformed
-        if(!txtID.getText().isEmpty()){
+        if(!validering.valideraSträngTom(txtID.getText())){
             if(validering.valideraAlienId(Integer.parseInt(txtID.getText()))){
                 String ID = txtID.getText();
                 String epost = db.getAlienEpostFrånID(ID);

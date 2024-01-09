@@ -21,7 +21,7 @@ public class TaBortAlien extends javax.swing.JFrame {
     private void initComponents() {
 
         btnTaBort = new javax.swing.JButton();
-        txtNamnAttTaBort = new javax.swing.JTextField();
+        txtIDAttTaBort = new javax.swing.JTextField();
         lblRubrik = new javax.swing.JLabel();
         btnTillbaka = new javax.swing.JButton();
 
@@ -34,9 +34,9 @@ public class TaBortAlien extends javax.swing.JFrame {
             }
         });
 
-        txtNamnAttTaBort.setColumns(8);
+        txtIDAttTaBort.setColumns(8);
 
-        lblRubrik.setText("Ange namn på alien att ta bort");
+        lblRubrik.setText("Ange ID på alien att ta bort");
 
         btnTillbaka.setText("Tillbaka");
         btnTillbaka.addActionListener(new java.awt.event.ActionListener() {
@@ -57,14 +57,14 @@ public class TaBortAlien extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(145, 145, 145)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtNamnAttTaBort, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtIDAttTaBort, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(17, 17, 17)
                                 .addComponent(btnTaBort))))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(btnTillbaka)))
-                .addContainerGap(120, Short.MAX_VALUE))
+                .addContainerGap(140, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -72,7 +72,7 @@ public class TaBortAlien extends javax.swing.JFrame {
                 .addGap(39, 39, 39)
                 .addComponent(lblRubrik)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
-                .addComponent(txtNamnAttTaBort, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtIDAttTaBort, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(43, 43, 43)
                 .addComponent(btnTaBort)
                 .addGap(30, 30, 30)
@@ -85,21 +85,12 @@ public class TaBortAlien extends javax.swing.JFrame {
     
     // Ta bort alien
     private void btnTaBortMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTaBortMouseClicked
-        String namnAttTaBort = txtNamnAttTaBort.getText();
-        if(!namnAttTaBort.isEmpty()){  
-            if(validering.valideraAlienNamnExisterar(namnAttTaBort)){
-                Integer id = db.hämtaAlienIdFrånNamn(namnAttTaBort);
-                db.taBortRas(id);
-                db.taBortAlien(id);
-                JOptionPane.showMessageDialog(null, "Tog bort " + namnAttTaBort + " från systemet");
-                txtNamnAttTaBort.setText("");
-            }
-            else{
-                JOptionPane.showMessageDialog(null, "Namnet finns inte i systemet eller stavfel.");
-            }
-        }
-        else{
-            JOptionPane.showMessageDialog(null, "Var vänlig och skriv in ett namn");
+        Integer IDAttTaBort = Integer.parseInt(txtIDAttTaBort.getText());
+        if(validering.valideraAlienId(IDAttTaBort)){  
+                db.taBortRas(IDAttTaBort);
+                db.taBortAlien(IDAttTaBort);
+                JOptionPane.showMessageDialog(null, "Tog bort alien med ID:" + IDAttTaBort + " från systemet");
+                txtIDAttTaBort.setText("");
         }
     }//GEN-LAST:event_btnTaBortMouseClicked
 
@@ -113,6 +104,6 @@ public class TaBortAlien extends javax.swing.JFrame {
     private javax.swing.JButton btnTaBort;
     private javax.swing.JButton btnTillbaka;
     private javax.swing.JLabel lblRubrik;
-    private javax.swing.JTextField txtNamnAttTaBort;
+    private javax.swing.JTextField txtIDAttTaBort;
     // End of variables declaration//GEN-END:variables
 }

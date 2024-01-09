@@ -286,7 +286,7 @@ public class EnskildAgentInfo extends javax.swing.JFrame {
             hämtaAgentInfo();   
         }
         //ifall man skriver i ID
-        else if(validering.valideraAgentIDTypo(txtID.getText()) && validering.valideraAgentIDExisterar(txtID.getText())){
+        else if(validering.valideraIDTypo(txtID.getText()) && validering.valideraAgentIDExisterar(txtID.getText())){
             id = txtID.getText();
             hämtaAgentInfo();
         }
@@ -351,7 +351,7 @@ public class EnskildAgentInfo extends javax.swing.JFrame {
             taBortAgent();
         }
         //ifall man skriver i ID
-        else if(validering.valideraAgentIDTypo(txtID.getText()) && validering.valideraAgentIDExisterar(txtID.getText())){
+        else if(validering.valideraIDTypo(txtID.getText()) && validering.valideraAgentIDExisterar(txtID.getText())){
             id = txtID.getText();
             taBortAgent();
         }

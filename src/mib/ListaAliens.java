@@ -274,7 +274,6 @@ public class ListaAliens extends javax.swing.JFrame {
                     kolumnNamn = kolumn;
                 }
             }
-            System.out.println(rasInfo);
             String namn = db.getAlienNamnFrånID(id);
             String epost = db.getAlienEpostFrånID(id);
             if(comboBoxRas.getSelectedIndex() != 3){
